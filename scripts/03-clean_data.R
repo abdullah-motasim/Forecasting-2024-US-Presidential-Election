@@ -1,11 +1,14 @@
 #### Preamble ####
-# Purpose: Cleans the raw plane data recorded by two observers..... [...UPDATE THIS...]
-# Author: Elizabeth Luong, Abdullah Motasim,and Yuanting Han
+# Purpose: Cleans the raw U.S. presidential poll data for analysis.
+#          This script standardizes column names, selects relevant columns,
+#          converts data types, and handles missing values.
+# Author: Elizabeth Luong, Abdullah Motasim, and Yuanting Han
 # Date: 4 November 2024
 # Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: [...UPDATE THIS...]
-# Any other information needed? [...UPDATE THIS...]
+# Pre-requisites: The raw poll data should be available at 'inputs/data/president_poll.csv'.
+#                 Ensure 'tidyverse' and 'janitor' packages are installed.
+# Any other information needed? Adjust the input file path as needed for different environments.
 
 #### Workspace setup ####
 library(tidyverse)
