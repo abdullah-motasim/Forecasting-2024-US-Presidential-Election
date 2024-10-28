@@ -1,7 +1,6 @@
 #### Preamble ####
-# Purpose: Simulates a dataset of American electoral divisions, including the 
-  #state and party that won each division.
-# Author: Elizabeth Luong, Abdullah Motasim,and Yuanting Han
+# Purpose: Simulates a dataset of American electoral divisions, including the state and party that won each division.
+# Author: Elizabeth Luong, Abdullah Motasim, and Yuanting Han
 # Date: 4 November 2024
 # Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT
