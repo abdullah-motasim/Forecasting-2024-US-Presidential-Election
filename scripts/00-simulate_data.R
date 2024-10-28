@@ -1,52 +1,62 @@
 #### Preamble ####
-# Purpose: Simulates a dataset of Australian electoral divisions, including the 
+# Purpose: Simulates a dataset of American electoral divisions, including the 
   #state and party that won each division.
-# Author: Rohan Alexander
-# Date: 26 September 2024
-# Contact: rohan.alexander@utoronto.ca
+# Author: Elizabeth Luong, Abdullah Motasim,and Yuanting Han
+# Date: 4 November 2024
+# Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: The `tidyverse` package must be installed
-# Any other information needed? Make sure you are in the `starter_folder` rproj
+# Pre-requisites: The `dplyr` package must be installed
 
 
 #### Workspace setup ####
-library(tidyverse)
+library(dplyr)
 set.seed(853)
 
 
 #### Simulate data ####
 # State names
 states <- c(
-  "New South Wales",
-  "Victoria",
-  "Queensland",
-  "South Australia",
-  "Western Australia",
-  "Tasmania",
-  "Northern Territory",
-  "Australian Capital Territory"
+  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
+  "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", 
+  "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", 
+  "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", 
+  "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", 
+  "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", 
+  "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", 
+  "Wyoming"
 )
 
 # Political parties
-parties <- c("Labor", "Liberal", "Greens", "National", "Other")
+parties <- c("Democrat", "Republican", "Independent", "Other")
 
-# Create a dataset by randomly assigning states and parties to divisions
-analysis_data <- tibble(
-  division = paste("Division", 1:151),  # Add "Division" to make it a character
-  state = sample(
-    states,
-    size = 151,
-    replace = TRUE,
-    prob = c(0.25, 0.25, 0.15, 0.1, 0.1, 0.1, 0.025, 0.025) # Rough state population distribution
-  ),
-  party = sample(
-    parties,
-    size = 151,
-    replace = TRUE,
-    prob = c(0.40, 0.40, 0.05, 0.1, 0.05) # Rough party distribution
-  )
+# Define probabilities for state distribution (equal probability for simplicity)
+state_probs <- rep(1/51, 51)
+
+# Define probabilities for party distribution
+party_probs <- c(0.45, 0.45, 0.05, 0.05)
+
+# Generate poll averages (e.g., support percentages)
+poll_averages <- runif(1000, min = 40, max = 60)  # Simulate polling between 40% and 60%
+
+# Generate state and party affiliations
+states_sampled <- sample(states, size = 1000, replace = TRUE, prob = state_probs)
+parties_sampled <- sample(parties, size = 1000, replace = TRUE, prob = party_probs)
+
+# Generate other predictors (e.g., economic factors, voter turnout)
+economic_factors <- rnorm(1000, mean = 0, sd = 1)  # Economic index (e.g., GDP growth)
+voter_turnout <- rnorm(1000, mean = 60, sd = 5)    # Voter turnout in percentage
+
+# Create a data frame
+simulated_data <- data.frame(
+  poll_average = poll_averages,
+  state = states_sampled,
+  party = parties_sampled,
+  economic_factors = economic_factors,
+  voter_turnout = voter_turnout
 )
 
+# Display first few rows of the data
+print(head(simulated_data))
 
-#### Save data ####
-write_csv(analysis_data, "data/00-simulated_data/simulated_data.csv")
+# Save data as CSV
+write.csv(simulated_data, "simulated_us_presidential_election_data_full.csv", row.names = FALSE)
