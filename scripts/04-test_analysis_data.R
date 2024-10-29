@@ -4,7 +4,7 @@
 # Date: 4 November 2024
 # Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: Cleaned data file should exist at 'outputs/data/analysis_data.csv'
+# Pre-requisites: Cleaned data file should exist at 'data/02-analysis_data/analysis_data.csv'
 # Any other information needed? Ensure 'testthat' and 'tidyverse' libraries are installed
 
 #### Workspace setup ####
@@ -12,7 +12,7 @@ library(tidyverse)
 library(testthat)
 
 # Load the cleaned data
-analysis_data <- read_csv("outputs/data/analysis_data.csv")
+analysis_data <- read_csv("data/02-analysis_data/analysis_data.csv")
 
 #### Test data ####
 
@@ -62,28 +62,7 @@ test_that("'pollster_name' column contains unique values", {
 })
 
 # Test that 'state' contains only valid U.S. state names
-# valid_states <- c(
-#  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
-#  "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", 
-#  "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", 
-#  "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", 
-#  "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", 
-#  "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota", 
-#  "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "West Virginia", "Wisconsin", 
-#  "Wyoming"
-# )
-# test_that("'state' contains valid U.S. state names", {
-#  expect_true(all(analysis_data$state %in% valid_states))
-# })
-
-# The failure indicates that there are values in the 'state' column that are not in the list of valid U.S. state names.
-# The presence of entries like "Maine CD-1", "Maine CD-2", and "Nebraska CD-2" indicates that the dataset includes congressional districts for states with split electoral votes.
-invalid_states <- analysis_data$state[!analysis_data$state %in% valid_states]
-print("Invalid state names found in the dataset:")
-print(unique(invalid_states))
-
-# Update the presence of entries like "Maine CD-1", "Maine CD-2", and "Nebraska CD-2" indicates that the dataset includes congressional districts for states with split electoral votes.
-valid_states_updated <- c(
+valid_states <- c(
   "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", 
   "Delaware", "District of Columbia", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", 
   "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maine CD-1", "Maine CD-2",
@@ -96,7 +75,7 @@ valid_states_updated <- c(
 
 # Test that 'state' contains only valid U.S. state names
 test_that("'state' contains valid U.S. state names", {
-  expect_true(all(analysis_data$state %in% valid_states_updated))
+  expect_true(all(analysis_data$state %in% valid_states))
 })
 
 # Test that there are no empty strings in 'pollster_name', 'candidate', 'percentage', 'sample_size', or 'state'
