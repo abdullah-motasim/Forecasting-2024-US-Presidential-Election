@@ -46,7 +46,7 @@ economic_factors <- rnorm(1000, mean = 0, sd = 1)  # Economic index (e.g., GDP g
 voter_turnout <- rnorm(1000, mean = 60, sd = 5)    # Voter turnout in percentage
 
 # Create a data frame
-simulated_data <- data.frame(
+simulated_data <- tibble(
   poll_average = poll_averages,
   state = states_sampled,
   party = parties_sampled,
@@ -58,4 +58,4 @@ simulated_data <- data.frame(
 print(head(simulated_data))
 
 # Save data as CSV
-write.csv(simulated_data, "simulated_us_presidential_election_data_full.csv", row.names = FALSE)
+write.csv(simulated_data, "data/00-simulated_data/simulated_US_election_data.csv", row.names=FALSE)

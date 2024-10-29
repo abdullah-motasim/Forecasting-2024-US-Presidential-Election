@@ -6,14 +6,14 @@
 # License: MIT
 # Pre-requisites: 
   # - The `tidyverse` package must be installed and loaded
-  # - 00-simulate_data.R must have been run
+  # - 00-simulate_data.R must have been run and saved the simulated data properly
 
 
 #### Workspace setup ####
 library(tidyverse)
 
 # Load the simulated data for the American election
-simulated_data <- read.csv("simulated_us_presidential_election_data_full.csv")
+simulated_data <- read.csv("data/00-simulated_data/simulated_data.csv")
 
 # Test if the data was successfully loaded
 if (exists("simulated_data")) {

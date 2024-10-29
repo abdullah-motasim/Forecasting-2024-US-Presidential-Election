@@ -8,7 +8,7 @@
 # License: MIT
 # Pre-requisites: The raw poll data should be available at 'inputs/data/president_poll.csv'.
 #                 Ensure 'tidyverse' and 'janitor' packages are installed.
-# Any other information needed? Adjust the input file path as needed for different environments.
+# Any other information needed?
 
 #### Workspace setup ####
 library(tidyverse)
@@ -16,7 +16,7 @@ library(janitor)
 
 #### Clean data ####
 # Load raw data from the specified path
-raw_data <- read_csv("inputs/data/president_poll.csv")
+raw_data <- read_csv("data/01-raw_data/president_polls.csv")
 
 # Clean the data
 cleaned_data <- 
@@ -36,17 +36,12 @@ cleaned_data <-
   drop_na()  # Remove any remaining rows with NA values
 
 #### Save data ####
-# Save the cleaned data to the specified output location
-output_file <- "outputs/data/analysis_data.csv"
-if (!dir.exists(dirname(output_file))) {
-  dir.create(dirname(output_file), recursive = TRUE)
-}
-
-write_csv(cleaned_data, output_file)
+# Save the cleaned data to a new file location within the project
+write_csv(cleaned_data, "data/02-analysis_data/analysis_data.csv")
 
 # Confirm successful cleaning and saving
-if (file.exists(output_file)) {
-  message("Test Passed: The cleaned dataset was successfully saved to the output directory.")
+if (file.exists("data/02-analysis_data/analysis_data.csv")) {
+  message("Test Passed: The cleaned dataset was saved successfully.")
 } else {
   stop("Test Failed: The cleaned dataset could not be saved.")
 }
