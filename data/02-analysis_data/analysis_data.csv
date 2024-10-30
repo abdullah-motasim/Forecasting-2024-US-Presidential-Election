@@ -1,10 +1,184 @@
 pollster_name,candidate,percentage,party,sample_size,state
+SoCal Strategies,Kamala Harris,49,DEM,600,Wisconsin
+SoCal Strategies,Donald Trump,49,REP,600,Wisconsin
+AtlasIntel,Kamala Harris,46.4,DEM,1458,Arizona
+AtlasIntel,Donald Trump,50.6,REP,1458,Arizona
+AtlasIntel,Jill Stein,1,GRE,1458,Arizona
+AtlasIntel,Chase Oliver,0.1,LIB,1458,Arizona
+AtlasIntel,Kamala Harris,47.3,DEM,1458,Arizona
+AtlasIntel,Donald Trump,50.8,REP,1458,Arizona
+AtlasIntel,Kamala Harris,47.1,DEM,1429,Georgia
+AtlasIntel,Donald Trump,50.2,REP,1429,Georgia
+AtlasIntel,Jill Stein,0.9,GRE,1429,Georgia
+AtlasIntel,Chase Oliver,0.6,LIB,1429,Georgia
+AtlasIntel,Kamala Harris,47.5,DEM,1429,Georgia
+AtlasIntel,Donald Trump,50.9,REP,1429,Georgia
+AtlasIntel,Kamala Harris,47.9,DEM,983,Michigan
+AtlasIntel,Donald Trump,49.2,REP,983,Michigan
+AtlasIntel,Jill Stein,1.8,GRE,983,Michigan
+AtlasIntel,Chase Oliver,0.2,LIB,983,Michigan
+AtlasIntel,Kamala Harris,48.1,DEM,983,Michigan
+AtlasIntel,Donald Trump,49.3,REP,983,Michigan
+AtlasIntel,Kamala Harris,47.5,DEM,1083,Nevada
+AtlasIntel,Donald Trump,48.4,REP,1083,Nevada
+AtlasIntel,Kamala Harris,47.6,DEM,1083,Nevada
+AtlasIntel,Donald Trump,48.5,REP,1083,Nevada
+AtlasIntel,Kamala Harris,48.5,DEM,1665,North Carolina
+AtlasIntel,Donald Trump,48.4,REP,1665,North Carolina
+AtlasIntel,Jill Stein,0.8,GRE,1665,North Carolina
+AtlasIntel,Chase Oliver,0.4,LIB,1665,North Carolina
+AtlasIntel,Kamala Harris,48.9,DEM,1665,North Carolina
+AtlasIntel,Donald Trump,48.4,REP,1665,North Carolina
+AtlasIntel,Kamala Harris,46.6,DEM,1299,Pennsylvania
+AtlasIntel,Donald Trump,48.7,REP,1299,Pennsylvania
+AtlasIntel,Jill Stein,0.9,GRE,1299,Pennsylvania
+AtlasIntel,Chase Oliver,0.6,LIB,1299,Pennsylvania
+AtlasIntel,Kamala Harris,46.9,DEM,1299,Pennsylvania
+AtlasIntel,Donald Trump,49.6,REP,1299,Pennsylvania
+AtlasIntel,Kamala Harris,48.1,DEM,1470,Wisconsin
+AtlasIntel,Donald Trump,48.7,REP,1470,Wisconsin
+AtlasIntel,Jill Stein,0.6,GRE,1470,Wisconsin
+AtlasIntel,Chase Oliver,0.5,LIB,1470,Wisconsin
+AtlasIntel,Kamala Harris,48.5,DEM,1470,Wisconsin
+AtlasIntel,Donald Trump,49,REP,1470,Wisconsin
+ActiVote,Kamala Harris,41.5,DEM,400,South Carolina
+ActiVote,Donald Trump,58.5,REP,400,South Carolina
+ActiVote,Kamala Harris,59.1,DEM,400,Washington
+ActiVote,Donald Trump,40.9,REP,400,Washington
+ActiVote,Kamala Harris,33.2,DEM,400,Oklahoma
+ActiVote,Donald Trump,66.8,REP,400,Oklahoma
+Data Orbital,Kamala Harris,41.9,DEM,550,Arizona
+Data Orbital,Donald Trump,49.7,REP,550,Arizona
+Data Orbital,Chase Oliver,0.7,LIB,550,Arizona
+Data Orbital,Jill Stein,1,GRE,550,Arizona
+Quantus Insights,Kamala Harris,49.2,DEM,844,Michigan
+Quantus Insights,Donald Trump,48.5,REP,844,Michigan
+Cygnal,Kamala Harris,43,DEM,600,Texas
+Cygnal,Donald Trump,51,REP,600,Texas
+Trafalgar Group,Kamala Harris,46.2,DEM,1091,North Carolina
+Trafalgar Group,Donald Trump,49.4,REP,1091,North Carolina
+Trafalgar Group,Kamala Harris,47.8,DEM,1082,Nevada
+Trafalgar Group,Donald Trump,47.6,REP,1082,Nevada
+Trafalgar Group,Kamala Harris,45.6,DEM,1127,Ohio
+Trafalgar Group,Donald Trump,51.7,REP,1127,Ohio
+SurveyUSA,Kamala Harris,51,DEM,728,Minnesota
+SurveyUSA,Donald Trump,43,REP,728,Minnesota
+Monmouth,Kamala Harris,46,DEM,824,Pennsylvania
+Monmouth,Donald Trump,47,REP,824,Pennsylvania
+Quinnipiac,Kamala Harris,46,DEM,2186,Pennsylvania
+Quinnipiac,Donald Trump,47,REP,2186,Pennsylvania
+Quinnipiac,Jill Stein,2,GRE,2186,Pennsylvania
+Quinnipiac,Chase Oliver,1,LIB,2186,Pennsylvania
+Quinnipiac,Kamala Harris,47,DEM,2186,Pennsylvania
+Quinnipiac,Donald Trump,49,REP,2186,Pennsylvania
+CNN/SSRS,Kamala Harris,48,DEM,726,Michigan
+CNN/SSRS,Donald Trump,43,REP,726,Michigan
+CNN/SSRS,Robert F. Kennedy,3,IND,726,Michigan
+CNN/SSRS,Cornel West,1,IND,726,Michigan
+CNN/SSRS,Jill Stein,2,GRE,726,Michigan
+CNN/SSRS,Chase Oliver,0,LIB,726,Michigan
+CNN/SSRS,Kamala Harris,48,DEM,819,Pennsylvania
+CNN/SSRS,Donald Trump,48,REP,819,Pennsylvania
+CNN/SSRS,Jill Stein,1,GRE,819,Pennsylvania
+CNN/SSRS,Chase Oliver,1,LIB,819,Pennsylvania
+CNN/SSRS,Kamala Harris,51,DEM,736,Wisconsin
+CNN/SSRS,Donald Trump,45,REP,736,Wisconsin
+CNN/SSRS,Robert F. Kennedy,1,IND,736,Wisconsin
+CNN/SSRS,Cornel West,0,IND,736,Wisconsin
+CNN/SSRS,Jill Stein,1,GRE,736,Wisconsin
+CNN/SSRS,Chase Oliver,0,LIB,736,Wisconsin
+YouGov,Kamala Harris,49,DEM,1273,Pennsylvania
+YouGov,Donald Trump,49,REP,1273,Pennsylvania
+YouGov,Kamala Harris,40,DEM,1206,Nebraska
+YouGov,Donald Trump,55,REP,1206,Nebraska
+YouGov,Jill Stein,0,GRE,1206,Nebraska
+YouGov,Cornel West,0,IND,1206,Nebraska
+YouGov,Chase Oliver,1,LIB,1206,Nebraska
+YouGov,Kamala Harris,43,DEM,408,Nebraska CD-1
+YouGov,Donald Trump,51,REP,408,Nebraska CD-1
+YouGov,Jill Stein,0,GRE,408,Nebraska CD-1
+YouGov,Cornel West,0,IND,408,Nebraska CD-1
+YouGov,Chase Oliver,3,LIB,408,Nebraska CD-1
+YouGov,Kamala Harris,52,DEM,393,Nebraska CD-2
+YouGov,Donald Trump,44,REP,393,Nebraska CD-2
+YouGov,Jill Stein,1,GRE,393,Nebraska CD-2
+YouGov,Cornel West,0,IND,393,Nebraska CD-2
+YouGov,Chase Oliver,1,LIB,393,Nebraska CD-2
+YouGov,Kamala Harris,25,DEM,404,Nebraska CD-3
+YouGov,Donald Trump,70,REP,404,Nebraska CD-3
+YouGov,Jill Stein,0,GRE,404,Nebraska CD-3
+YouGov,Cornel West,0,IND,404,Nebraska CD-3
+YouGov,Chase Oliver,0,LIB,404,Nebraska CD-3
+ActiVote,Kamala Harris,45.9,DEM,400,Ohio
+ActiVote,Donald Trump,54.1,REP,400,Ohio
+ActiVote,Kamala Harris,38.3,DEM,400,Tennessee
+ActiVote,Donald Trump,61.7,REP,400,Tennessee
+ActiVote,Kamala Harris,58.4,DEM,400,Illinois
+ActiVote,Donald Trump,41.6,REP,400,Illinois
+ActiVote,Kamala Harris,42.3,DEM,400,Indiana
+ActiVote,Donald Trump,57.7,REP,400,Indiana
+ActiVote,Kamala Harris,54.1,DEM,400,Virginia
+ActiVote,Donald Trump,45.9,REP,400,Virginia
+ActiVote,Kamala Harris,56.9,DEM,400,New Jersey
+ActiVote,Donald Trump,43.1,REP,400,New Jersey
 InsiderAdvantage,Kamala Harris,47.4,DEM,800,Pennsylvania
 InsiderAdvantage,Donald Trump,48.4,REP,800,Pennsylvania
 InsiderAdvantage,Kamala Harris,47.9,DEM,800,Michigan
 InsiderAdvantage,Donald Trump,48.5,REP,800,Michigan
+Cygnal,Kamala Harris,56.8,DEM,600,New York
+Cygnal,Donald Trump,39,REP,600,New York
+InsiderAdvantage,Kamala Harris,48,DEM,800,Wisconsin
+InsiderAdvantage,Donald Trump,49,REP,800,Wisconsin
+SoCal Strategies,Kamala Harris,49,DEM,658,Georgia
+SoCal Strategies,Donald Trump,50,REP,658,Georgia
+Emerson,Kamala Harris,49.3,DEM,1000,Michigan
+Emerson,Donald Trump,49.8,REP,1000,Michigan
+Redfield & Wilton Strategies,Kamala Harris,47,DEM,901,Arizona
+Redfield & Wilton Strategies,Donald Trump,49,REP,901,Arizona
+Redfield & Wilton Strategies,Chase Oliver,1,LIB,901,Arizona
+Redfield & Wilton Strategies,Jill Stein,1,GRE,901,Arizona
+Redfield & Wilton Strategies,Kamala Harris,47,DEM,1112,Georgia
+Redfield & Wilton Strategies,Donald Trump,48,REP,1112,Georgia
+Redfield & Wilton Strategies,Chase Oliver,1,LIB,1112,Georgia
+Redfield & Wilton Strategies,Jill Stein,0,GRE,1112,Georgia
+Redfield & Wilton Strategies,Kamala Harris,49,DEM,728,Michigan
+Redfield & Wilton Strategies,Donald Trump,48,REP,728,Michigan
+Redfield & Wilton Strategies,Chase Oliver,0,LIB,728,Michigan
+Redfield & Wilton Strategies,Jill Stein,1,GRE,728,Michigan
+Redfield & Wilton Strategies,Kamala Harris,47,DEM,531,Nevada
+Redfield & Wilton Strategies,Donald Trump,47,REP,531,Nevada
+Redfield & Wilton Strategies,Chase Oliver,1,LIB,531,Nevada
+Redfield & Wilton Strategies,Jill Stein,0,GRE,531,Nevada
+Redfield & Wilton Strategies,Kamala Harris,46,DEM,770,North Carolina
+Redfield & Wilton Strategies,Donald Trump,48,REP,770,North Carolina
+Redfield & Wilton Strategies,Chase Oliver,1,LIB,770,North Carolina
+Redfield & Wilton Strategies,Jill Stein,1,GRE,770,North Carolina
+Redfield & Wilton Strategies,Kamala Harris,48,DEM,1116,Pennsylvania
+Redfield & Wilton Strategies,Donald Trump,48,REP,1116,Pennsylvania
+Redfield & Wilton Strategies,Chase Oliver,1,LIB,1116,Pennsylvania
+Redfield & Wilton Strategies,Jill Stein,0,GRE,1116,Pennsylvania
+Redfield & Wilton Strategies,Kamala Harris,49,DEM,746,Wisconsin
+Redfield & Wilton Strategies,Donald Trump,47,REP,746,Wisconsin
+Redfield & Wilton Strategies,Chase Oliver,1,LIB,746,Wisconsin
+Redfield & Wilton Strategies,Jill Stein,0,GRE,746,Wisconsin
+RABA Research,Kamala Harris,45,DEM,589,Arizona
+RABA Research,Donald Trump,43,REP,589,Arizona
+Suffolk,Kamala Harris,47,DEM,500,Michigan
+Suffolk,Donald Trump,47.4,REP,500,Michigan
+Suffolk,Chase Oliver,0.2,LIB,500,Michigan
+Suffolk,Randall A. Terry,0,CON,500,Michigan
+Suffolk,Jill Stein,1.4,GRE,500,Michigan
+Suffolk,Robert F. Kennedy,1.4,IND,500,Michigan
+Suffolk,Joseph Kishore,0.2,IND,500,Michigan
+Suffolk,Cornel West,1,IND,500,Michigan
+Susquehanna,Kamala Harris,51.7,DEM,400,Michigan
+Susquehanna,Donald Trump,46.6,REP,400,Michigan
 ActiVote,Kamala Harris,45,DEM,400,Texas
 ActiVote,Donald Trump,55,REP,400,Texas
+Florida Atlantic University/Mainstreet Research,Kamala Harris,44,DEM,913,Florida
+Florida Atlantic University/Mainstreet Research,Donald Trump,53,REP,913,Florida
+Florida Atlantic University/Mainstreet Research,Kamala Harris,44,DEM,897,Florida
+Florida Atlantic University/Mainstreet Research,Donald Trump,53,REP,897,Florida
 ActiVote,Kamala Harris,44.2,DEM,400,Florida
 ActiVote,Donald Trump,55.8,REP,400,Florida
 ActiVote,Kamala Harris,59,DEM,400,New York
@@ -21,6 +195,8 @@ Patriot Polling,Kamala Harris,49,DEM,796,Michigan
 Patriot Polling,Donald Trump,50,REP,796,Michigan
 Praecones Analytica,Kamala Harris,49.8,DEM,622,New Hampshire
 Praecones Analytica,Donald Trump,50.2,REP,622,New Hampshire
+Emerson,Kamala Harris,60.2,DEM,1000,Massachusetts
+Emerson,Donald Trump,37.2,REP,1000,Massachusetts
 Siena/NYT,Kamala Harris,41,DEM,1180,Texas
 Siena/NYT,Donald Trump,52,REP,1180,Texas
 Siena/NYT,Kamala Harris,40,DEM,1180,Texas
@@ -54,14 +230,77 @@ Siena/NYT,Donald Trump,41,REP,500,Nebraska CD-2
 Siena/NYT,Jill Stein,0,GRE,500,Nebraska CD-2
 Siena/NYT,Cornel West,0,IND,500,Nebraska CD-2
 Siena/NYT,Chase Oliver,1,LIB,500,Nebraska CD-2
+SurveyUSA,Kamala Harris,47,DEM,853,North Carolina
+SurveyUSA,Donald Trump,47,REP,853,North Carolina
 North Star Opinion Research,Kamala Harris,47,DEM,600,Pennsylvania
 North Star Opinion Research,Donald Trump,47,REP,600,Pennsylvania
 North Star Opinion Research,Chase Oliver,1,LIB,600,Pennsylvania
 North Star Opinion Research,Jill Stein,1,GRE,600,Pennsylvania
+CNN/SSRS,Kamala Harris,48,DEM,781,Arizona
+CNN/SSRS,Donald Trump,47,REP,781,Arizona
+CNN/SSRS,Jill Stein,1,GRE,781,Arizona
+CNN/SSRS,Chase Oliver,2,LIB,781,Arizona
+CNN/SSRS,Kamala Harris,47,DEM,683,Nevada
+CNN/SSRS,Donald Trump,48,REP,683,Nevada
+CNN/SSRS,Chase Oliver,1,LIB,683,Nevada
 Emerson,Kamala Harris,39.6,DEM,1000,Montana
 Emerson,Donald Trump,58.6,REP,1000,Montana
 St. Pete Polls,Kamala Harris,44.6,DEM,1227,Florida
 St. Pete Polls,Donald Trump,50.3,REP,1227,Florida
+CES / YouGov,Kamala Harris,49,DEM,2077,Arizona
+CES / YouGov,Donald Trump,49,REP,2077,Arizona
+CES / YouGov,Kamala Harris,47,DEM,2066,Arizona
+CES / YouGov,Donald Trump,51,REP,2066,Arizona
+CES / YouGov,Kamala Harris,47,DEM,5952,Florida
+CES / YouGov,Donald Trump,51,REP,5952,Florida
+CES / YouGov,Kamala Harris,46,DEM,5916,Florida
+CES / YouGov,Donald Trump,52,REP,5916,Florida
+CES / YouGov,Kamala Harris,48,DEM,2682,Georgia
+CES / YouGov,Donald Trump,49,REP,2682,Georgia
+CES / YouGov,Kamala Harris,46,DEM,2663,Georgia
+CES / YouGov,Donald Trump,51,REP,2663,Georgia
+CES / YouGov,Kamala Harris,52,DEM,2347,Michigan
+CES / YouGov,Donald Trump,45,REP,2347,Michigan
+CES / YouGov,Kamala Harris,51,DEM,2336,Michigan
+CES / YouGov,Donald Trump,46,REP,2336,Michigan
+CES / YouGov,Kamala Harris,52,DEM,1278,Minnesota
+CES / YouGov,Donald Trump,44,REP,1278,Minnesota
+CES / YouGov,Kamala Harris,53,DEM,1275,Minnesota
+CES / YouGov,Donald Trump,43,REP,1275,Minnesota
+CES / YouGov,Kamala Harris,53,DEM,940,Nevada
+CES / YouGov,Donald Trump,44,REP,940,Nevada
+CES / YouGov,Kamala Harris,51,DEM,933,Nevada
+CES / YouGov,Donald Trump,47,REP,933,Nevada
+CES / YouGov,Kamala Harris,52,DEM,380,New Hampshire
+CES / YouGov,Donald Trump,45,REP,380,New Hampshire
+CES / YouGov,Kamala Harris,52,DEM,375,New Hampshire
+CES / YouGov,Donald Trump,45,REP,375,New Hampshire
+CES / YouGov,Kamala Harris,49,DEM,2330,North Carolina
+CES / YouGov,Donald Trump,48,REP,2330,North Carolina
+CES / YouGov,Kamala Harris,48,DEM,2308,North Carolina
+CES / YouGov,Donald Trump,50,REP,2308,North Carolina
+CES / YouGov,Kamala Harris,45,DEM,3120,Ohio
+CES / YouGov,Donald Trump,52,REP,3120,Ohio
+CES / YouGov,Kamala Harris,45,DEM,3091,Ohio
+CES / YouGov,Donald Trump,52,REP,3091,Ohio
+CES / YouGov,Kamala Harris,50,DEM,3708,Pennsylvania
+CES / YouGov,Donald Trump,47,REP,3708,Pennsylvania
+CES / YouGov,Kamala Harris,49,DEM,3685,Pennsylvania
+CES / YouGov,Donald Trump,48,REP,3685,Pennsylvania
+CES / YouGov,Kamala Harris,47,DEM,6526,Texas
+CES / YouGov,Donald Trump,51,REP,6526,Texas
+CES / YouGov,Kamala Harris,47,DEM,6473,Texas
+CES / YouGov,Donald Trump,51,REP,6473,Texas
+CES / YouGov,Kamala Harris,53,DEM,2027,Virginia
+CES / YouGov,Donald Trump,44,REP,2027,Virginia
+CES / YouGov,Kamala Harris,52,DEM,2015,Virginia
+CES / YouGov,Donald Trump,44,REP,2015,Virginia
+CES / YouGov,Kamala Harris,51,DEM,1552,Wisconsin
+CES / YouGov,Donald Trump,46,REP,1552,Wisconsin
+CES / YouGov,Kamala Harris,50,DEM,1542,Wisconsin
+CES / YouGov,Donald Trump,47,REP,1542,Wisconsin
+Cygnal,Kamala Harris,51.8,DEM,600,New Jersey
+Cygnal,Donald Trump,40.3,REP,600,New Jersey
 Cygnal,Kamala Harris,51.8,DEM,600,New Jersey
 Cygnal,Donald Trump,40.3,REP,600,New Jersey
 Quantus Insights,Kamala Harris,48.9,DEM,725,Virginia
@@ -71,6 +310,26 @@ Glengariff Group Inc.,Donald Trump,43.7,REP,600,Michigan
 Glengariff Group Inc.,Robert F. Kennedy,3.9,IND,600,Michigan
 Glengariff Group Inc.,Jill Stein,1.6,GRE,600,Michigan
 Glengariff Group Inc.,Chase Oliver,1,LIB,600,Michigan
+Marquette Law School,Kamala Harris,50,DEM,753,Wisconsin
+Marquette Law School,Donald Trump,49,REP,753,Wisconsin
+Marquette Law School,Kamala Harris,46,DEM,753,Wisconsin
+Marquette Law School,Donald Trump,44,REP,753,Wisconsin
+Marquette Law School,Robert F. Kennedy,5,IND,753,Wisconsin
+Marquette Law School,Claudia De La Cruz,0,PSL,753,Wisconsin
+Marquette Law School,Chase Oliver,2,LIB,753,Wisconsin
+Marquette Law School,Jill Stein,1,GRE,753,Wisconsin
+Marquette Law School,Randall A. Terry,0,CON,753,Wisconsin
+Marquette Law School,Cornel West,1,IND,753,Wisconsin
+Marquette Law School,Kamala Harris,51,DEM,834,Wisconsin
+Marquette Law School,Donald Trump,49,REP,834,Wisconsin
+Marquette Law School,Kamala Harris,46,DEM,834,Wisconsin
+Marquette Law School,Donald Trump,43,REP,834,Wisconsin
+Marquette Law School,Robert F. Kennedy,5,IND,834,Wisconsin
+Marquette Law School,Chase Oliver,2,LIB,834,Wisconsin
+Marquette Law School,Jill Stein,1,GRE,834,Wisconsin
+Marquette Law School,Randall A. Terry,0,CON,834,Wisconsin
+Marquette Law School,Cornel West,1,IND,834,Wisconsin
+Marquette Law School,Claudia De La Cruz,0,PSL,834,Wisconsin
 Emerson,Kamala Harris,50.9,DEM,915,New Hampshire
 Emerson,Donald Trump,47.2,REP,915,New Hampshire
 Suffolk,Kamala Harris,46.6,DEM,500,Wisconsin
@@ -140,6 +399,8 @@ OnMessage Inc.,Chase Oliver,0,LIB,600,Wisconsin
 East Carolina University,Kamala Harris,42,DEM,950,South Carolina
 East Carolina University,Donald Trump,55.1,REP,950,South Carolina
 East Carolina University,Chase Oliver,0.5,LIB,950,South Carolina
+Susquehanna,Kamala Harris,46,DEM,500,Pennsylvania
+Susquehanna,Donald Trump,45.8,REP,500,Pennsylvania
 Marist,Kamala Harris,49,DEM,1356,Georgia
 Marist,Donald Trump,48,REP,1356,Georgia
 Marist,Kamala Harris,49,DEM,1193,Georgia
@@ -162,6 +423,10 @@ Hunt Research,Chase Oliver,0.4,LIB,1234,Florida
 Hunt Research,Jill Stein,0.4,GRE,1234,Florida
 Embold Research,Kamala Harris,47.7,DEM,1734,Minnesota
 Embold Research,Donald Trump,45.1,REP,1734,Minnesota
+Rutgers-Eagleton,Kamala Harris,55,DEM,451,New Jersey
+Rutgers-Eagleton,Donald Trump,35,REP,451,New Jersey
+Rutgers-Eagleton,Kamala Harris,51,DEM,478,New Jersey
+Rutgers-Eagleton,Donald Trump,37,REP,478,New Jersey
 SoCal Strategies,Kamala Harris,46.3,DEM,702,North Carolina
 SoCal Strategies,Donald Trump,48.7,REP,702,North Carolina
 Emerson,Kamala Harris,64,DEM,865,Maryland
@@ -187,6 +452,10 @@ Quinnipiac,Randall A. Terry,0,CON,1108,Wisconsin
 Quinnipiac,Claudia De La Cruz,0,PSL,1108,Wisconsin
 Quinnipiac,Kamala Harris,48,DEM,1108,Wisconsin
 Quinnipiac,Donald Trump,48,REP,1108,Wisconsin
+University of Texas at Tyler,Kamala Harris,46,DEM,956,Texas
+University of Texas at Tyler,Donald Trump,51,REP,956,Texas
+University of Texas at Tyler,Jill Stein,1,GRE,956,Texas
+University of Texas at Tyler,Chase Oliver,1,LIB,956,Texas
 Bowling Green State University/YouGov,Kamala Harris,43,DEM,1000,Ohio
 Bowling Green State University/YouGov,Donald Trump,50,REP,1000,Ohio
 InsiderAdvantage,Kamala Harris,47.7,DEM,800,Nevada
@@ -293,6 +562,8 @@ Morning Consult,Jill Stein,1,GRE,624,Wisconsin
 Morning Consult,Chase Oliver,3,LIB,624,Wisconsin
 Morning Consult,Kamala Harris,48,DEM,624,Wisconsin
 Morning Consult,Donald Trump,48,REP,624,Wisconsin
+U. Arizona/TrueDot,Kamala Harris,46.15,DEM,846,Arizona
+U. Arizona/TrueDot,Donald Trump,45.48,REP,846,Arizona
 Cherry Communications,Kamala Harris,45,DEM,614,Florida
 Cherry Communications,Donald Trump,51,REP,614,Florida
 Franklin and Marshall College,Kamala Harris,49,DEM,794,Pennsylvania
@@ -430,6 +701,28 @@ Bullfinch,Kamala Harris,49,DEM,600,Pennsylvania
 Bullfinch,Donald Trump,49,REP,600,Pennsylvania
 Bullfinch,Kamala Harris,49,DEM,600,Pennsylvania
 Bullfinch,Donald Trump,48,REP,600,Pennsylvania
+Elon U.,Kamala Harris,46,DEM,800,North Carolina
+Elon U.,Donald Trump,46,REP,800,North Carolina
+YouGov,Kamala Harris,63,DEM,1139,California
+YouGov,Donald Trump,34,REP,1139,California
+YouGov,Kamala Harris,63,DEM,1139,California
+YouGov,Donald Trump,34,REP,1139,California
+YouGov,Kamala Harris,50,DEM,1062,Pennsylvania
+YouGov,Donald Trump,47,REP,1062,Pennsylvania
+YouGov,Kamala Harris,50,DEM,1043,Pennsylvania
+YouGov,Donald Trump,48,REP,1043,Pennsylvania
+YouGov,Kamala Harris,46,DEM,1094,Florida
+YouGov,Donald Trump,51,REP,1094,Florida
+YouGov,Kamala Harris,46,DEM,1076,Florida
+YouGov,Donald Trump,51,REP,1076,Florida
+YouGov,Kamala Harris,45,DEM,1108,Texas
+YouGov,Donald Trump,50,REP,1108,Texas
+YouGov,Kamala Harris,46,DEM,1075,Texas
+YouGov,Donald Trump,51,REP,1075,Texas
+YouGov,Kamala Harris,58,DEM,1089,New York
+YouGov,Donald Trump,38,REP,1089,New York
+YouGov,Kamala Harris,58,DEM,1089,New York
+YouGov,Donald Trump,38,REP,1089,New York
 ActiVote,Kamala Harris,49.3,DEM,400,Georgia
 ActiVote,Donald Trump,50.7,REP,400,Georgia
 ActiVote,Kamala Harris,41.6,DEM,400,South Carolina
@@ -458,6 +751,11 @@ U. Georgia SPIA,Kamala Harris,43.4,DEM,1000,Georgia
 U. Georgia SPIA,Donald Trump,47,REP,1000,Georgia
 U. Georgia SPIA,Chase Oliver,0.4,LIB,1000,Georgia
 U. Georgia SPIA,Jill Stein,0.4,GRE,1000,Georgia
+MSU - Billings,Kamala Harris,34,DEM,760,Montana
+MSU - Billings,Donald Trump,52,REP,760,Montana
+MSU - Billings,Chase Oliver,2,LIB,760,Montana
+MSU - Billings,Jill Stein,1,GRE,760,Montana
+MSU - Billings,Robert F. Kennedy,3,IND,760,Montana
 ActiVote,Kamala Harris,44.2,DEM,400,Texas
 ActiVote,Donald Trump,55.8,REP,400,Texas
 Fort Hays State University,Kamala Harris,39.4,DEM,608,Kansas
@@ -2425,6 +2723,8 @@ InsiderAdvantage,Kamala Harris,48.4,DEM,800,North Carolina
 InsiderAdvantage,Donald Trump,49.2,REP,800,North Carolina
 InsiderAdvantage,Kamala Harris,48.3,DEM,800,Georgia
 InsiderAdvantage,Donald Trump,47.6,REP,800,Georgia
+U. Arizona/TrueDot,Kamala Harris,41.8,DEM,1155,Arizona
+U. Arizona/TrueDot,Donald Trump,45.75,REP,1155,Arizona
 SoonerPoll.com,Kamala Harris,39.9,DEM,323,Oklahoma
 SoonerPoll.com,Donald Trump,56,REP,323,Oklahoma
 YouGov,Kamala Harris,44,DEM,1200,Texas

@@ -58,4 +58,7 @@ simulated_data <- tibble(
 print(head(simulated_data))
 
 # Save data as CSV
-write.csv(simulated_data, "data/00-simulated_data/simulated_US_election_data.csv", row.names=FALSE)
+write_csv(simulated_data, "data/00-simulated_data/simulated_US_election_data.csv")
+
+
+print(head(simulated_data))
