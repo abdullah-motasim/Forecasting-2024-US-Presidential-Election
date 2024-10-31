@@ -8,7 +8,6 @@
 # License: MIT
 # Pre-requisites: The raw poll data should be available at 'inputs/data/president_poll.csv'.
 #                 Ensure 'tidyverse' and 'janitor' packages are installed.
-# Any other information needed?
 
 #### Workspace setup ####
 library(tidyverse)
@@ -45,3 +44,4 @@ if (file.exists("data/02-analysis_data/analysis_data.csv")) {
 } else {
   stop("Test Failed: The cleaned dataset could not be saved.")
 }
+
