@@ -1,12 +1,12 @@
-# #### Preamble ####
-# # Purpose: Models the forecast for the 2024 U.S. presidential election using "poll-of-polls"
-# # Author: Elizabeth Luong, Abdullah Motasim, and Yuanting Han
-# # Date: 4 November 2024
-# # Contact: elizabethh.luong@mail.utoronto.ca
-# # License: MIT
-# # Pre-requisites: Cleaned data should be available at 'outputs/data/analysis_data.csv'
-# # Any other information needed? Data must include relevant predictors like percentage, sample size, state, etc.
-# 
+#### Preamble ####
+# Purpose: Models the forecast for the 2024 U.S. presidential election using "poll-of-polls"
+# Author: Elizabeth Luong, Abdullah Motasim, and Yuanting Han
+# Date: 4 November 2024
+# Contact: elizabethh.luong@mail.utoronto.ca
+# License: MIT
+# Pre-requisites: Cleaned data should be available at 'outputs/data/analysis_data.csv'
+# Any other information needed? Data must include relevant predictors like percentage, sample size, state, etc.
+
 #### Workspace setup ####
 library(tidyverse)
 library(rstanarm)
