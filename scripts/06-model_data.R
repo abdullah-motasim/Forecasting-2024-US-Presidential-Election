@@ -4,7 +4,7 @@
 # Date: 4 November 2024
 # Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: Cleaned data should be available at 'outputs/data/analysis_data.csv'
+# Pre-requisites: Cleaned data should be available at 'data/02-analysis_data/analysis_data.csv'
 # Any other information needed? Data must include relevant predictors like percentage, sample size, state, etc.
 
 #### Workspace setup ####
@@ -12,7 +12,7 @@ library(tidyverse)
 library(rstanarm)
 
 #### Read data ####
-analysis_data <- read_csv("outputs/data/analysis_data.csv")
+analysis_data <- read_csv("data/02-analysis_data/analysis_data.csv")
 
 #### Prepare data for modeling ####
 # Create a binary outcome indicating if a candidate is leading

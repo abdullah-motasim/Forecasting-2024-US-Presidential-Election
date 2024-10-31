@@ -18,7 +18,7 @@ president_polls <- read_csv("https://projects.fivethirtyeight.com/polls/data/pre
 
 #### Save data ####
 # Save the raw data to a new file location within the project
-write_csv(president_polls, "data/01-raw_data/president_polls.csv")
+write.csv(president_polls, "data/01-raw_data/president_polls.csv", row.names=FALSE)
 
 # Test if the data was successfully saved
 if (file.exists("data/01-raw_data/president_polls.csv")) {

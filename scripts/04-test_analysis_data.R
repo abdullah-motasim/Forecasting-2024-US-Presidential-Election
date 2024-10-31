@@ -21,7 +21,7 @@ test_that("dataset has at least 1000 rows", {
   expect_true(nrow(analysis_data) >= 1000)
 })
 
-# Test that the dataset has 5 columns (based on cleaned dataset structure)
+# Test that the dataset has 6 columns (based on cleaned dataset structure)
 test_that("dataset has 6 columns", {
   expect_equal(ncol(analysis_data), 6)
 })

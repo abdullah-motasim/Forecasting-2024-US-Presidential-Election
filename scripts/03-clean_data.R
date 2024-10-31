@@ -37,7 +37,7 @@ cleaned_data <-
 
 #### Save data ####
 # Save the cleaned data to a new file location within the project
-write_csv(cleaned_data, "data/02-analysis_data/analysis_data.csv")
+write.csv(cleaned_data, "data/02-analysis_data/analysis_data.csv", row.names=FALSE)
 
 # Confirm successful cleaning and saving
 if (file.exists("data/02-analysis_data/analysis_data.csv")) {
