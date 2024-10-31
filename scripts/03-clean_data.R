@@ -7,11 +7,12 @@
 # Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT
 # Pre-requisites: The raw poll data should be available at 'inputs/data/president_poll.csv'.
-#                 Ensure 'tidyverse' and 'janitor' packages are installed.
+#                 Ensure 'tidyverse', 'janitor' and 'arrow' packages are installed.
 
 #### Workspace setup ####
 library(tidyverse)
 library(janitor)
+library(arrow)
 
 #### Clean data ####
 # Load raw data from the specified path
@@ -36,7 +37,7 @@ cleaned_data <-
 
 #### Save data ####
 # Save the cleaned data to a new file location within the project
-write.csv(cleaned_data, "data/02-analysis_data/analysis_data.csv", row.names=FALSE)
+write_parquet(cleaned_data, "data/02-analysis_data/analysis_data.parquet")
 
 # Confirm successful cleaning and saving
 if (file.exists("data/02-analysis_data/analysis_data.csv")) {
