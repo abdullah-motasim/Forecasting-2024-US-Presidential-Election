@@ -31,11 +31,11 @@ if (nrow(simulated_data) == 1000) {
   stop("Test Failed: The dataset does not have 1000 rows.")
 }
 
-# Check if the dataset has 6 columns
-if (ncol(simulated_data) == 6) {
-  message("Test Passed: The dataset has 6 columns.")
+# Check if the dataset has 5 columns
+if (ncol(simulated_data) == 5) {
+  message("Test Passed: The dataset has 5 columns.")
 } else {
-  stop("Test Failed: The dataset does not have 6 columns.")
+  stop("Test Failed: The dataset does not have 5 columns.")
 }
 
 # Check if the 'state' column contains only valid U.S. state names

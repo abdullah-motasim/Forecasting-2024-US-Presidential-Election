@@ -4,7 +4,7 @@
 # Date: 4 November 2024
 # Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: Cleaned data should be available at 'data/02-analysis_data/analysis_data.csv'
+# Pre-requisites: Cleaned data should be available at 'outputs/data/analysis_data.csv'
 # Any other information needed? Data must include relevant predictors like percentage, sample size, state, etc.
 
 #### Workspace setup ####
@@ -12,13 +12,8 @@ library(tidyverse)
 library(rstanarm)
 library(bayesplot)
 
-<<<<<<< HEAD
-#### Read data ####
-analysis_data <- read_csv("data/02-analysis_data/analysis_data.csv")
-=======
 ### Read data ###
 analysis_data <- read_csv("outputs/data/analysis_data.csv")
->>>>>>> 3592d5af433f700a07aa92b5d53f576013ddb28c
 
 #### Prepare data for modeling ####
 # Create a binary outcome indicating if a candidate is leading
@@ -154,4 +149,3 @@ ggplot(pred_data_harris, aes(x = pollster, y = pred_pct, fill = pollster)) +
     axis.text.y = element_text(size = 12),
     legend.position = "none"
   )
-

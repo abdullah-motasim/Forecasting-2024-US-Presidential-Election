@@ -4,7 +4,7 @@
 # Date: 4 November 2024
 # Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT
-# Pre-requisites: Cleaned data should be available at 'data/02-analysis_data/analysis_data.csv'
+# Pre-requisites: Cleaned data should be available at 'outputs/data/analysis_data.csv'
 # Any other information needed? Ensure predictors like percentage, sample size, etc., are available in the data
 
 #### Workspace setup ####
@@ -275,12 +275,3 @@ ggplot(pred_data, aes(x = predicted_probs, fill = factor(leading_candidate))) +
     axis.text.y = element_text(size = 12),
     legend.position = "right"
   )
-
-
-
-
-
-
-
-
-
