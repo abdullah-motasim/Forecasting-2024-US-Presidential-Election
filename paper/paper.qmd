@@ -383,7 +383,7 @@ Your responses are anonymous and will be used solely for research purposes.
 
 If you have any questions or concerns, please contact Elizabeth Luong at elizabethh.luong\@mail.utoronto.ca.
 
-### **Section 1: Demographic Information**
+**Section 1: Demographic Information**
 
 1.  **What is your age?**
 
@@ -449,7 +449,7 @@ If you have any questions or concerns, please contact Elizabeth Luong at elizabe
 
     -   Other (please specify): \[Open text field\]
 
-### **Section 2: Political Opinions**
+**Section 2: Political Opinions**
 
 6.  **How likely are you to vote in the upcoming presidential election?**
 
@@ -505,7 +505,7 @@ If you have any questions or concerns, please contact Elizabeth Luong at elizabe
 
     -   Strongly disapprove
 
-### **Section 3: Media Consumption**
+**Section 3: Media Consumption**
 
 10. **Which sources do you primarily use to get news about the election?** (Select all that apply)
 
