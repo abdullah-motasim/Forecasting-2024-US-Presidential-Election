@@ -12,9 +12,10 @@ library(tidyverse)
 library(rstanarm)
 library(bayesplot)
 library(gt)
+library(arrow)
 
 #### Read data ####
-analysis_data <- read_csv("data/02-analysis_data/analysis_data.csv")
+analysis_data <- read_parquet("data/02-analysis_data/analysis_data.parquet")
 
 #### Prepare data for modeling ####
 # Convert percentage to a proportion and ensure columns are in the correct data type
@@ -237,4 +238,3 @@ ggplot(state_sample_data, aes(x = reorder(state, total_sample_size), y = total_s
     axis.text.y = element_text(size = 12),
     axis.text.x = element_text(size = 12)
   )
-

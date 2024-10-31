@@ -11,9 +11,10 @@
 library(tidyverse)
 library(rstanarm)
 library(bayesplot)
+library(arrow)
 
 ### Read data ###
-analysis_data <- read_csv("data/02-analysis_data/analysis_data.csv")
+analysis_data <- read_parquet("data/02-analysis_data/analysis_data.parquet")
 
 # Convert percentage to a proportion and ensure columns are in the correct data type
 analysis_data <- analysis_data %>%

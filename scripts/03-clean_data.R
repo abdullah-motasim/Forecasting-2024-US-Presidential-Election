@@ -40,7 +40,7 @@ cleaned_data <-
 write_parquet(cleaned_data, "data/02-analysis_data/analysis_data.parquet")
 
 # Confirm successful cleaning and saving
-if (file.exists("data/02-analysis_data/analysis_data.csv")) {
+if (file.exists("data/02-analysis_data/analysis_data.parquet")) {
   message("Test Passed: The cleaned dataset was saved successfully.")
 } else {
   stop("Test Failed: The cleaned dataset could not be saved.")

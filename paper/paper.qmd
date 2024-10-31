@@ -374,7 +374,7 @@ Below is a link to the actual survey, which includes an introductory section, we
 
 **U.S. Presidential Election Forecasting Survey**
 
-### **Introduction**
+**Introduction**
 
 Thank you for participating in our survey!
 Your insights are invaluable for understanding voter sentiment leading up to the upcoming US presidential election.
@@ -465,11 +465,11 @@ If you have any questions or concerns, please contact Elizabeth Luong at elizabe
 
 7.  **Which candidate do you plan to vote for in the upcoming presidential election?**
 
-    -   Candidate A (Democrat)
+    -   Donald Trump (Republican)
 
-    -   Candidate B (Republican)
+    -   Kamala Harris (Democrat)
 
-    -   Candidate C (Independent)
+    -   Robert F. Kennedy Jr. (Independent)
 
     -   Undecided
 
@@ -535,7 +535,7 @@ If you have any questions or concerns, please contact Elizabeth Luong at elizabe
 
     -   Never
 
-### **Conclusion**
+**Conclusion**
 
 Thank you for taking the time to complete this survey!
 Your feedback is crucial for understanding voter sentiment as we approach the election.
