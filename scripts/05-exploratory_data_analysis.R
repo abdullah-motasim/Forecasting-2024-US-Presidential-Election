@@ -153,30 +153,6 @@ summary_table %>%
     heading.subtitle.font.size = 16
   )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 # Pollster reliability visualization
 # Identifying the 5 most frequent pollsters for readability 
 top_pollsters <- analysis_data %>%
