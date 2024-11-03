@@ -22,7 +22,7 @@ raw_data <- read_csv("data/01-raw_data/president_polls.csv")
 cleaned_data <- 
   raw_data |>
   janitor::clean_names() |>  # Standardize column names to snake_case
-  select(pollster, candidate_name, pct, party, sample_size, state) |>  # Select relevant columns
+  select(pollster, candidate_name, pct, party, sample_size, state, numeric_grade) |>  # Select relevant columns
   filter(!is.na(pct)) |>  # Remove rows where the percentage column is missing
   mutate(
     pct = as.numeric(gsub(",", ".", pct)),  # Convert percentage to numeric, handling commas

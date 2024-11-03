@@ -22,9 +22,9 @@ test_that("dataset has at least 1000 rows", {
   expect_true(nrow(analysis_data) >= 1000)
 })
 
-# Test that the dataset has 6 columns (based on cleaned dataset structure)
-test_that("dataset has 6 columns", {
-  expect_equal(ncol(analysis_data), 6)
+# Test that the dataset has 7 columns (based on cleaned dataset structure)
+test_that("dataset has 7 columns", {
+  expect_equal(ncol(analysis_data), 7)
 })
 
 # Test that the 'pollster_name' column is character type
@@ -41,6 +41,12 @@ test_that("'candidate' is character", {
 test_that("'percentage' is numeric", {
   expect_type(analysis_data$percentage, "double")
 })
+
+# Test that the 'numeric_grade' column is numeric
+test_that("'numeric_grade' is numeric", {
+  expect_type(analysis_data$numeric_grade, "double")
+})
+
 
 # Test that the 'sample_size' column is numeric
 test_that("'sample_size' is numeric", {
@@ -79,12 +85,13 @@ test_that("'state' contains valid U.S. state names", {
   expect_true(all(analysis_data$state %in% valid_states))
 })
 
-# Test that there are no empty strings in 'pollster_name', 'candidate', 'percentage', 'sample_size', or 'state'
+# Test that there are no empty strings in 'pollster_name', 'candidate', 'percentage', 'sample_size', 'numeric_grade', or 'state'
 test_that("no empty strings in critical columns", {
   expect_false(any(analysis_data$pollster_name == "" | 
                      analysis_data$candidate == "" | 
                      analysis_data$percentage == "" | 
                      analysis_data$sample_size == "" | 
+                     analysis_data$numeric_grade == "" | 
                      analysis_data$state == ""))
 })
 

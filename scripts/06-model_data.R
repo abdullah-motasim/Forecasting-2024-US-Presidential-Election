@@ -13,83 +13,110 @@ library(rstanarm)
 library(bayesplot)
 library(arrow)
 
+# Set a seed for reproducibility
+set.seed(853)
+
 ### Read data ###
 analysis_data <- read_parquet("data/02-analysis_data/analysis_data.parquet")
 
-# Convert percentage to a proportion and ensure columns are in the correct data type
-analysis_data <- analysis_data %>%
-  mutate(
-    poll_percentage = percentage / 100,  # Convert percentage to a proportion
-    candidate_party = as.factor(party),
-    pollster_name = as.factor(pollster_name),
-    state = as.factor(state)
-  )
 
+# Filter data for Harris and Trump
+harris_data <- analysis_data %>% filter(candidate == "Kamala Harris")
+trump_data <- analysis_data %>% filter(candidate == "Donald Trump")
 
-# Fit a GLM model for poll percentage
-glm_model <- stan_glm(
-  formula = poll_percentage ~ sample_size + state + candidate_party,
-  data = analysis_data,
-  family = gaussian(),  # GLM for continuous outcome
-  prior = normal(location = 0, scale = 2.5, autoscale = TRUE),
-  prior_intercept = normal(location = 0, scale = 2.5, autoscale = TRUE),
+# Bayesian hierarchical model for Harris's support
+harris_model <- stan_glm(
+  percentage ~ pollster_name + sample_size + state,
+  data = harris_data,
+  family = gaussian(),
+  prior = normal(0, 2.5, autoscale = TRUE),
+  prior_intercept = normal(0, 2.5, autoscale = TRUE),
   seed = 853
 )
 
-# Model summary
-print(summary(glm_model))
+# Generate posterior predictions for Harris' support
+harris_pred <- posterior_predict(harris_model)
+harris_pred_means <- colMeans(harris_pred)  # Mean predicted support across simulations
 
-# Pollster reliability visualization
-# Identify the top 5 most frequent pollsters
-top_pollsters <- analysis_data %>%
-  count(pollster_name, sort = TRUE) %>%
-  top_n(5, n) %>%
-  pull(pollster_name)
+# Bayesian hierarchical model for Trump's support
+trump_model <- stan_glm(
+  percentage ~ pollster_name + sample_size + state,
+  data = trump_data,
+  family = gaussian(),
+  prior = normal(0, 2.5, autoscale = TRUE),
+  prior_intercept = normal(0, 2.5, autoscale = TRUE),
+  seed = 853
+)
 
-# Filter data to include only the top 5 pollsters
-top_pollster_data <- analysis_data %>%
-  filter(pollster_name %in% top_pollsters)
+# Generate posterior predictions for Trump's support
+trump_pred <- posterior_predict(trump_model)
+trump_pred_means <- colMeans(trump_pred)  # Mean predicted support across simulations
 
-# Enhanced visualization
-ggplot(top_pollster_data, aes(x = pollster_name, y = numeric_grade)) +
-  geom_boxplot(aes(fill = pollster_name), color = "black", width = 0.6, outlier.shape = NA, alpha = 0.8) +
-  geom_jitter(color = "darkgray", size = 1, alpha = 0.6, width = 0.2) +  # Add jittered points for individual grades
+# Simulate election outcomes by comparing Harris and Trump's predicted support
+simulated_outcomes <- ifelse(harris_pred_means > trump_pred_means, "Harris", "Trump")
+
+# Calculate probabilities
+harris_win_prob <- mean(simulated_outcomes == "Harris")
+trump_win_prob <- mean(simulated_outcomes == "Trump")
+
+# Print probabilities
+cat("Probability Harris Wins:", harris_win_prob, "\n")
+cat("Probability Trump Wins:", trump_win_prob, "\n")
+
+# Plot distribution of predicted support for Harris
+ggplot(data.frame(harris_pred_means), aes(x = harris_pred_means)) +
+  geom_histogram(bins = 30, fill = "blue", color = "black", alpha = 0.7) +
   labs(
-    title = "Reliability Grades of Top 5 Pollsters by Frequency",
-    subtitle = "Distribution of Numeric Grades for the Most Frequent Pollsters",
-    x = "Pollster Name",
-    y = "Numeric Grade"
+    title = "Distribution of Predicted Support for Kamala Harris",
+    x = "Predicted Support Percentage",
+    y = "Frequency",
+    caption = "Fig 3: This histogram shows the distribution of predicted support percentages\nfor Kamala Harris based on model simulations."
   ) +
-  scale_fill_brewer(palette = "Set3") +  # Use a visually appealing color palette
-  theme_minimal(base_size = 15) +
-  theme(
-    plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
-    plot.subtitle = element_text(size = 14, hjust = 0.5),
-    axis.title.x = element_text(size = 16),
-    axis.title.y = element_text(size = 16),
-    axis.text.x = element_text(angle = 30, hjust = 1, size = 12),
-    axis.text.y = element_text(size = 12),
-    legend.position = "none"
-  )
-
-# Filter data for Trump and Harris only
-candidate_data <- analysis_data %>%
-  filter(candidate %in% c("Donald Trump", "Kamala Harris"))
-
-# Violin plot with overlaid boxplot for additional statistical information
-ggplot(candidate_data, aes(x = candidate, y = percentage, fill = candidate)) +
-  geom_violin(trim = FALSE, alpha = 0.6, color = "black") +  # Violin plot with no trimming
-  geom_boxplot(width = 0.1, color = "black", outlier.shape = NA) +  # Boxplot overlay
-  labs(
-    title = "Distribution of Support Percentages for Trump and Harris",
-    x = "Candidate",
-    y = "Support Percentage"
-  ) +
-  scale_fill_manual(values = c("Donald Trump" = "red", "Kamala Harris" = "blue")) +
   theme_minimal(base_size = 14) +
   theme(
-    plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
-    axis.title.x = element_text(size = 14),
-    axis.title.y = element_text(size = 14),
-    legend.position = "none"
+    plot.caption = element_text(size = 10, hjust = 0.5, margin = margin(t = 10))
+  )
+
+
+# Plot distribution of predicted support for Trump
+ggplot(data.frame(trump_pred_means), aes(x = trump_pred_means)) +
+  geom_histogram(bins = 30, fill = "red", color = "black", alpha = 0.7) +
+  labs(
+    title = "Distribution of Predicted Support for Donald Trump",
+    x = "Predicted Support Percentage",
+    y = "Frequency", 
+    caption = "Fig 4: This histogram shows the distribution of predicted support percentages\nfor Donald Trump based on model simulations."
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.caption = element_text(size = 10, hjust = 0.5, margin = margin(t = 10))
+  )
+
+# Determine the minimum length between the two prediction sets
+min_length <- min(length(harris_pred_means), length(trump_pred_means))
+
+# Subset both predictions to have the same length
+harris_pred_means <- harris_pred_means[1:min_length]
+trump_pred_means <- trump_pred_means[1:min_length]
+
+# Combine predictions for comparison plot
+comparison_data <- data.frame(
+  support = c(harris_pred_means, trump_pred_means),
+  candidate = rep(c("Harris", "Trump"), each = min_length)
+)
+
+# Plot comparison of support for Harris and Trump
+ggplot(comparison_data, aes(x = support, fill = candidate)) +
+  geom_density(alpha = 0.5) +
+  labs(
+    title = "Comparison of Predicted Support for Harris and Trump",
+    x = "Predicted Support Percentage",
+    y = "Density",
+    fill = "Candidate",
+    caption = "Fig 5: This density plot compares the predicted support percentages\n for Kamala Harris and Donald Trump based on model simulations."
+  ) +
+  scale_fill_manual(values = c("blue", "red")) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.caption = element_text(size = 10, hjust = 0.5, margin = margin(t = 10))  # Adjust caption styling
   )
