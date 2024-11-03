@@ -18,7 +18,6 @@ set.seed(853)
 ### Read data ###
 analysis_data <- read_csv("data/02-analysis_data/analysis_data.csv")
 
-
 # Filter data for Harris and Trump
 harris_data <- analysis_data %>% filter(candidate == "Kamala Harris")
 trump_data <- analysis_data %>% filter(candidate == "Donald Trump")
@@ -69,7 +68,7 @@ ggplot(data.frame(harris_pred_means), aes(x = harris_pred_means)) +
     title = "Distribution of Predicted Support for Kamala Harris",
     x = "Predicted Support Percentage",
     y = "Frequency",
-    caption = "Fig 3: This histogram shows the distribution of predicted support percentages\nfor Kamala Harris based on model simulations."
+    caption = "Fig 4: This histogram shows the distribution of predicted support percentages\nfor Kamala Harris based on model simulations."
   ) +
   theme_minimal(base_size = 14) +
   theme(
@@ -84,7 +83,7 @@ ggplot(data.frame(trump_pred_means), aes(x = trump_pred_means)) +
     title = "Distribution of Predicted Support for Donald Trump",
     x = "Predicted Support Percentage",
     y = "Frequency", 
-    caption = "Fig 4: This histogram shows the distribution of predicted support percentages\nfor Donald Trump based on model simulations."
+    caption = "Fig 5: This histogram shows the distribution of predicted support percentages\nfor Donald Trump based on model simulations."
   ) +
   theme_minimal(base_size = 14) +
   theme(
@@ -112,7 +111,7 @@ ggplot(comparison_data, aes(x = support, fill = candidate)) +
     x = "Predicted Support Percentage",
     y = "Density",
     fill = "Candidate",
-    caption = "Fig 5: This density plot compares the predicted support percentages\n for Kamala Harris and Donald Trump based on model simulations."
+    caption = "Fig 6: This density plot compares the predicted support percentages\n for Kamala Harris and Donald Trump based on model simulations."
   ) +
   scale_fill_manual(values = c("blue", "red")) +
   theme_minimal(base_size = 14) +
