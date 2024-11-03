@@ -5,14 +5,15 @@
 # Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT
 # Pre-requisites: Cleaned data file should exist at 'data/02-analysis_data/analysis_data.csv'
-# Any other information needed? Ensure 'testthat' and 'tidyverse' libraries are installed
+# Any other information needed? Ensure 'testthat', 'tidyverse' and 'arrow' libraries are installed
 
 #### Workspace setup ####
 library(tidyverse)
 library(testthat)
+library(arrow)
 
 # Load the cleaned data
-analysis_data <- read_csv("data/02-analysis_data/analysis_data.csv")
+analysis_data <- read_parquet("data/02-analysis_data/analysis_data.parquet")
 
 #### Test data ####
 

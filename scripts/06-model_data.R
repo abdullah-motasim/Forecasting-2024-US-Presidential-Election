@@ -11,12 +11,13 @@
 library(tidyverse)
 library(rstanarm)
 library(bayesplot)
+library(arrow)
 
 # Set a seed for reproducibility
 set.seed(853)
 
 ### Read data ###
-analysis_data <- read_csv("data/02-analysis_data/analysis_data.csv")
+analysis_data <- read_parquet("data/02-analysis_data/analysis_data.parquet")
 
 # Filter data for Harris and Trump
 harris_data <- analysis_data %>% filter(candidate == "Kamala Harris")
