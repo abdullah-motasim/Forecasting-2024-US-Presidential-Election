@@ -19,4 +19,4 @@ The repo is structured as:
 
 ## Statement on LLM usage
 
-Aspects of the abstract, title, and code such as the simulation script, cleaning script, testing script, and R code within the quorto paper were written with the help of chatGPT and the entire chat history is available in other/llms/usage.txt.
+Aspects of the abstract, title, and code such as the simulation script, cleaning script, testing script, and the Quarto paper were written with the help of chatGPT and the entire chat history is available in other/llms/usage.txt.
