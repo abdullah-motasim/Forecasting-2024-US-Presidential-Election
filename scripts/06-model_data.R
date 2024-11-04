@@ -33,6 +33,8 @@ harris_model <- stan_glm(
   seed = 853
 )
 
+saveRDS(harris_model, "models/harris_model.rds")
+
 # Generate posterior predictions for Harris' support
 harris_pred <- posterior_predict(harris_model)
 harris_pred_means <- colMeans(harris_pred)  # Mean predicted support across simulations
@@ -46,6 +48,8 @@ trump_model <- stan_glm(
   prior_intercept = normal(0, 2.5, autoscale = TRUE),
   seed = 853
 )
+
+saveRDS(trump_model, "models/trump_model.rds")
 
 # Generate posterior predictions for Trump's support
 trump_pred <- posterior_predict(trump_model)
