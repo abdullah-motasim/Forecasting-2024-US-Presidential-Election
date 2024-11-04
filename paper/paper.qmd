@@ -13,9 +13,6 @@ number-sections: true
 table-of-contents: true
 toc-depth: 2
 bibliography: references.bib
-editor: 
-  markdown: 
-    wrap: sentence
 ---
 
 ```{r}
@@ -45,25 +42,19 @@ Since the U.S. is a powerhouse within the world, often affecting crucial interna
 As such, leading up to the election time there are many polls conducted by different pollsters to determine the winner of the election, but these polls often vary significantly between each other due to biases and sampling limitations.
 Poll aggregation is a method which aims to mitigate these differences by combining or aggregating the results of multiple polls to provide a more robust estimate of the election outcome.
 
-This study seeks to forecast the 2024 U.S.
-Presidential election outcome by developing a generalized linear model based on poll aggregation data.
+This study seeks to forecast the 2024 U.S. Presidential election outcome by developing a generalized linear model based on poll aggregation data.
 Specifically, we evaluate predictors including demographics, polling trends, and historical voting patterns.
 While the popular vote does not directly determine the presidential outcome due to the electoral college system, our model’s findings offer a clearer picture of voter preferences and potential trends in key states.
 This paper outlines our modeling approach, data processing techniques, and results, with a final section discussing model limitations and implications for future election forecasting.
 
-Estimand paragraph: The primary estimand in this study is the probability of a Democratic or Republican victory in the popular vote, based on current polling trends and demographic predictors.
-
-Results paragraph: State results of who won in which state (the 5 in exploratory) and also talk about the final model and who it predicted to win in each state on the day of the election than also who won overall.
+The primary estimand in this study is the probability of a Democratic or Republican victory in the popular vote, based on current polling trends and demographic predictors.
 
 Utilizing Bayesian Generalized Linear Models (GLM) and Monte Carlo simulations to estimate the predicted support percentages for Kamala Harris and Donald Trump. Harris has a higher support percentage over Trump with a win probability of 63.2%, while Trump has a 36.8% win probability. The model suggest that although there is close competition between both candidates, Harris has an advantage based on the polling data. 
 
 Running the simulations for this data showcases the importance of state-level effects, support for each candidate varies significantly by region. The models indicate that Harris has strong support in traditionally Democratic states, whereas Trump maintains a lead in Republican-leading regions. Support for each candidate indicates that regional factors are pivotal in determining the final outcome for American elections.
 
-
-
-
-Telegraphing paragraph: The remainder of this paper is structured as follows.
-@sec-data....
+The remainder of this paper is structured as follows.
+@sec-data discusses the data types included in the raw data, the cleaning process for the data, and the reason for selecting the data set we did. @sec-model discusses model specification and justification for Bayesian GLMs and Monte Carlo simulation. @sec-results analyzes the trends and correlations between different variables utilizing tabular and graphical means. @sec-discussion discusses the results of @sec-results going into detail on what the simulation results can tell us about the upcoming election, as well as assumptions and limitations in data.
 
 # Data {#sec-data}
 
@@ -110,99 +101,211 @@ What is your party registration?
 etc.
 After this the results of the survey are analyzed to get the percentages of votes for each option and these are than presented within the aggregated data set.
 
-Note this is a general overview of the measurement method utilized by Emerson, a more thorough breakdown of measurement can be found in \[Appendix A\].
+Note this is a general overview of the measurement method utilized by Emerson, a more thorough breakdown of measurement can be found in @sec-pollster-methdology.
 
-## Outcome variables
+## Outcome variable{#sec-outcome-variable}
 
-Add graphs, tables and text.
-Use sub-sub-headings for each outcome variable or update the subheading to be singular.
+The primary outcome variable in our analysis is the percentage of support each candidate receives in various polls, as reported by different polling organizations.
+This variable captures the proportion of respondents who indicate support for a specific candidate (e.g., Kamala Harris, Donald Trump) in a given poll.
+By aggregating the reported percentages across pollsters and accounting for factors such as sample size and pollster reliability, we can obtain a comprehensive view of each candidate's current standing in the 2024 U.S. election.
+This outcome variable directly reflects voter preference trends and provides a baseline for modeling anticipated election results.
+The robustness of this measure is influenced by the accuracy of individual poll data and the methodological rigor of each pollster, such as Emerson’s use of IVR and online panels, ensuring it represents a reliable indicator of the broader electorate's sentiments.
 
-Some of our data is of penguins (@fig-bills), from @palmerpenguins.
+To illustrate the predicted support for the two primary candidates in our analysis, Kamala Harris and Donald Trump, we included a density plot @fig-avg-support that visualizes the simulated support percentages for each candidate.
+This plot provides a comparison of predicted support, with Harris shown in blue and Trump in red.
+The density plot highlights the distribution of predicted support percentages based on our model simulations, allowing us to observe both the central tendency and spread of each candidate’s support.
 
-```{r}
-#| label: fig-bills
-#| fig-cap: Bills of penguins
-#| echo: false
-
-# ggplot(penguins, aes(x = island, fill = species)) +
-#   geom_bar(alpha = 0.8) +
-#   scale_fill_manual(values = c("darkorange","purple","cyan4"),
-#                     guide = "none") +
-#   theme_minimal() +
-#   facet_wrap(~species, ncol = 1) +
-#   coord_flip()
-```
-
-Talk more about it.
-
-And also planes (@fig-planes).
-(You can change the height and width, but don't worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)
+In this visual, we can see that Harris and Trump exhibit overlapping distributions, though with slightly different peaks.
+This overlapping region reflects a competitive election landscape, where variations in poll results or sampling could impact the projected outcome.
+The density peaks suggest that Harris has a slightly higher central tendency in predicted support, yet the close proximity of both distributions emphasizes the uncertainty and competitiveness of the race.
+By examining the density of predicted percentages, this plot contributes to a clearer understanding of the variability in support for each candidate as forecasted by our model.
 
 ```{r}
-#| label: fig-planes
-#| fig-cap: Relationship between wing length and width
+#| label: fig-avg-support
+#| fig-cap: This density plot compares the predicted support percentages for Kamala Harris and Donald Trump based on model simulations."
 #| echo: false
 #| warning: false
 #| message: false
 
-# analysis_data <- read_csv(here::here("data/02-analysis_data/analysis_data.csv"))
+harris_model <- readRDS(here("models/harris_model.rds"))
+trump_model <- readRDS(here("models/trump_model.rds"))
 
-# analysis_data |> 
-#   ggplot(aes(x = width, y = length)) +
-#   geom_point(alpha = 0.8) +
-#   theme_minimal() +
-#   labs(x = "Wing width (mm)",
-#        y = "Wing length (mm)")
+harris_pred <- posterior_predict(harris_model)
+harris_pred_means <- colMeans(harris_pred)
+trump_pred <- posterior_predict(trump_model)
+trump_pred_means <- colMeans(trump_pred)
+
+# Simulate election outcomes by comparing Harris and Trump's predicted support
+simulated_outcomes <- ifelse(harris_pred_means > trump_pred_means, "Harris", "Trump")
+
+# Determine the minimum length between the two prediction sets
+min_length <- min(length(harris_pred_means), length(trump_pred_means))
+
+# Subset both predictions to have the same length
+harris_pred_means <- harris_pred_means[1:min_length]
+trump_pred_means <- trump_pred_means[1:min_length]
+
+# Combine predictions for comparison plot
+comparison_data <- data.frame(
+  support = c(harris_pred_means, trump_pred_means),
+  candidate = rep(c("Harris", "Trump"), each = min_length)
+)
+
+# Plot comparison of support for Harris and Trump
+ggplot(comparison_data, aes(x = support, fill = candidate)) +
+  geom_density(alpha = 0.5) +
+  labs(
+    title = "Comparison of Predicted Support for \n     Harris and Trump",
+    x = "Predicted Support Percentage",
+    y = "Density",
+    fill = "Candidate",
+  ) +
+  scale_fill_manual(values = c("blue", "red")) +
+  theme_minimal(base_size = 14)
 ```
-
-Talk way more about it.
 
 ## Predictor variables
 
-Add graphs, tables and text.
+To model the outcome variable effectively, we selected 3 predictor variables based on their relevance to candidate support and regional trends:
 
-Use sub-sub-headings for each outcome variable and feel free to combine a few into one if they go together naturally.
+Pollster Name: Identifying the organization conducting each poll (e.g., YouGov, Emerson) allows us to assess potential biases and variation in methodologies that could impact polling accuracy.
+Given that certain pollsters (like Emerson) have more frequent entries in our cleaned dataset, this predictor provides valuable insight into consistency and reliability across poll sources.
 
-# Model
+Sample Size: Poll sample size directly influences the reliability of the reported percentages.
+Polls with larger sample sizes tend to yield more accurate estimates, reducing margin of error and providing a more representative snapshot of voter opinion.
+Incorporating this variable enhances the robustness of our predictions by weighting polls based on their sample adequacy.
 
-This analysis uses Bayesian Generalized Linear Models (GLM) with Gaussian distributions to predict the support percentages for Kamala Harris and Donald Trump across multiple polls. The continuous outcome variable, representing the predicted support percentage, is modeled as a function of key predictors to capture poll-specific and demographic variations.
+State: Including the state where each poll was conducted allows us to account for regional voting patterns, which are essential in a federal system like the U.S.
 
-Background details and diagnostics are included in [Appendix -@sec-model-details].
+Each predictor variable was selected to provide a balanced perspective on polling results, helping us account for various factors that influence voter behavior and polling reliability.
+These variables offer a structured approach to analyzing the 2024 U.S. election, supporting a model that is both statistically grounded and contextually aware.
 
-## Model set-up
+@fig-pollster-vs-reliability illustrates the distribution of numeric reliability grades for the five most frequent pollsters in the dataset: Beacon/Shaw, Emerson, Morning Consult, Redfield & Wilton Strategies, and Siena/NYT. Each boxplot represents the variation in numeric reliability grades for individual polls from these pollsters, with jittered points indicating individual poll grades. This visualization helps highlight the consistency of reliability scores across these pollsters, with Emerson and Morning Consult exhibiting particularly stable distributions around higher reliability grades compared to others.
 
-Given the continuous nature of support percentages, a Gaussian family with an \textbf{identity link function} was selected. This choice allows the model to accurately estimate continuous variations in support percentages, adjusting for effects from pollster, sample size, and state. The model can be expressed as follows:
-
-
-$$\text{Support Percentage} = \beta_0 + \beta_1 \cdot \text{pollster} + \beta_2 \cdot \text{sample size} + \beta_3 \cdot \text{state}$$
-Where: 
-
-  - $\beta_0$ is the intercept term
-  
-  - $\beta_1$ represents the effect of the pollster source.
-  
-  - $\beta_2$ captures the influence of the sample size on support percentage.
-  
-  - $\beta_3$ accounts for state-level variations.
-  
-## Explaination of Variables and Inclusions 
-
-Each predictor in the model is chosen for its relevance in reflecting the polling data's characteristics:
-
-1. **Pollster (`pollster`)**: Captures potential systematic differences among organizations, ensuring that support estimates are not bias by any single pollster's methodology. 
-
-2. **Sample Size (`sample_size`)**: Accounts for the reliability of each poll, as larger samples tend to reduce margin of error.
-
-3. **State (`state`)**: Controls for geographic and political variations, allowing the model to adjust for differences in support based on regional preferences.
-
-The summary statistics below @SummaryStatisticsComparison outline key variables in our analysis, focusing on Kamala Harris and Donald Trump. These tables display the distribution of support percentages and sample sizes, with metrics including mean, median, standard deviation, minimum, and maximum.
-
+This reliability assessment is crucial in weighting pollster data appropriately in our analysis. For example, Emerson, one of the most frequent pollsters in the dataset, shows a narrow spread in its reliability score, suggesting consistent methodology and accuracy. By understanding the reliability of each pollster, we can adjust our model to account for potential biases or methodological weaknesses that might otherwise skew the results. This reliability variable acts as a quality measure, allowing us to place greater confidence in polls from consistently high-rated pollsters.
 
 ```{r}
+#| label: fig-pollster-vs-reliability
+#| fig-cap: Each boxplot shows the distribution of numeric reliability grades for the top 5 pollsters, with individual poll grades represented by jittered points.
 #| echo: false
 #| warning: false
 #| message: false
-#| label: SummaryStatisticsComparison
+
+# Pollster reliability visualization
+# Identifying the 5 most frequent pollsters for readability 
+top_pollsters <- analysis_data %>%
+  count(pollster_name, sort = TRUE) %>%
+  top_n(5, n) %>%
+  pull(pollster_name)
+
+# Filter data to include only the top 5 pollsters
+top_pollsters_data <- analysis_data %>%
+  filter(pollster_name %in% top_pollsters)
+
+# Visualize numeric grade fort he 5 top pollsters
+ggplot(top_pollsters_data, aes(x = pollster_name, y = numeric_grade)) +
+  geom_boxplot(aes(fill = pollster_name), color = "black", width = 0.6, outlier.shape = NA, alpha = 0.8) +
+  geom_jitter(color = "skyblue", size = 1, alpha = 0.6, width = 0.2) +  # Add jittered points for individual grades
+  labs(
+    title = "Reliability Score of Top 5 Pollsters \nby Frequency",
+    subtitle = "Numeric Grade Distribution of Most Frequent Pollsters",
+    x = "Pollster Name",
+    y = "Numeric Grade",
+  ) +
+  scale_fill_brewer(palette = "Set3") +  # Use a visually appealing color palette
+  theme_minimal(base_size = 15) +
+  theme(
+    plot.title = element_text(size = 20, face = "bold", hjust = 0.5),
+    plot.subtitle = element_text(size = 14, hjust = 0.5),
+    axis.title.x = element_text(size = 16),
+    axis.title.y = element_text(size = 16),
+    axis.text.x = element_text(angle = 30, hjust = 1, size = 12),
+    axis.text.y = element_text(size = 12),
+    legend.position = "none",
+    plot.margin = margin(t = 15, r = 15, b = 15, l = 15))
+```
+
+@fig-state-vs-size provides a breakdown of sample sizes across different U.S. states, with Pennsylvania, Michigan, and Wisconsin leading in terms of sample volume. These sample sizes are a critical predictor, as polls with larger sample sizes generally yield more reliable data. This visualization underscores the emphasis placed on certain swing states and battleground regions, reflecting where polling efforts are most concentrated and, by extension, where voter sentiment may be considered more closely in analyses.
+
+Incorporating sample size as a predictor allows the model to adjust the weight of each poll based on its reliability. For instance, a poll with a large sample size from a critical state such as Pennsylvania is likely to be more indicative of statewide voter sentiment than a poll with a smaller sample size. This adjustment based on sample size helps to create a more nuanced and representative model, giving us a stronger basis for forecasting outcomes in the election.
+
+```{r}
+#| label: fig-state-vs-size
+#| fig-cap: This chart displays the total sample size per state for survey data, ordered from highest to lowest sample size.
+#| echo: false
+#| warning: false
+#| message: false
+
+# Prepare the data by grouping and summarizing sample size per state
+state_sample_data <- analysis_data %>%
+  group_by(state) %>%
+  summarize(total_sample_size = sum(sample_size, na.rm = TRUE)) %>%
+  arrange(desc(total_sample_size))  # Order by sample size for better readability
+
+# Horizontal bar plot for sample size by state
+# Horizontal bar plot for sample size by state
+ggplot(state_sample_data, aes(x = reorder(state, total_sample_size), y = total_sample_size)) +
+  geom_bar(stat = "identity", fill = "skyblue", color = "black", alpha = 0.7) +
+  coord_flip() +  # Flip coordinates for a horizontal bar plot
+  scale_y_continuous(labels = scales::comma) +
+  labs(
+    title = "Total Sample Size by State",
+    x = "State",
+    y = "Sample Size",
+    caption = "Fig 3: This chart displays the total sample size per state for survey data, ordered from highest to lowest sample size."
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.title = element_text(size = 18, face = "bold", hjust = 0.5),
+    axis.title.x = element_text(size = 14),
+    axis.title.y = element_text(size = 14),
+    axis.text.y = element_text(size = 7, hjust = 1),  # Adjust size for readability
+    axis.text.x = element_text(size = 12),
+    plot.caption = element_text(size = 8, hjust = 0, margin = margin(t = 10))
+  )
+ 
+```
+
+
+
+# Model {#sec-model}
+
+This analysis uses Bayesian Generalized Linear Models (GLM) with Gaussian distributions to predict the support percentages for Kamala Harris and Donald Trump across multiple polls.
+The continuous outcome variable, representing the predicted support percentage, is modeled as a function of key predictors to capture poll-specific and demographic variations.
+
+## Model set-up
+
+Given the continuous nature of support percentages, a Gaussian family with an \textbf{identity link function} was selected.
+This choice allows the model to accurately estimate continuous variations in support percentages, adjusting for effects from pollster, sample size, and state.
+The model can be expressed as follows:
+
+$$\text{Support Percentage} = \beta_0 + \beta_1 \cdot \text{pollster} + \beta_2 \cdot \text{sample size} + \beta_3 \cdot \text{state}$$ Where:
+
+-   $\beta_0$ is the intercept term
+
+-   $\beta_1$ represents the effect of the pollster source.
+
+-   $\beta_2$ captures the influence of the sample size on support percentage.
+
+-   $\beta_3$ accounts for state-level variations.
+
+## Explaination of Variables and Inclusions
+
+Each predictor in the model is chosen for its relevance in reflecting the polling data's characteristics:
+
+1.  **Pollster (`pollster`)**: Captures potential systematic differences among organizations, ensuring that support estimates are not bias by any single pollster's methodology.
+
+2.  **Sample Size (`sample_size`)**: Accounts for the reliability of each poll, as larger samples tend to reduce margin of error.
+
+3.  **State (`state`)**: Controls for geographic and political variations, allowing the model to adjust for differences in support based on regional preferences.
+
+The summary statistics below @tbl-summary-statistics-comparison outline key variables in our analysis, focusing on Kamala Harris and Donald Trump.
+These tables display the distribution of support percentages and sample sizes, with metrics including mean, median, standard deviation, minimum, and maximum.
+
+```{r}
+#| echo: false
+#| message: false
+#| label: tbl-summary-statistics-comparison
 #| tbl-cap: Directly compares support percentages and sample sizes for Harris and Trump, showing central tendencies and variability in polling data for each candidate.
 
 # Filter data for Harris and Trump
@@ -256,45 +359,48 @@ summary_table %>%
 
 ```
 
-
-  
 ## Model justification
 
 ### Bayesian Framework
 
-The models utilize a Bayesian approach with normal priors on the coefficients, implemented through the `rstanarm` package of @rstanarm in R [@citeR]. The Bayesian framework offers two primary advantages for our analysis:
+The models utilize a Bayesian approach with normal priors on the coefficients, implemented through the `rstanarm` package of @rstanarm in R [@citeR].
+The Bayesian framework offers two primary advantages for our analysis:
 
-1. **Uncertainty Representation**: Posterior distributions for each coefficient provide a clear indication of uncertainty around the estimates, allowing for more informative predictions.
+1.  **Uncertainty Representation**: Posterior distributions for each coefficient provide a clear indication of uncertainty around the estimates, allowing for more informative predictions.
 
-2. **Regularization**: Normal priors help stabilize estimates, especially for smaller sample sizes or polls with limited data points, reducing overfitting.
+2.  **Regularization**: Normal priors help stabilize estimates, especially for smaller sample sizes or polls with limited data points, reducing overfitting.
 
 ### Monte Carlo Simulation for Win Probability Estimation
 
 To assess the probability of each candidate winning, we employed Monte Carlo simulations using posterior predictions from the GLMs:
 
-1. **Generate Posterior Predictions**: Posterior distributions from each candidate’s model produce a range of possible support percentages for Harris and Trump.
+1.  **Generate Posterior Predictions**: Posterior distributions from each candidate’s model produce a range of possible support percentages for Harris and Trump.
 
-2. **Simulate Election Outcomes**: Each simulation iteration compares Harris' and Trump’s predicted support. Harris is marked as the winner if her support surpasses Trump’s, and vice versa.
+2.  **Simulate Election Outcomes**: Each simulation iteration compares Harris' and Trump’s predicted support.
+    Harris is marked as the winner if her support surpasses Trump’s, and vice versa.
 
-3. **Estimate Win Probabilities**: By repeating this comparison over thousands of iterations, we estimate win probabilities for each candidate based on the frequency of simulated wins.
+3.  **Estimate Win Probabilities**: By repeating this comparison over thousands of iterations, we estimate win probabilities for each candidate based on the frequency of simulated wins.
 
 ## Model Assumptions and Limitations
 
 The Bayesian Generalized Linear Models in this analysis have key assumptions and limitations that may impact predictive accuracy.
 
-First, the assumption of a Gaussian distribution for support percentages may not fully capture the true nature of polling data, particularly if the data include skewness or outliers. While a Gaussian distribution efficiently models continuous support, it may lead to biased estimates in smaller states or in polls with high variance if non-normal patterns are present.
+First, the assumption of a Gaussian distribution for support percentages may not fully capture the true nature of polling data, particularly if the data include skewness or outliers.
+While a Gaussian distribution efficiently models continuous support, it may lead to biased estimates in smaller states or in polls with high variance if non-normal patterns are present.
 
-Second, the model assumes that each pollster’s effect on support estimates is consistent across all states, disregarding potential variations in polling methodologies and accuracy by region. This simplification may overlook regional nuances, especially if certain pollsters perform differently in specific states, potentially reducing accuracy in cases of state-specific polling practices.
+Second, the model assumes that each pollster’s effect on support estimates is consistent across all states, disregarding potential variations in polling methodologies and accuracy by region.
+This simplification may overlook regional nuances, especially if certain pollsters perform differently in specific states, potentially reducing accuracy in cases of state-specific polling practices.
 
-Finally, the model treats state-level effects as static, assuming that state-specific support remains stable over time. This limits the model’s ability to adapt to changing voter sentiment within states as the election nears. Significant state-level shifts that occur after the latest data collection may not be reflected in the predictions, leading to outdated estimates.
+Finally, the model treats state-level effects as static, assuming that state-specific support remains stable over time.
+This limits the model’s ability to adapt to changing voter sentiment within states as the election nears.
+Significant state-level shifts that occur after the latest data collection may not be reflected in the predictions, leading to outdated estimates.
 
 While these assumptions balance interpretability and reliability, they also indicate areas for future improvement, such as dynamic state effects and region-specific pollster adjustments, to further enhance predictive accuracy.
 
+# Results {#sec-results}
 
-
-# Results
-
-The results of the Bayesian Generalized Linear Model (GLM) analysis, which aimed to predict support percentages for Kamala Harris and Donald Trump across various polls. The findings, represented through probability estimates, predicted support distributions, and comparative density plots, provide insights into each candidate's likely performance in hypothetical head-to-head polling scenarios.
+The results of the Bayesian Generalized Linear Model (GLM) analysis, which aimed to predict support percentages for Kamala Harris and Donald Trump across various polls.
+The findings, represented through probability estimates, predicted support distributions, and comparative density plots, provide insights into each candidate's likely performance in hypothetical head-to-head polling scenarios.
 
 ## Predicted Support Percentages
 
@@ -302,15 +408,17 @@ The results of the Bayesian Generalized Linear Model (GLM) analysis, which aimed
 #| echo: false
 #| warning: false
 #| message: false
+#| label: fig-harris-support
+#| tbl-cap: This histogram shows the distribution of predicted support percentages for Kamala Harris based on model simulations.
+
 
 # Plot distribution of predicted support for Harris
 ggplot(data.frame(harris_pred_means), aes(x = harris_pred_means)) +
   geom_histogram(bins = 30, fill = "blue", color = "black", alpha = 0.7) +
   labs(
-    title = "Distribution of Predicted Support for Kamala Harris",
+    title = "Distribution of Predicted Support \nfor Kamala Harris",
     x = "Predicted Support Percentage",
     y = "Frequency",
-    caption = "Fig 4: This histogram shows the distribution of predicted support percentages\nfor Kamala Harris based on model simulations."
   ) +
   theme_minimal(base_size = 14) +
   theme(
@@ -322,206 +430,155 @@ ggplot(data.frame(harris_pred_means), aes(x = harris_pred_means)) +
 
 ### Kamala Harris
 
-The distribution of predicted support for Kamala Harris is displayed in Figure 4. The model estimates her average support at approximately 47.32%, with the majority of values clustering around this mean. This relatively tight distribution indicates consistent support for Harris across polls, with limited variability. The standard deviation of her predicted support suggests that her polling results remain stable, even in states with more diverse polling outcomes.
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Plot distribution of predicted support for Trump
-ggplot(data.frame(trump_pred_means), aes(x = trump_pred_means)) +
-  geom_histogram(bins = 30, fill = "red", color = "black", alpha = 0.7) +
-  labs(
-    title = "Distribution of Predicted Support for Donald Trump",
-    x = "Predicted Support Percentage",
-    y = "Frequency", 
-    caption = "Fig 5: This histogram shows the distribution of predicted support percentages\nfor Donald Trump based on model simulations."
-  ) +
-  theme_minimal(base_size = 14) +
-  theme(
-    plot.caption = element_text(size = 10, hjust = 0.5, margin = margin(t = 10))
-  )
-```
-
-### Donald Trump
-
-Figure 5 illustrates the predicted support for Donald Trump, centered around a mean of 45.56%. Compared to Harris, Trump’s predicted support distribution shows slightly greater variability, indicating a broader spread in his support across polls. The higher standard deviation in Trump’s support highlights increased variability in polling outcomes, suggesting a wider range of voter responses depending on the region and poll characteristics.
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-# Determine the minimum length between the two prediction sets
-min_length <- min(length(harris_pred_means), length(trump_pred_means))
-
-# Subset both predictions to have the same length
-harris_pred_means <- harris_pred_means[1:min_length]
-trump_pred_means <- trump_pred_means[1:min_length]
-
-# Combine predictions for comparison plot
-comparison_data <- data.frame(
-  support = c(harris_pred_means, trump_pred_means),
-  candidate = rep(c("Harris", "Trump"), each = min_length)
-)
-
-# Plot comparison of support for Harris and Trump
-ggplot(comparison_data, aes(x = support, fill = candidate)) +
-  geom_density(alpha = 0.5) +
-  labs(
-    title = "Comparison of Predicted Support for Harris and Trump",
-    x = "Predicted Support Percentage",
-    y = "Density",
-    fill = "Candidate",
-    caption = "Fig 6: This density plot compares the predicted support percentages\n for Kamala Harris and Donald Trump based on model simulations."
-  ) +
-  scale_fill_manual(values = c("blue", "red")) +
-  theme_minimal(base_size = 14) +
-  theme(
-    plot.caption = element_text(size = 10, hjust = 0.5, margin = margin(t = 10))  # Adjust caption styling
-  )
-
-
-```
+The distribution of predicted support for Kamala Harris is displayed in @fig-harris-support.
+The model estimates her average support at approximately 47.32%, with the majority of values clustering around this mean.
+This relatively tight distribution indicates consistent support for Harris across polls, with limited variability.
+The standard deviation of her predicted support suggests that her polling results remain stable, even in states with more diverse polling outcomes.
 
 ### Comparison of Predicted Support
 
-The combined density plot in Figure 6 provides a direct comparison of Harris and Trump’s predicted support distributions. Harris’s distribution (in blue) peaks at a higher level than Trump’s (in red), indicating her slight edge in predicted support. Both distributions overlap significantly, particularly between 45% and 50%, underscoring the close nature of their polling outcomes. This overlap suggests that while Harris holds a predicted lead, the margins are slim, indicating a competitive scenario in many states.
-
-```{r}
-#| echo: false
-#| warning: false
-#| message: false
-
-
-# Bayesian hierarchical model for Harris's support
-harris_model <- stan_glm(
-  percentage ~ pollster_name + sample_size + state,
-  data = harris_data,
-  family = gaussian(),
-  prior = normal(0, 2.5, autoscale = TRUE),
-  prior_intercept = normal(0, 2.5, autoscale = TRUE),
-  seed = 853
-)
-
-# Generate posterior predictions for Harris' support
-harris_pred <- posterior_predict(harris_model)
-harris_pred_means <- colMeans(harris_pred)  # Mean predicted support across simulations
-
-# Bayesian hierarchical model for Trump's support
-trump_model <- stan_glm(
-  percentage ~ pollster_name + sample_size + state,
-  data = trump_data,
-  family = gaussian(),
-  prior = normal(0, 2.5, autoscale = TRUE),
-  prior_intercept = normal(0, 2.5, autoscale = TRUE),
-  seed = 853
-)
-
-# Generate posterior predictions for Trump's support
-trump_pred <- posterior_predict(trump_model)
-trump_pred_means <- colMeans(trump_pred)  # Mean predicted support across simulations
-
-# Simulate election outcomes by comparing Harris and Trump's predicted support
-simulated_outcomes <- ifelse(harris_pred_means > trump_pred_means, "Harris", "Trump")
-
-# Calculate probabilities
-harris_win_prob <- mean(simulated_outcomes == "Harris")
-trump_win_prob <- mean(simulated_outcomes == "Trump")
-
-# Print probabilities
-cat("Probability Harris Wins:", harris_win_prob, "\n")
-cat("Probability Trump Wins:", trump_win_prob, "\n")
-```
+The combined density plot was @fig-avg-support previously shown @sec-outcome-variable provides a direct comparison of Harris and Trump’s predicted support distributions.
+Harris’s distribution (in blue) peaks at a higher level than Trump’s (in red), indicating her slight edge in predicted support.
+Both distributions overlap significantly, particularly between 45% and 50%, underscoring the close nature of their polling outcomes.
+This overlap suggests that while Harris holds a predicted lead, the margins are slim, indicating a competitive scenario in many states.
 
 ## Probability of Winning
 
-Using Monte Carlo simulation, we estimated the likelihood of each candidate securing a win based on their predicted support. According to the model, Harris has a 63.2% probability of winning, while Trump has a 36.8% probability. These probabilities were calculated by comparing predicted support across thousands of iterations, with each iteration counting a win for the candidate who garnered higher support. This probabilistic approach captures the uncertainty inherent in election predictions and emphasizes Harris’ modest advantage in a hypothetical head-to-head match-up.
+Using Monte Carlo simulation, we estimated the likelihood of each candidate securing a win based on their predicted support.
+According to the model, Harris has a 63.2% probability of winning, while Trump has a 36.8% probability.
+These probabilities were calculated by comparing predicted support across thousands of iterations, with each iteration counting a win for the candidate who garnered higher support.
+This probabilistic approach captures the uncertainty inherent in election predictions and emphasizes Harris’ modest advantage in a hypothetical head-to-head match-up.
 
 ## State-Specific Trends
 
 ### Regional Variation in Support
 
-The model reveals notable differences in support by state, aligning with known regional preferences. For instance, Harris’ support is consistently higher in traditionally Democratic states like California and New York, where her predicted vote share surpasses 60%. Conversely, Trump shows strong predicted support in states like Texas and Florida, with anticipated leads of 5-10 percentage points, reflecting historical Republican preferences.
+The model reveals notable differences in support by state, aligning with known regional preferences.
+For instance, Harris’ support is consistently higher in traditionally Democratic states like California and New York, where her predicted vote share surpasses 60%.
+Conversely, Trump shows strong predicted support in states like Texas and Florida, with anticipated leads of 5-10 percentage points, reflecting historical Republican preferences.
 
 ### Battleground States
 
-In critical battleground states like Pennsylvania and Ohio, the predicted support for both candidates is nearly evenly split, signifying highly competitive races. The model suggests that Trump may hold a slight edge in Ohio, while Harris appears to lead narrowly in Pennsylvania. These projections highlight the importance of minor polling shifts in these states, where even small changes in support could significantly influence the final outcome.
+In critical battleground states like Pennsylvania and Ohio, the predicted support for both candidates is nearly evenly split, signifying highly competitive races.
+The model suggests that Trump may hold a slight edge in Ohio, while Harris appears to lead narrowly in Pennsylvania.
+These projections highlight the importance of minor polling shifts in these states, where even small changes in support could significantly influence the final outcome.
 
 ## Summary of Predicted Insights
 
-Overall, the model’s results showcase the impact of state-level factors, polling characteristics, and candidate-specific trends on predicted outcomes. The Bayesian GLM, enhanced with Monte Carlo simulations, enables the estimation of win probabilities and predicted support with a quantifiable degree of uncertainty. Harris’ predicted advantage, while modest, is supported by stable polling across states, whereas Trump’s broader distribution points to more variable support, especially in key states. This analysis provides a foundation for understanding competitive dynamics and regional differences in the 2024 U.S. presidential race, with implications for candidate strategies in battleground states.
+Overall, the model’s results showcase the impact of state-level factors, polling characteristics, and candidate-specific trends on predicted outcomes.
+The Bayesian GLM, enhanced with Monte Carlo simulations, enables the estimation of win probabilities and predicted support with a quantifiable degree of uncertainty.
+Harris’ predicted advantage, while modest, is supported by stable polling across states, whereas Trump’s broader distribution points to more variable support, especially in key states.
+This analysis provides a foundation for understanding competitive dynamics and regional differences in the 2024 U.S. presidential race, with implications for candidate strategies in battleground states.
 
+# Discussion - Predictive Modeling of 2024 Election Outcomes {#sec-discussion}
 
-Our results are summarized in @tbl-modelresults.
-
-# Discussion - Predictive Modeling of 2024 Election Outcomes
-
-## Key Findings 
+## Key Findings
 
 The analysis utilizes Bayesian Generalized Linear Models (GLMs) and Monte Carlo simulations to estimate predicted support percentages for Kamala Harris and Donald Trump. With a win probability of 63.2% for Harris and 36.8% for Trump, the model suggests a modest advantage for Harris, albeit within a competitive margin. The density plot (Fig. 6) highlights the distributions of predicted support for both candidates, showing a slight overlap, which indicates close competition and shows the uncertainty inherent in forecasting elections based on polling data.
 
-Our findings emphasize the roles of pollster reliability, sample size, and state-level effects in influencing predicted support. Specifically, the distributions of predicted support (Figs. 4 and 5) reveal that both Harris and Trump have a strong central tendency around similar support percentages, with Harris showing a slightly higher mean. This slight advantage for Harris in the distribution of predicted support aligns with her higher win probability. However, the narrowness of this advantage indicates that slight variations in support could easily alter the projected outcome.
+Our findings emphasize the roles of pollster reliability, sample size, and state-level effects in influencing predicted support.
+Specifically, the distributions of predicted support (Figs. 4 and 5) reveal that both Harris and Trump have a strong central tendency around similar support percentages, with Harris showing a slightly higher mean.
+This slight advantage for Harris in the distribution of predicted support aligns with her higher win probability.
+However, the narrowness of this advantage indicates that slight variations in support could easily alter the projected outcome.
 
 ## Influence of Sample Size and Pollster Effects
 
-The results suggest that larger sample sizes generally produce more stable support estimates, reducing the influence of random fluctuations in polling data. Polls with larger sample sizes are less likely to exhibit extreme support values, which improves the reliability of the predictions. However, smaller sample sizes tend to introduce variability, often exaggerating support levels for one candidate. For instance, in battleground states with smaller sample sizes, our model indicates higher variability in support percentages, which could lead to overestimated support in certain cases. Thus, integrating sample size as a predictor helps moderate these extremes and improves the precision of predictions.
+The results suggest that larger sample sizes generally produce more stable support estimates, reducing the influence of random fluctuations in polling data.
+Polls with larger sample sizes are less likely to exhibit extreme support values, which improves the reliability of the predictions.
+However, smaller sample sizes tend to introduce variability, often exaggerating support levels for one candidate.
+For instance, in battleground states with smaller sample sizes, our model indicates higher variability in support percentages, which could lead to overestimated support in certain cases.
+Thus, integrating sample size as a predictor helps moderate these extremes and improves the precision of predictions.
 
-Pollster effects are also significant in this analysis. Different pollsters have unique methodologies, sampling techniques, and weighting schemes, which can lead to systematic differences in reported support. By including pollster as a predictor in the model, we control for these variations, allowing for a more standardized comparison of support across polls. This inclusion reduces the likelihood that any single pollster's methodology disproportionately skews the predictions, resulting in more balanced estimates across different polls.
+Pollster effects are also significant in this analysis.
+Different pollsters have unique methodologies, sampling techniques, and weighting schemes, which can lead to systematic differences in reported support.
+By including pollster as a predictor in the model, we control for these variations, allowing for a more standardized comparison of support across polls.
+This inclusion reduces the likelihood that any single pollster's methodology disproportionately skews the predictions, resulting in more balanced estimates across different polls.
 
 ## State-Level Variations in Support
 
-The model highlights the importance of state-level effects, revealing that support for each candidate varies significantly by region. For example, Harris is shown to have strong support in traditionally Democratic states, whereas Trump maintains a lead in Republican-leaning regions. In battleground states such as Florida and Pennsylvania, the predicted support percentages are closer, reflecting the competitive nature of these regions. The density plot in Fig. 6 illustrates that while Harris has a slight overall advantage, support for both candidates closely overlaps in key states, indicating that regional factors are pivotal in determining final outcomes.
+The model highlights the importance of state-level effects, revealing that support for each candidate varies significantly by region.
+For example, Harris is shown to have strong support in traditionally Democratic states, whereas Trump maintains a lead in Republican-leaning regions.
+In battleground states such as Florida and Pennsylvania, the predicted support percentages are closer, reflecting the competitive nature of these regions.
+The density plot in Fig.
+6 illustrates that while Harris has a slight overall advantage, support for both candidates closely overlaps in key states, indicating that regional factors are pivotal in determining final outcomes.
 
-Our results underscore the necessity of including state-level predictors to capture these regional nuances. Ignoring state-level effects could oversimplify the model, potentially misrepresenting the strength of support for each candidate in different parts of the country. By accounting for these variations, our model can provide a more nuanced prediction that aligns with observed state-specific voting patterns.
+Our results underscore the necessity of including state-level predictors to capture these regional nuances.
+Ignoring state-level effects could oversimplify the model, potentially misrepresenting the strength of support for each candidate in different parts of the country.
+By accounting for these variations, our model can provide a more nuanced prediction that aligns with observed state-specific voting patterns.
 
 ## Weaknesses
 
-While the models presented provide a comprehensive approach to forecasting the 2024 election, both the data and models have inherent weaknesses that may impact the accuracy of the predictions. 
+While the models presented provide a comprehensive approach to forecasting the 2024 election, both the data and models have inherent weaknesses that may impact the accuracy of the predictions.
 
 ### Data-Related Weaknesses
 
-The polling data used in this analysis, while comprehensive, presents challenges in terms of representativeness and variability. Polls differ widely in sample size, methodology, and quality, which can introduce biases that are difficult to adjust for consistently across states. For instance, smaller sample sizes, particularly in less-populated or battleground states, may lead to exaggerated or unstable estimates of support. Additionally, polling firms often adopt different weighting schemes or sampling frames, which may not fully capture the demographic and geographic diversity within each state. This variability can result in inconsistencies when aggregating polls across different regions, potentially skewing the predictions for states with sparse polling data.
+The polling data used in this analysis, while comprehensive, presents challenges in terms of representativeness and variability.
+Polls differ widely in sample size, methodology, and quality, which can introduce biases that are difficult to adjust for consistently across states.
+For instance, smaller sample sizes, particularly in less-populated or battleground states, may lead to exaggerated or unstable estimates of support.
+Additionally, polling firms often adopt different weighting schemes or sampling frames, which may not fully capture the demographic and geographic diversity within each state.
+This variability can result in inconsistencies when aggregating polls across different regions, potentially skewing the predictions for states with sparse polling data.
 
-Another challenge is the limited frequency of polling in certain regions. Many states receive minimal polling attention, leading to sparse data that may not accurately reflect shifts in voter sentiment over time. This lack of consistent polling can cause the model to rely on outdated or unrepresentative data points, especially in states where political dynamics are changing rapidly. Consequently, the model may overestimate or underestimate support in these areas, reducing the accuracy of the overall predictions.
+Another challenge is the limited frequency of polling in certain regions.
+Many states receive minimal polling attention, leading to sparse data that may not accurately reflect shifts in voter sentiment over time.
+This lack of consistent polling can cause the model to rely on outdated or unrepresentative data points, especially in states where political dynamics are changing rapidly.
+Consequently, the model may overestimate or underestimate support in these areas, reducing the accuracy of the overall predictions.
 
 ### Model-Related Weaknesses
 
-The model’s reliance on a Gaussian distribution to predict support percentages may not fully account for the non-normality often observed in polling data. Polling data can exhibit skewed distributions or heavy tails, particularly in states where support for a candidate is highly polarized. By assuming a Gaussian distribution, the model may miss these nuances, potentially leading to biased estimates in states where the distribution of support is not symmetric.
+The model’s reliance on a Gaussian distribution to predict support percentages may not fully account for the non-normality often observed in polling data.
+Polling data can exhibit skewed distributions or heavy tails, particularly in states where support for a candidate is highly polarized.
+By assuming a Gaussian distribution, the model may miss these nuances, potentially leading to biased estimates in states where the distribution of support is not symmetric.
 
-Additionally, the model assumes that the effect of each pollster on support estimates is consistent across all states, an assumption that may oversimplify regional differences in polling accuracy. Different pollsters have varying levels of reliability in specific regions, influenced by factors like local sampling techniques, demographic targeting, and survey timing. By treating pollster effects as uniform, the model may fail to capture these subtleties, potentially resulting in inaccurate support estimates for states where polling practices differ significantly.
+Additionally, the model assumes that the effect of each pollster on support estimates is consistent across all states, an assumption that may oversimplify regional differences in polling accuracy.
+Different pollsters have varying levels of reliability in specific regions, influenced by factors like local sampling techniques, demographic targeting, and survey timing.
+By treating pollster effects as uniform, the model may fail to capture these subtleties, potentially resulting in inaccurate support estimates for states where polling practices differ significantly.
 
-The static nature of the state-level effects in the model also presents a limitation. Political dynamics within states are fluid, particularly in the lead-up to an election, when voter sentiment may shift rapidly in response to events, campaigns, or emerging issues. By treating state-level effects as constant, the model lacks the flexibility to account for these temporal changes. Consequently, predictions based on older polls may not accurately reflect current support levels, especially in states with fast-changing political landscapes.
+The static nature of the state-level effects in the model also presents a limitation.
+Political dynamics within states are fluid, particularly in the lead-up to an election, when voter sentiment may shift rapidly in response to events, campaigns, or emerging issues.
+By treating state-level effects as constant, the model lacks the flexibility to account for these temporal changes.
+Consequently, predictions based on older polls may not accurately reflect current support levels, especially in states with fast-changing political landscapes.
 
-### Impact on Prediction Accuracy 
+### Impact on Prediction Accuracy
 
-These data and model weaknesses underscore the challenges of election forecasting and highlight the potential for misestimations in certain regions. The variability in polling data quality and the assumption of static state effects may reduce the model’s predictive accuracy, particularly in battleground states where small shifts in voter sentiment could have a significant impact on the election outcome. Furthermore, the lack of temporal adaptation in the model may lead to outdated predictions as the election approaches, particularly if there are last-minute shifts in public opinion.
+These data and model weaknesses underscore the challenges of election forecasting and highlight the potential for misestimations in certain regions.
+The variability in polling data quality and the assumption of static state effects may reduce the model’s predictive accuracy, particularly in battleground states where small shifts in voter sentiment could have a significant impact on the election outcome.
+Furthermore, the lack of temporal adaptation in the model may lead to outdated predictions as the election approaches, particularly if there are last-minute shifts in public opinion.
 
 ## Future Directions
 
-To enhance the predictive accuracy of election forecasting models, future research could focus on several key improvements. One promising avenue is the integration of time-series elements to account for temporal changes in voter sentiment as election day approaches. A time-series approach would allow the model to weigh recent polls more heavily than older data, reflecting shifts in public opinion as new events, debates, and campaign efforts unfold. This would result in a more dynamic model that adapts to real-time changes in voter preferences, increasing prediction accuracy closer to election day.
+To enhance the predictive accuracy of election forecasting models, future research could focus on several key improvements.
+One promising avenue is the integration of time-series elements to account for temporal changes in voter sentiment as election day approaches.
+A time-series approach would allow the model to weigh recent polls more heavily than older data, reflecting shifts in public opinion as new events, debates, and campaign efforts unfold.
+This would result in a more dynamic model that adapts to real-time changes in voter preferences, increasing prediction accuracy closer to election day.
 
-Incorporating voter turnout predictions based on historical data and demographic trends could further improve the model’s reliability. Turnout often varies by demographic group, driven by factors such as candidate appeal, mobilization efforts, and election-specific conditions like weather. Adjusting predictions based on turnout likelihoods by group would create a more nuanced view of potential election outcomes, especially in swing states where voter turnout can significantly impact results.
+Incorporating voter turnout predictions based on historical data and demographic trends could further improve the model’s reliability.
+Turnout often varies by demographic group, driven by factors such as candidate appeal, mobilization efforts, and election-specific conditions like weather.
+Adjusting predictions based on turnout likelihoods by group would create a more nuanced view of potential election outcomes, especially in swing states where voter turnout can significantly impact results.
 
-Expanding the Bayesian framework to incorporate historical voting patterns as informative priors would be particularly valuable in states with sparse or inconsistent polling. Bayesian methods can update predictions as new polling data becomes available, grounding predictions in past election trends while allowing flexibility for current shifts. This approach would mitigate the volatility often seen in states with limited data, leading to more stable estimates.
+Expanding the Bayesian framework to incorporate historical voting patterns as informative priors would be particularly valuable in states with sparse or inconsistent polling.
+Bayesian methods can update predictions as new polling data becomes available, grounding predictions in past election trends while allowing flexibility for current shifts.
+This approach would mitigate the volatility often seen in states with limited data, leading to more stable estimates.
 
-Finally, integrating alternative data sources, such as social media sentiment analysis or economic indicators, could enrich the model by capturing real-time shifts in voter sentiment not reflected in traditional polling. For instance, social media activity following major events like debates or policy announcements could serve as an indicator of changes in support, supplementing polling data to create a more responsive forecasting model. Economic indicators, such as unemployment rates or inflation, could also offer insights into voter priorities and potential support patterns, enhancing the model’s predictive capacity in economically sensitive regions.
+Finally, integrating alternative data sources, such as social media sentiment analysis or economic indicators, could enrich the model by capturing real-time shifts in voter sentiment not reflected in traditional polling.
+For instance, social media activity following major events like debates or policy announcements could serve as an indicator of changes in support, supplementing polling data to create a more responsive forecasting model.
+Economic indicators, such as unemployment rates or inflation, could also offer insights into voter priorities and potential support patterns, enhancing the model’s predictive capacity in economically sensitive regions.
 
 Implementing these advancements would address current data and model limitations, creating a more adaptive and robust forecasting tool capable of accurately capturing the complexities of voter behavior in a dynamic election landscape.
 
-## Conclusion 
+## Conclusion
 
-The analysis demonstrates that both pollster reliability and sample size are critical factors in accurately predicting support percentages, while state-specific effects capture essential regional variations. However, the model’s assumptions and limitations suggest avenues for further refinement. Incorporating dynamic, turnout-adjusted, and multi-source data into future models could yield more precise election forecasts. In sum, while this model provides a solid foundation for understanding potential outcomes in the 2024 election, continuous refinement and adaptation to new data sources and methods will enhance the reliability of election prediction models.
+The analysis demonstrates that both pollster reliability and sample size are critical factors in accurately predicting support percentages, while state-specific effects capture essential regional variations.
+However, the model’s assumptions and limitations suggest avenues for further refinement.
+Incorporating dynamic, turnout-adjusted, and multi-source data into future models could yield more precise election forecasts.
+In sum, while this model provides a solid foundation for understanding potential outcomes in the 2024 election, continuous refinement and adaptation to new data sources and methods will enhance the reliability of election prediction models.
 
 \newpage
 
 \appendix
 
-# Appendix {-}
+# Appendix {.unnumbered}
 
-
-# Pollster Methodology Overview and Evaluation
+# Pollster Methodology Overview and Evaluation {#sec-pollster-methdology}
 
 The Emerson College Polling method utilizes a hybrid approach, combining Interactive Voice Response (IVR) with an online panel to gather data from likely voters in Michigan.
 This methodology is crucial in translating individual opinions into quantifiable data that can inform electoral forecasts and insights.
@@ -660,11 +717,10 @@ This approach combines robust sampling techniques, diverse recruitment strategie
 The survey will be implemented using Google Forms.
 Below is a link to the actual survey, which includes an introductory section, well-constructed questions, and a closing section thanking respondents for their participation:
 
-[**U.S. Presidential Election Forecasting Survey**](https://docs.google.com/forms/d/e/1FAIpQLSdlSVq77BK3tKqsrsdLZicLx8ie0Jei1PFX3HzOGmpKxolD8w/viewform?usp=sf_link)
+**Survey Link:** [U.S. Presidential Election Forecasting Survey](https://docs.google.com/forms/d/e/1FAIpQLSdlSVq77BK3tKqsrsdLZicLx8ie0Jei1PFX3HzOGmpKxolD8w/viewform?usp=sf_link)
 
-**Survey Copy**
+**Survey Copy: **
 
-**U.S. Presidential Election Forecasting Survey**
 
 **Introduction**
 
@@ -831,67 +887,9 @@ If you have any questions or concerns, please contact Elizabeth Luong at elizabe
 
 Thank you for taking the time to complete this survey!
 Your feedback is crucial for understanding voter sentiment as we approach the election.
-If you have any additional comments or thoughts you'd like to share, please reach out to Elizabeth Luong at elizabethh.luong\@mail.utoronto.ca.
+If you have any additional comments or thoughts you'd like to share, please reach out to Elizabeth Luong at elizabethh.luong\@mail.utoronto.ca.
 
 **Thank you again for your participation!**
-
-# Additional data details
-
-# Model details {#sec-model-details}
-
-## Posterior predictive check
-
-In @fig-ppcheckandposteriorvsprior-1 we implement a posterior predictive check.
-This shows...
-
-In @fig-ppcheckandposteriorvsprior-2 we compare the posterior with the prior.
-This shows...
-
-```{r}
-#| eval: true
-#| echo: false
-#| message: false
-#| warning: false
-#| label: fig-ppcheckandposteriorvsprior
-#| layout-ncol: 2
-#| fig-cap: "Examining how the model fits, and is affected by, the data"
-#| fig-subcap: ["Posterior prediction check", "Comparing the posterior with the prior"]
-# 
-# pp_check(first_model) +
-#   theme_classic() +
-#   theme(legend.position = "bottom")
-# 
-# posterior_vs_prior(first_model) +
-#   theme_minimal() +
-#   scale_color_brewer(palette = "Set1") +
-#   theme(legend.position = "bottom") +
-#   coord_flip()
-```
-
-## Diagnostics
-
-@fig-stanareyouokay-1 is a trace plot.
-It shows...
-This suggests...
-
-@fig-stanareyouokay-2 is a Rhat plot.
-It shows...
-This suggests...
-
-```{r}
-#| echo: false
-#| eval: true
-#| message: false
-#| warning: false
-#| label: fig-stanareyouokay
-#| fig-cap: "Checking the convergence of the MCMC algorithm"
-#| fig-subcap: ["Trace plot", "Rhat plot"]
-#| layout-ncol: 2
-
-# plot(first_model, "trace")
-# 
-# plot(first_model, "rhat")
-```
 
 \newpage
 
