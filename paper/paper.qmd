@@ -24,7 +24,15 @@ editor:
 #| message: false
 
 library(tidyverse)
-# library(palmerpenguins)
+library(testthat)
+library(arrow)
+library(here)
+library(rstanarm)
+library(bayesplot)
+library(gt)
+library(kableExtra)
+
+analysis_data <- read_parquet(here("data/02-analysis_data/analysis_data.parquet"))
 ```
 
 # Introduction
@@ -180,11 +188,67 @@ Each predictor in the model is chosen for its relevance in reflecting the pollin
 
 3. **State (`state`)**: Controls for geographic and political variations, allowing the model to adjust for differences in support based on regional preferences.
 
-The summary statistics below outline key variables in our analysis, focusing on Kamala Harris and Donald Trump. These tables display the distribution of support percentages and sample sizes, with metrics including mean, median, standard deviation, minimum, and maximum.
+The summary statistics below @SummaryStatisticsComparison outline key variables in our analysis, focusing on Kamala Harris and Donald Trump. These tables display the distribution of support percentages and sample sizes, with metrics including mean, median, standard deviation, minimum, and maximum.
 
-Table 1: Directly compares support percentages and sample sizes for Harris and Trump, showing central tendencies and variability in polling data for each candidate.
 
-Table 2: Summarizes all numeric variables, providing a broader context on data variability, particularly in pollster reliability scores, support percentages, and sample sizes.
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| warning: false
+#| label: SummaryStatisticsComparison
+#| tbl-cap: Directly compares support percentages and sample sizes for Harris and Trump, showing central tendencies and variability in polling data for each candidate.
+
+# Filter data for Harris and Trump
+harris_data <- analysis_data %>%
+  filter(candidate == "Kamala Harris")
+
+trump_data <- analysis_data %>%
+  filter(candidate == "Donald Trump")
+
+# Define a function to compute summary statistics
+compute_summary_stats <- function(data) {
+  data %>%
+    summarise(
+      Mean = mean(percentage, na.rm = TRUE),
+      Median = median(percentage, na.rm = TRUE),
+      SD = sd(percentage, na.rm = TRUE),
+      Min = min(percentage, na.rm = TRUE),
+      Max = max(percentage, na.rm = TRUE),
+      Sample_Size_Mean = mean(sample_size, na.rm = TRUE),
+      Sample_Size_SD = sd(sample_size, na.rm = TRUE)
+    )
+}
+
+# Summary statistics for Harris
+harris_summary <- compute_summary_stats(harris_data) %>%
+  mutate(Candidate = "Kamala Harris")
+
+# Summary statistics for Trump
+trump_summary <- compute_summary_stats(trump_data) %>%
+  mutate(Candidate = "Donald Trump")
+
+# Combine the two tables and format values to 2 decimal places
+summary_table <- bind_rows(harris_summary, trump_summary) %>%
+  select(Candidate, everything()) %>%
+  mutate(across(where(is.numeric), ~ round(.x, 2)))  # Round numeric columns to 2 decimal places
+
+# Rename columns in the summary table
+summary_table <- summary_table %>%
+  rename(
+    `Sample Size Mean` = Sample_Size_Mean,
+    `Sample Size SD` = Sample_Size_SD
+  )
+
+# Create a visual table using kable
+summary_table %>%
+  kable("html", caption = "Summary Statistics for Key Variables Comparing Kamala Harris and Donald Trump") %>%
+  kable_styling(bootstrap_options = "striped", full_width = FALSE, position = "center") %>%
+  add_header_above(c(" " = 1, "Percentage Statistics" = 5, "Sample Size Statistics" = 2)) %>%
+  column_spec(2:8, width = "2em")  # Adjust column width if necessary
+
+```
+
 
   
 ## Model justification
