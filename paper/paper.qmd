@@ -578,12 +578,7 @@ In sum, while this model provides a solid foundation for understanding potential
 
 # Appendix {.unnumbered}
 
-<<<<<<< HEAD
 # Pollster Methodology Overview and Evaluation {#sec-pollster-methdology}
-=======
-
-# Pollster Methodology Overview and Evaluation
->>>>>>> f381e71e49b01c64026d381b27eb49f59aa38f8f
 
 The Emerson College Polling method utilizes a hybrid approach, combining Interactive Voice Response (IVR) with an online panel to gather data from likely voters in Michigan.
 This methodology is crucial in translating individual opinions into quantifiable data that can inform electoral forecasts and insights.
