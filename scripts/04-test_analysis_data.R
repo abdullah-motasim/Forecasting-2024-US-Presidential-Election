@@ -134,3 +134,4 @@ test_that("'pollster_name' entries have no leading/trailing whitespace", {
   expect_false(any(grepl("^\\s+|\\s+$", analysis_data$pollster_name)))
 })
 
+
