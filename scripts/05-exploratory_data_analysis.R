@@ -136,7 +136,7 @@ ggplot(top_pollsters_data, aes(x = pollster_name, y = numeric_grade)) +
     subtitle = "Distribution of Numeric Grades for the Most Frequent Pollsters",
     x = "Pollster Name",
     y = "Numeric Grade",
-    caption = "Each boxplot shows the distribution of numeric reliability grades for the top 5 pollsters, with individual poll grades represented by jittered points."
+    caption = "Fig 1: Each boxplot shows the distribution of numeric reliability grades for the top 5 pollsters, with individual poll grades represented by jittered points."
   ) +
   scale_fill_brewer(palette = "Set3") +  # Use a visually appealing color palette
   theme_minimal(base_size = 15) +
@@ -167,7 +167,7 @@ ggplot(candidate_data, aes(x = candidate, y = percentage, fill = candidate)) +
     title = "Distribution of Support Percentages for Trump and Harris",
     x = "Candidate",
     y = "Support Percentage",
-    caption = "Fig 1: The violin plot shows the distribution and density of support percentages for each candidate, with an overlaid box plot highlighting \n                                                    the median, interquartile range, and approximate outliers."
+    caption = "Fig 2: The violin plot shows the distribution and density of support percentages for each candidate, with an overlaid box plot highlighting \n                                                    the median, interquartile range, and approximate outliers."
   ) +
   scale_fill_manual(values = c("Donald Trump" = "red", "Kamala Harris" = "blue")) +
   theme_minimal(base_size = 14) +
@@ -195,7 +195,7 @@ ggplot(state_sample_data, aes(x = reorder(state, total_sample_size), y = total_s
     title = "Total Sample Size by State",
     x = "State",
     y = "Sample Size",
-    caption = "Fig 2: This chart displays the total sample size per state for survey data, ordered from highest to lowest sample size."
+    caption = "Fig 3: This chart displays the total sample size per state for survey data, ordered from highest to lowest sample size."
   ) +
   theme_minimal(base_size = 14) +
   theme(
@@ -206,3 +206,4 @@ ggplot(state_sample_data, aes(x = reorder(state, total_sample_size), y = total_s
     axis.text.x = element_text(size = 12),
     plot.caption = element_text(size = 8, hjust = 0, margin = margin(t = 10))
   )
+
