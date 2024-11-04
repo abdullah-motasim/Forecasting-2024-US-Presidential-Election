@@ -99,3 +99,38 @@ test_that("no empty strings in critical columns", {
 test_that("'candidate' column contains at least 2 unique values", {
   expect_true(length(unique(analysis_data$candidate)) >= 2)
 })
+
+# Test that 'percentage' values are between 0 and 100
+test_that("'percentage' values are between 0 and 100", {
+  expect_true(all(analysis_data$percentage >= 0 & analysis_data$percentage <= 100))
+})
+
+# Test that 'numeric_grade' falls within an expected range (e.g., 0 to 4 for grading scale)
+test_that("'numeric_grade' values fall within the range 0 to 4", {
+  expect_true(all(analysis_data$numeric_grade >= 0 & analysis_data$numeric_grade <= 4))
+})
+
+# Test that 'sample_size' has reasonable values (e.g., not too small or unreasonably large)
+test_that("'sample_size' values are within a realistic range (50 to 50000)", {
+  expect_true(all(analysis_data$sample_size >= 50 & analysis_data$sample_size <= 50000))
+})
+
+
+# Test that the dataset contains data from at least 40 unique states, ensuring wide coverage
+test_that("data covers at least 40 unique states", {
+  expect_true(length(unique(analysis_data$state)) >= 40)
+})
+
+# Test that the average 'percentage' by 'candidate' is reasonable (between 0 and 100)
+candidate_avg <- analysis_data %>%
+  group_by(candidate) %>%
+  summarise(avg_percentage = mean(percentage, na.rm = TRUE))
+test_that("average 'percentage' per candidate is within 0-100 range", {
+  expect_true(all(candidate_avg$avg_percentage >= 0 & candidate_avg$avg_percentage <= 100))
+})
+
+# Test that 'pollster_name' entries have no leading or trailing whitespace
+test_that("'pollster_name' entries have no leading/trailing whitespace", {
+  expect_false(any(grepl("^\\s+|\\s+$", analysis_data$pollster_name)))
+})
+
