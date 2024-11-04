@@ -31,6 +31,8 @@ library(rstanarm)
 library(bayesplot)
 library(gt)
 library(kableExtra)
+library(knitr)
+library(webshot2)
 
 analysis_data <- read_parquet(here("data/02-analysis_data/analysis_data.parquet"))
 ```
@@ -195,7 +197,6 @@ The summary statistics below @SummaryStatisticsComparison outline key variables 
 #| echo: false
 #| warning: false
 #| message: false
-#| warning: false
 #| label: SummaryStatisticsComparison
 #| tbl-cap: Directly compares support percentages and sample sizes for Harris and Trump, showing central tendencies and variability in polling data for each candidate.
 
@@ -242,10 +243,11 @@ summary_table <- summary_table %>%
 
 # Create a visual table using kable
 summary_table %>%
-  kable("html", caption = "Summary Statistics for Key Variables Comparing Kamala Harris and Donald Trump") %>%
+  kable(caption = "Summary Statistics for Key Variables Comparing Kamala Harris and Donald Trump") %>%
   kable_styling(bootstrap_options = "striped", full_width = FALSE, position = "center") %>%
   add_header_above(c(" " = 1, "Percentage Statistics" = 5, "Sample Size Statistics" = 2)) %>%
   column_spec(2:8, width = "2em")  # Adjust column width if necessary
+
 
 ```
 

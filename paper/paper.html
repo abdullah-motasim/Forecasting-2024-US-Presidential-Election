@@ -1,0 +1,1145 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.5.57">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Abdullah Motasim">
+<meta name="author" content="Elizabeth Luong">
+<meta name="dcterms.date" content="2024-11-04">
+
+<title>My title</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="paper_files/libs/clipboard/clipboard.min.js"></script>
+<script src="paper_files/libs/quarto-html/quarto.js"></script>
+<script src="paper_files/libs/quarto-html/popper.min.js"></script>
+<script src="paper_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="paper_files/libs/quarto-html/anchor.min.js"></script>
+<link href="paper_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="paper_files/libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="paper_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="paper_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="paper_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="paper_files/libs/kePrint-0.0.1/kePrint.js"></script>
+
+<link href="paper_files/libs/lightable-0.0.1/lightable.css" rel="stylesheet">
+
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body>
+
+<div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+  <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul class="collapse">
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction"><span class="header-section-number">1</span> Introduction</a></li>
+  <li><a href="#sec-data" id="toc-sec-data" class="nav-link" data-scroll-target="#sec-data"><span class="header-section-number">2</span> Data</a>
+  <ul class="collapse">
+  <li><a href="#overview" id="toc-overview" class="nav-link" data-scroll-target="#overview"><span class="header-section-number">2.1</span> Overview</a></li>
+  <li><a href="#measurement" id="toc-measurement" class="nav-link" data-scroll-target="#measurement"><span class="header-section-number">2.2</span> Measurement</a></li>
+  <li><a href="#outcome-variables" id="toc-outcome-variables" class="nav-link" data-scroll-target="#outcome-variables"><span class="header-section-number">2.3</span> Outcome variables</a></li>
+  <li><a href="#predictor-variables" id="toc-predictor-variables" class="nav-link" data-scroll-target="#predictor-variables"><span class="header-section-number">2.4</span> Predictor variables</a></li>
+  </ul></li>
+  <li><a href="#model" id="toc-model" class="nav-link" data-scroll-target="#model"><span class="header-section-number">3</span> Model</a>
+  <ul class="collapse">
+  <li><a href="#model-set-up" id="toc-model-set-up" class="nav-link" data-scroll-target="#model-set-up"><span class="header-section-number">3.1</span> Model set-up</a></li>
+  <li><a href="#explaination-of-variables-and-inclusions" id="toc-explaination-of-variables-and-inclusions" class="nav-link" data-scroll-target="#explaination-of-variables-and-inclusions"><span class="header-section-number">3.2</span> Explaination of Variables and Inclusions</a></li>
+  <li><a href="#model-justification" id="toc-model-justification" class="nav-link" data-scroll-target="#model-justification"><span class="header-section-number">3.3</span> Model justification</a></li>
+  <li><a href="#model-assumptions-and-limitations" id="toc-model-assumptions-and-limitations" class="nav-link" data-scroll-target="#model-assumptions-and-limitations"><span class="header-section-number">3.4</span> Model Assumptions and Limitations</a></li>
+  </ul></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results"><span class="header-section-number">4</span> Results</a>
+  <ul class="collapse">
+  <li><a href="#predicted-support-percentages" id="toc-predicted-support-percentages" class="nav-link" data-scroll-target="#predicted-support-percentages"><span class="header-section-number">4.1</span> Predicted Support Percentages</a></li>
+  <li><a href="#probability-of-winning" id="toc-probability-of-winning" class="nav-link" data-scroll-target="#probability-of-winning"><span class="header-section-number">4.2</span> Probability of Winning</a></li>
+  <li><a href="#state-specific-trends" id="toc-state-specific-trends" class="nav-link" data-scroll-target="#state-specific-trends"><span class="header-section-number">4.3</span> State-Specific Trends</a></li>
+  <li><a href="#summary-of-predicted-insights" id="toc-summary-of-predicted-insights" class="nav-link" data-scroll-target="#summary-of-predicted-insights"><span class="header-section-number">4.4</span> Summary of Predicted Insights</a></li>
+  </ul></li>
+  <li><a href="#discussion---predictive-modeling-of-2024-election-outcomes" id="toc-discussion---predictive-modeling-of-2024-election-outcomes" class="nav-link" data-scroll-target="#discussion---predictive-modeling-of-2024-election-outcomes"><span class="header-section-number">5</span> Discussion - Predictive Modeling of 2024 Election Outcomes</a>
+  <ul class="collapse">
+  <li><a href="#key-findings" id="toc-key-findings" class="nav-link" data-scroll-target="#key-findings"><span class="header-section-number">5.1</span> Key Findings</a></li>
+  <li><a href="#influence-of-sample-size-and-pollster-effects" id="toc-influence-of-sample-size-and-pollster-effects" class="nav-link" data-scroll-target="#influence-of-sample-size-and-pollster-effects"><span class="header-section-number">5.2</span> Influence of Sample Size and Pollster Effects</a></li>
+  <li><a href="#state-level-variations-in-support" id="toc-state-level-variations-in-support" class="nav-link" data-scroll-target="#state-level-variations-in-support"><span class="header-section-number">5.3</span> State-Level Variations in Support</a></li>
+  <li><a href="#weaknesses" id="toc-weaknesses" class="nav-link" data-scroll-target="#weaknesses"><span class="header-section-number">5.4</span> Weaknesses</a></li>
+  <li><a href="#future-directions" id="toc-future-directions" class="nav-link" data-scroll-target="#future-directions"><span class="header-section-number">5.5</span> Future Directions</a></li>
+  <li><a href="#conclusion" id="toc-conclusion" class="nav-link" data-scroll-target="#conclusion"><span class="header-section-number">5.6</span> Conclusion</a></li>
+  </ul></li>
+  <li><a href="#appendix" id="toc-appendix" class="nav-link" data-scroll-target="#appendix">Appendix</a></li>
+  <li><a href="#pollster-methodology-overview-and-evaluation" id="toc-pollster-methodology-overview-and-evaluation" class="nav-link" data-scroll-target="#pollster-methodology-overview-and-evaluation"><span class="header-section-number">6</span> Pollster Methodology Overview and Evaluation</a></li>
+  <li><a href="#idealized-survey" id="toc-idealized-survey" class="nav-link" data-scroll-target="#idealized-survey"><span class="header-section-number">7</span> Idealized Survey</a></li>
+  <li><a href="#additional-data-details" id="toc-additional-data-details" class="nav-link" data-scroll-target="#additional-data-details"><span class="header-section-number">8</span> Additional data details</a></li>
+  <li><a href="#sec-model-details" id="toc-sec-model-details" class="nav-link" data-scroll-target="#sec-model-details"><span class="header-section-number">9</span> Model details</a>
+  <ul class="collapse">
+  <li><a href="#posterior-predictive-check" id="toc-posterior-predictive-check" class="nav-link" data-scroll-target="#posterior-predictive-check"><span class="header-section-number">9.1</span> Posterior predictive check</a></li>
+  <li><a href="#diagnostics" id="toc-diagnostics" class="nav-link" data-scroll-target="#diagnostics"><span class="header-section-number">9.2</span> Diagnostics</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references"><span class="header-section-number">10</span> References</a></li>
+  </ul>
+</nav>
+</div>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">My title</h1>
+<p class="subtitle lead">My subtitle if needed</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Authors</div>
+    <div class="quarto-title-meta-contents">
+             <p>Abdullah Motasim </p>
+             <p>Elizabeth Luong </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">November 4, 2024</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+<div>
+  <div class="abstract">
+    <div class="block-title">Abstract</div>
+    First sentence. Second sentence. Third sentence. Fourth sentence.
+  </div>
+</div>
+
+
+</header>
+
+
+<section id="introduction" class="level1" data-number="1">
+<h1 data-number="1"><span class="header-section-number">1</span> Introduction</h1>
+<p>Overview paragraph: On November 5 2024 the U.S. Presidential Elections will be held to determine the 47th President of the United States. Since the U.S. is a powerhouse within the world, often affecting crucial international affairs, the result of this election will have a global impact on all countries and as such there is much interest in which of the top two candidates Donald Trump or Kamala Harris will end up winning the election. As such, leading up to the election time there are many polls conducted by different pollsters to determine the winner of the election, but these polls often vary significantly between each other due to biases and sampling limitations. Poll aggregation is a method which aims to mitigate these differences by combining or aggregating the results of multiple polls to provide a more robust estimate of the election outcome.</p>
+<p>This study seeks to forecast the 2024 U.S. Presidential election outcome by developing a generalized linear model based on poll aggregation data. Specifically, we evaluate predictors including demographics, polling trends, and historical voting patterns. While the popular vote does not directly determine the presidential outcome due to the electoral college system, our model’s findings offer a clearer picture of voter preferences and potential trends in key states. This paper outlines our modeling approach, data processing techniques, and results, with a final section discussing model limitations and implications for future election forecasting.</p>
+<p>Estimand paragraph: The primary estimand in this study is the probability of a Democratic or Republican victory in the popular vote, based on current polling trends and demographic predictors.</p>
+<p>Results paragraph: State results of who won in which state (the 5 in exploratory) and also talk about the final model and who it predicted to win in each state on the day of the election than also who won overall.</p>
+<p>Why it matters paragraph:</p>
+<p>Telegraphing paragraph: The remainder of this paper is structured as follows. <a href="#sec-data" class="quarto-xref">Section&nbsp;2</a>….</p>
+</section>
+<section id="sec-data" class="level1" data-number="2">
+<h1 data-number="2"><span class="header-section-number">2</span> Data</h1>
+<section id="overview" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="overview"><span class="header-section-number">2.1</span> Overview</h2>
+<p>The aggregated dataset containing the polling data for the 2024 U.S. election was sourced from FiveThrityEight (). We use the statistical programming language R <span class="citation" data-cites="citeR">(<a href="#ref-citeR" role="doc-biblioref">R Core Team 2023</a>)</span> and packages the … to download, analyze, and model the data.</p>
+<p>The initial raw data contained about 17000 observations of 52 variables from multiple pollsters and after cleaning the data we were left with about 9000 observations of 7 variables. The data cleaning involved removing missing values and only selecting variables which were of importance to us, these variables were:</p>
+<ul>
+<li><p><strong>pollster_name</strong> - The name of the polling organization that conducted the poll (e.g., YouGov, RMG Research).</p></li>
+<li><p><strong>candidate</strong> - The name of the candidate in the poll (e.g., Kamala Harris, Donald Trump).</p></li>
+<li><p><strong>percentage</strong> - The percentage of the vote or support that the candidate received in the poll (e.g., 51.0 for Kamala Harris, 48.0 for Donald Trump).</p></li>
+<li><p><strong>party</strong> - The political party of the candidate in the poll (e.g., DEM for Democrats, REP for Republicans).</p></li>
+<li><p><strong>sample_size</strong> - The total number of respondents participating in the poll (e.g., 2712).</p></li>
+<li><p><strong>state</strong> - The U.S. state where the poll was conducted or focused, if applicable.</p></li>
+<li><p><strong>numeric_grade</strong> - A numeric rating given to the pollster to indicate their quality or reliability (e.g., 3.0).</p></li>
+</ul>
+<p>These variables were selected due to their direct relevance to assessing candidate support, polling reliability, and geographic voting trends. Specifically, pollster_name and numeric_grade are crucial for tracking potential biases and variations across polling organizations, as different methodologies can impact results. Candidate/Party and percentage provide direct indicators of support levels for each contender, which is essential for making accurate projections of election outcomes. Also, it is worth noting that there were more Sample_size is key to assessing the reliability of each poll, as larger samples tend to yield more accurate representations of public opinion. Lastly, state enables us to account for regional variations, crucial in a system like the U.S. Electoral College, where state-level results play a determining role in the election. Collectively, these variables offer a focused and comprehensive view of the polling landscape, supporting a more reliable aggregation and interpretation of the data.</p>
+</section>
+<section id="measurement" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="measurement"><span class="header-section-number">2.2</span> Measurement</h2>
+<p>Since different pollsters utilize various methods to collect their data and convert real-world phenomena into entries in their datasets, we have chosen to focus on the method utilized by Emerson, as it is the most frequent pollster within our cleaned data, accounting for 823 of the observations. Analyzing Emerson’s methodology provides valuable insights into how polling results are generated, thereby enhancing our understanding of the dataset.</p>
+<p>Emerson College Polling employs a combination of Interactive Voice Response (IVR) and online panel methodologies for data collection. The recent survey of Michigan sampled 1,000 likely voters. Emerson developed a series of survey questions to ask these potential candidates such as do you prove or disapprove of the job Joe Biden is doing as president? What is your party registration? etc. After this the results of the survey are analyzed to get the percentages of votes for each option and these are than presented within the aggregated data set.</p>
+<p>Note this is a general overview of the measurement method utilized by Emerson, a more thorough breakdown of measurement can be found in [Appendix A].</p>
+</section>
+<section id="outcome-variables" class="level2" data-number="2.3">
+<h2 data-number="2.3" class="anchored" data-anchor-id="outcome-variables"><span class="header-section-number">2.3</span> Outcome variables</h2>
+<p>Add graphs, tables and text. Use sub-sub-headings for each outcome variable or update the subheading to be singular.</p>
+<p>Some of our data is of penguins (<strong>?@fig-bills</strong>), from <span class="citation" data-cites="palmerpenguins">Horst, Hill, and Gorman (<a href="#ref-palmerpenguins" role="doc-biblioref">2020</a>)</span>.</p>
+<p>Talk more about it.</p>
+<p>And also planes (<strong>?@fig-planes</strong>). (You can change the height and width, but don’t worry about doing that until you have finished every other aspect of the paper - Quarto will try to make it look nice and the defaults usually work well once you have enough text.)</p>
+<p>Talk way more about it.</p>
+</section>
+<section id="predictor-variables" class="level2" data-number="2.4">
+<h2 data-number="2.4" class="anchored" data-anchor-id="predictor-variables"><span class="header-section-number">2.4</span> Predictor variables</h2>
+<p>Add graphs, tables and text.</p>
+<p>Use sub-sub-headings for each outcome variable and feel free to combine a few into one if they go together naturally.</p>
+</section>
+</section>
+<section id="model" class="level1" data-number="3">
+<h1 data-number="3"><span class="header-section-number">3</span> Model</h1>
+<p>This analysis uses Bayesian Generalized Linear Models (GLM) with Gaussian distributions to predict the support percentages for Kamala Harris and Donald Trump across multiple polls. The continuous outcome variable, representing the predicted support percentage, is modeled as a function of key predictors to capture poll-specific and demographic variations.</p>
+<p>Background details and diagnostics are included in <a href="#sec-model-details" class="quarto-xref">Appendix&nbsp;9</a>.</p>
+<section id="model-set-up" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="model-set-up"><span class="header-section-number">3.1</span> Model set-up</h2>
+<p>Given the continuous nature of support percentages, a Gaussian family with an was selected. This choice allows the model to accurately estimate continuous variations in support percentages, adjusting for effects from pollster, sample size, and state. The model can be expressed as follows:</p>
+<p><span class="math display">\[\text{Support Percentage} = \beta_0 + \beta_1 \cdot \text{pollster} + \beta_2 \cdot \text{sample size} + \beta_3 \cdot \text{state}\]</span> Where:</p>
+<ul>
+<li><p><span class="math inline">\(\beta_0\)</span> is the intercept term</p></li>
+<li><p><span class="math inline">\(\beta_1\)</span> represents the effect of the pollster source.</p></li>
+<li><p><span class="math inline">\(\beta_2\)</span> captures the influence of the sample size on support percentage.</p></li>
+<li><p><span class="math inline">\(\beta_3\)</span> accounts for state-level variations.</p></li>
+</ul>
+</section>
+<section id="explaination-of-variables-and-inclusions" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="explaination-of-variables-and-inclusions"><span class="header-section-number">3.2</span> Explaination of Variables and Inclusions</h2>
+<p>Each predictor in the model is chosen for its relevance in reflecting the polling data’s characteristics:</p>
+<ol type="1">
+<li><p><strong>Pollster (<code>pollster</code>)</strong>: Captures potential systematic differences among organizations, ensuring that support estimates are not bias by any single pollster’s methodology.</p></li>
+<li><p><strong>Sample Size (<code>sample_size</code>)</strong>: Accounts for the reliability of each poll, as larger samples tend to reduce margin of error.</p></li>
+<li><p><strong>State (<code>state</code>)</strong>: Controls for geographic and political variations, allowing the model to adjust for differences in support based on regional preferences.</p></li>
+</ol>
+<p>The summary statistics below <span class="citation" data-cites="SummaryStatisticsComparison">(<a href="#ref-SummaryStatisticsComparison" role="doc-biblioref"><strong>SummaryStatisticsComparison?</strong></a>)</span> outline key variables in our analysis, focusing on Kamala Harris and Donald Trump. These tables display the distribution of support percentages and sample sizes, with metrics including mean, median, standard deviation, minimum, and maximum.</p>
+<div class="cell">
+<div id="tbl-SummaryStatisticsComparison" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-SummaryStatisticsComparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;1: Directly compares support percentages and sample sizes for Harris and Trump, showing central tendencies and variability in polling data for each candidate.
+</figcaption>
+<div aria-describedby="tbl-SummaryStatisticsComparison-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="cell-output-display">
+<table class="table table-striped do-not-create-environment cell caption-top table-sm small" data-quarto-postprocess="true">
+<caption>Summary Statistics for Key Variables Comparing Kamala Harris and Donald Trump</caption>
+<colgroup>
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+<col style="width: 12%">
+</colgroup>
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th" style="text-align: left; empty-cells: hide; border-bottom: hidden;"></th>
+<th colspan="5" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Percentage Statistics
+</div></th>
+<th colspan="2" data-quarto-table-cell-role="th" style="text-align: center; border-bottom: hidden; padding-bottom: 0; padding-left: 3px; padding-right: 3px;"><div style="border-bottom: 1px solid #ddd; padding-bottom: 5px; ">
+Sample Size Statistics
+</div></th>
+</tr>
+<tr class="odd">
+<th style="text-align: left;" data-quarto-table-cell-role="th">Candidate</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Mean</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Median</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">SD</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Min</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Max</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Sample Size Mean</th>
+<th style="text-align: right;" data-quarto-table-cell-role="th">Sample Size SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Kamala Harris</td>
+<td style="text-align: right; width: 2em;">47.32</td>
+<td style="text-align: right; width: 2em;">47.6</td>
+<td style="text-align: right; width: 2em;">4.46</td>
+<td style="text-align: right; width: 2em;">25</td>
+<td style="text-align: right; width: 2em;">70</td>
+<td style="text-align: right; width: 2em;">910.86</td>
+<td style="text-align: right; width: 2em;">544.67</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Donald Trump</td>
+<td style="text-align: right; width: 2em;">45.56</td>
+<td style="text-align: right; width: 2em;">46.0</td>
+<td style="text-align: right; width: 2em;">5.37</td>
+<td style="text-align: right; width: 2em;">21</td>
+<td style="text-align: right; width: 2em;">70</td>
+<td style="text-align: right; width: 2em;">879.21</td>
+<td style="text-align: right; width: 2em;">524.25</td>
+</tr>
+</tbody>
+</table>
+
+
+</div>
+</div>
+</figure>
+</div>
+</div>
+</section>
+<section id="model-justification" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="model-justification"><span class="header-section-number">3.3</span> Model justification</h2>
+<section id="bayesian-framework" class="level3" data-number="3.3.1">
+<h3 data-number="3.3.1" class="anchored" data-anchor-id="bayesian-framework"><span class="header-section-number">3.3.1</span> Bayesian Framework</h3>
+<p>The models utilize a Bayesian approach with normal priors on the coefficients, implemented through the <code>rstanarm</code> package of <span class="citation" data-cites="rstanarm">Goodrich et al. (<a href="#ref-rstanarm" role="doc-biblioref">2022</a>)</span> in R <span class="citation" data-cites="citeR">(<a href="#ref-citeR" role="doc-biblioref">R Core Team 2023</a>)</span>. The Bayesian framework offers two primary advantages for our analysis:</p>
+<ol type="1">
+<li><p><strong>Uncertainty Representation</strong>: Posterior distributions for each coefficient provide a clear indication of uncertainty around the estimates, allowing for more informative predictions.</p></li>
+<li><p><strong>Regularization</strong>: Normal priors help stabilize estimates, especially for smaller sample sizes or polls with limited data points, reducing overfitting.</p></li>
+</ol>
+</section>
+<section id="monte-carlo-simulation-for-win-probability-estimation" class="level3" data-number="3.3.2">
+<h3 data-number="3.3.2" class="anchored" data-anchor-id="monte-carlo-simulation-for-win-probability-estimation"><span class="header-section-number">3.3.2</span> Monte Carlo Simulation for Win Probability Estimation</h3>
+<p>To assess the probability of each candidate winning, we employed Monte Carlo simulations using posterior predictions from the GLMs:</p>
+<ol type="1">
+<li><p><strong>Generate Posterior Predictions</strong>: Posterior distributions from each candidate’s model produce a range of possible support percentages for Harris and Trump.</p></li>
+<li><p><strong>Simulate Election Outcomes</strong>: Each simulation iteration compares Harris’ and Trump’s predicted support. Harris is marked as the winner if her support surpasses Trump’s, and vice versa.</p></li>
+<li><p><strong>Estimate Win Probabilities</strong>: By repeating this comparison over thousands of iterations, we estimate win probabilities for each candidate based on the frequency of simulated wins.</p></li>
+</ol>
+</section>
+</section>
+<section id="model-assumptions-and-limitations" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="model-assumptions-and-limitations"><span class="header-section-number">3.4</span> Model Assumptions and Limitations</h2>
+<p>The Bayesian Generalized Linear Models in this analysis have key assumptions and limitations that may impact predictive accuracy.</p>
+<p>First, the assumption of a Gaussian distribution for support percentages may not fully capture the true nature of polling data, particularly if the data include skewness or outliers. While a Gaussian distribution efficiently models continuous support, it may lead to biased estimates in smaller states or in polls with high variance if non-normal patterns are present.</p>
+<p>Second, the model assumes that each pollster’s effect on support estimates is consistent across all states, disregarding potential variations in polling methodologies and accuracy by region. This simplification may overlook regional nuances, especially if certain pollsters perform differently in specific states, potentially reducing accuracy in cases of state-specific polling practices.</p>
+<p>Finally, the model treats state-level effects as static, assuming that state-specific support remains stable over time. This limits the model’s ability to adapt to changing voter sentiment within states as the election nears. Significant state-level shifts that occur after the latest data collection may not be reflected in the predictions, leading to outdated estimates.</p>
+<p>While these assumptions balance interpretability and reliability, they also indicate areas for future improvement, such as dynamic state effects and region-specific pollster adjustments, to further enhance predictive accuracy.</p>
+</section>
+</section>
+<section id="results" class="level1" data-number="4">
+<h1 data-number="4"><span class="header-section-number">4</span> Results</h1>
+<p>The results of the Bayesian Generalized Linear Model (GLM) analysis, which aimed to predict support percentages for Kamala Harris and Donald Trump across various polls. The findings, represented through probability estimates, predicted support distributions, and comparative density plots, provide insights into each candidate’s likely performance in hypothetical head-to-head polling scenarios.</p>
+<section id="predicted-support-percentages" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="predicted-support-percentages"><span class="header-section-number">4.1</span> Predicted Support Percentages</h2>
+<section id="kamala-harris" class="level3" data-number="4.1.1">
+<h3 data-number="4.1.1" class="anchored" data-anchor-id="kamala-harris"><span class="header-section-number">4.1.1</span> Kamala Harris</h3>
+<p>The distribution of predicted support for Kamala Harris is displayed in Figure 4. The model estimates her average support at approximately 47.32%, with the majority of values clustering around this mean. This relatively tight distribution indicates consistent support for Harris across polls, with limited variability. The standard deviation of her predicted support suggests that her polling results remain stable, even in states with more diverse polling outcomes.</p>
+</section>
+<section id="donald-trump" class="level3" data-number="4.1.2">
+<h3 data-number="4.1.2" class="anchored" data-anchor-id="donald-trump"><span class="header-section-number">4.1.2</span> Donald Trump</h3>
+<p>Figure 5 illustrates the predicted support for Donald Trump, centered around a mean of 45.56%. Compared to Harris, Trump’s predicted support distribution shows slightly greater variability, indicating a broader spread in his support across polls. The higher standard deviation in Trump’s support highlights increased variability in polling outcomes, suggesting a wider range of voter responses depending on the region and poll characteristics.</p>
+</section>
+<section id="comparison-of-predicted-support" class="level3" data-number="4.1.3">
+<h3 data-number="4.1.3" class="anchored" data-anchor-id="comparison-of-predicted-support"><span class="header-section-number">4.1.3</span> Comparison of Predicted Support</h3>
+<p>The combined density plot in Figure 6 provides a direct comparison of Harris and Trump’s predicted support distributions. Harris’s distribution (in blue) peaks at a higher level than Trump’s (in red), indicating her slight edge in predicted support. Both distributions overlap significantly, particularly between 45% and 50%, underscoring the close nature of their polling outcomes. This overlap suggests that while Harris holds a predicted lead, the margins are slim, indicating a competitive scenario in many states.</p>
+</section>
+</section>
+<section id="probability-of-winning" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="probability-of-winning"><span class="header-section-number">4.2</span> Probability of Winning</h2>
+<p>Using Monte Carlo simulation, we estimated the likelihood of each candidate securing a win based on their predicted support. According to the model, Harris has a 63.2% probability of winning, while Trump has a 36.8% probability. These probabilities were calculated by comparing predicted support across thousands of iterations, with each iteration counting a win for the candidate who garnered higher support. This probabilistic approach captures the uncertainty inherent in election predictions and emphasizes Harris’ modest advantage in a hypothetical head-to-head match-up.</p>
+</section>
+<section id="state-specific-trends" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="state-specific-trends"><span class="header-section-number">4.3</span> State-Specific Trends</h2>
+<section id="regional-variation-in-support" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="regional-variation-in-support"><span class="header-section-number">4.3.1</span> Regional Variation in Support</h3>
+<p>The model reveals notable differences in support by state, aligning with known regional preferences. For instance, Harris’ support is consistently higher in traditionally Democratic states like California and New York, where her predicted vote share surpasses 60%. Conversely, Trump shows strong predicted support in states like Texas and Florida, with anticipated leads of 5-10 percentage points, reflecting historical Republican preferences.</p>
+</section>
+<section id="battleground-states" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="battleground-states"><span class="header-section-number">4.3.2</span> Battleground States</h3>
+<p>In critical battleground states like Pennsylvania and Ohio, the predicted support for both candidates is nearly evenly split, signifying highly competitive races. The model suggests that Trump may hold a slight edge in Ohio, while Harris appears to lead narrowly in Pennsylvania. These projections highlight the importance of minor polling shifts in these states, where even small changes in support could significantly influence the final outcome.</p>
+</section>
+</section>
+<section id="summary-of-predicted-insights" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="summary-of-predicted-insights"><span class="header-section-number">4.4</span> Summary of Predicted Insights</h2>
+<p>Overall, the model’s results showcase the impact of state-level factors, polling characteristics, and candidate-specific trends on predicted outcomes. The Bayesian GLM, enhanced with Monte Carlo simulations, enables the estimation of win probabilities and predicted support with a quantifiable degree of uncertainty. Harris’ predicted advantage, while modest, is supported by stable polling across states, whereas Trump’s broader distribution points to more variable support, especially in key states. This analysis provides a foundation for understanding competitive dynamics and regional differences in the 2024 U.S. presidential race, with implications for candidate strategies in battleground states.</p>
+<p>Our results are summarized in <a href="#tbl-modelresults" class="quarto-xref">Table&nbsp;2</a>.</p>
+<div id="tbl-modelresults" class="cell quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-modelresults-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Table&nbsp;2: Explanatory models of flight time based on wing width and wing length
+</figcaption>
+<div aria-describedby="tbl-modelresults-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div>
+
+</div>
+</div>
+</figure>
+</div>
+</section>
+</section>
+<section id="discussion---predictive-modeling-of-2024-election-outcomes" class="level1" data-number="5">
+<h1 data-number="5"><span class="header-section-number">5</span> Discussion - Predictive Modeling of 2024 Election Outcomes</h1>
+<section id="key-findings" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="key-findings"><span class="header-section-number">5.1</span> Key Findings</h2>
+<p>The analysis utilizes Bayesian Generalized Linear Models (GLMs) and Monte Carlo simulations to estimate predicted support percentages for Kamala Harris and Donald Trump. With a win probability of 63.2% for Harris and 36.8% for Trump, the model suggests a modest advantage for Harris, albeit within a competitive margin. The density plot (Fig. 6) highlights the distributions of predicted support for both candidates, showing a slight overlap, which indicates close competition and underscores the uncertainty inherent in forecasting elections based on polling data.</p>
+<p>Our findings emphasize the roles of pollster reliability, sample size, and state-level effects in influencing predicted support. Specifically, the distributions of predicted support (Figs. 4 and 5) reveal that both Harris and Trump have a strong central tendency around similar support percentages, with Harris showing a slightly higher mean. This slight advantage for Harris in the distribution of predicted support aligns with her higher win probability. However, the narrowness of this advantage indicates that slight variations in support could easily alter the projected outcome.</p>
+</section>
+<section id="influence-of-sample-size-and-pollster-effects" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="influence-of-sample-size-and-pollster-effects"><span class="header-section-number">5.2</span> Influence of Sample Size and Pollster Effects</h2>
+<p>The results suggest that larger sample sizes generally produce more stable support estimates, reducing the influence of random fluctuations in polling data. Polls with larger sample sizes are less likely to exhibit extreme support values, which improves the reliability of the predictions. However, smaller sample sizes tend to introduce variability, often exaggerating support levels for one candidate. For instance, in battleground states with smaller sample sizes, our model indicates higher variability in support percentages, which could lead to overestimated support in certain cases. Thus, integrating sample size as a predictor helps moderate these extremes and improves the precision of predictions.</p>
+<p>Pollster effects are also significant in this analysis. Different pollsters have unique methodologies, sampling techniques, and weighting schemes, which can lead to systematic differences in reported support. By including pollster as a predictor in the model, we control for these variations, allowing for a more standardized comparison of support across polls. This inclusion reduces the likelihood that any single pollster’s methodology disproportionately skews the predictions, resulting in more balanced estimates across different polls.</p>
+</section>
+<section id="state-level-variations-in-support" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="state-level-variations-in-support"><span class="header-section-number">5.3</span> State-Level Variations in Support</h2>
+<p>The model highlights the importance of state-level effects, revealing that support for each candidate varies significantly by region. For example, Harris is shown to have strong support in traditionally Democratic states, whereas Trump maintains a lead in Republican-leaning regions. In battleground states such as Florida and Pennsylvania, the predicted support percentages are closer, reflecting the competitive nature of these regions. The density plot in Fig. 6 illustrates that while Harris has a slight overall advantage, support for both candidates closely overlaps in key states, indicating that regional factors are pivotal in determining final outcomes.</p>
+<p>Our results underscore the necessity of including state-level predictors to capture these regional nuances. Ignoring state-level effects could oversimplify the model, potentially misrepresenting the strength of support for each candidate in different parts of the country. By accounting for these variations, our model can provide a more nuanced prediction that aligns with observed state-specific voting patterns.</p>
+</section>
+<section id="weaknesses" class="level2" data-number="5.4">
+<h2 data-number="5.4" class="anchored" data-anchor-id="weaknesses"><span class="header-section-number">5.4</span> Weaknesses</h2>
+<p>While the models presented provide a comprehensive approach to forecasting the 2024 election, both the data and models have inherent weaknesses that may impact the accuracy of the predictions.</p>
+<section id="data-related-weaknesses" class="level3" data-number="5.4.1">
+<h3 data-number="5.4.1" class="anchored" data-anchor-id="data-related-weaknesses"><span class="header-section-number">5.4.1</span> Data-Related Weaknesses</h3>
+<p>The polling data used in this analysis, while comprehensive, presents challenges in terms of representativeness and variability. Polls differ widely in sample size, methodology, and quality, which can introduce biases that are difficult to adjust for consistently across states. For instance, smaller sample sizes, particularly in less-populated or battleground states, may lead to exaggerated or unstable estimates of support. Additionally, polling firms often adopt different weighting schemes or sampling frames, which may not fully capture the demographic and geographic diversity within each state. This variability can result in inconsistencies when aggregating polls across different regions, potentially skewing the predictions for states with sparse polling data.</p>
+<p>Another challenge is the limited frequency of polling in certain regions. Many states receive minimal polling attention, leading to sparse data that may not accurately reflect shifts in voter sentiment over time. This lack of consistent polling can cause the model to rely on outdated or unrepresentative data points, especially in states where political dynamics are changing rapidly. Consequently, the model may overestimate or underestimate support in these areas, reducing the accuracy of the overall predictions.</p>
+</section>
+<section id="model-related-weaknesses" class="level3" data-number="5.4.2">
+<h3 data-number="5.4.2" class="anchored" data-anchor-id="model-related-weaknesses"><span class="header-section-number">5.4.2</span> Model-Related Weaknesses</h3>
+<p>The model’s reliance on a Gaussian distribution to predict support percentages may not fully account for the non-normality often observed in polling data. Polling data can exhibit skewed distributions or heavy tails, particularly in states where support for a candidate is highly polarized. By assuming a Gaussian distribution, the model may miss these nuances, potentially leading to biased estimates in states where the distribution of support is not symmetric.</p>
+<p>Additionally, the model assumes that the effect of each pollster on support estimates is consistent across all states, an assumption that may oversimplify regional differences in polling accuracy. Different pollsters have varying levels of reliability in specific regions, influenced by factors like local sampling techniques, demographic targeting, and survey timing. By treating pollster effects as uniform, the model may fail to capture these subtleties, potentially resulting in inaccurate support estimates for states where polling practices differ significantly.</p>
+<p>The static nature of the state-level effects in the model also presents a limitation. Political dynamics within states are fluid, particularly in the lead-up to an election, when voter sentiment may shift rapidly in response to events, campaigns, or emerging issues. By treating state-level effects as constant, the model lacks the flexibility to account for these temporal changes. Consequently, predictions based on older polls may not accurately reflect current support levels, especially in states with fast-changing political landscapes.</p>
+</section>
+<section id="impact-on-prediction-accuracy" class="level3" data-number="5.4.3">
+<h3 data-number="5.4.3" class="anchored" data-anchor-id="impact-on-prediction-accuracy"><span class="header-section-number">5.4.3</span> Impact on Prediction Accuracy</h3>
+<p>These data and model weaknesses underscore the challenges of election forecasting and highlight the potential for misestimations in certain regions. The variability in polling data quality and the assumption of static state effects may reduce the model’s predictive accuracy, particularly in battleground states where small shifts in voter sentiment could have a significant impact on the election outcome. Furthermore, the lack of temporal adaptation in the model may lead to outdated predictions as the election approaches, particularly if there are last-minute shifts in public opinion.</p>
+</section>
+</section>
+<section id="future-directions" class="level2" data-number="5.5">
+<h2 data-number="5.5" class="anchored" data-anchor-id="future-directions"><span class="header-section-number">5.5</span> Future Directions</h2>
+<p>To enhance the predictive accuracy of election forecasting models, future research could focus on several key improvements. One promising avenue is the integration of time-series elements to account for temporal changes in voter sentiment as election day approaches. A time-series approach would allow the model to weigh recent polls more heavily than older data, reflecting shifts in public opinion as new events, debates, and campaign efforts unfold. This would result in a more dynamic model that adapts to real-time changes in voter preferences, increasing prediction accuracy closer to election day.</p>
+<p>Incorporating voter turnout predictions based on historical data and demographic trends could further improve the model’s reliability. Turnout often varies by demographic group, driven by factors such as candidate appeal, mobilization efforts, and election-specific conditions like weather. Adjusting predictions based on turnout likelihoods by group would create a more nuanced view of potential election outcomes, especially in swing states where voter turnout can significantly impact results.</p>
+<p>Expanding the Bayesian framework to incorporate historical voting patterns as informative priors would be particularly valuable in states with sparse or inconsistent polling. Bayesian methods can update predictions as new polling data becomes available, grounding predictions in past election trends while allowing flexibility for current shifts. This approach would mitigate the volatility often seen in states with limited data, leading to more stable estimates.</p>
+<p>Finally, integrating alternative data sources, such as social media sentiment analysis or economic indicators, could enrich the model by capturing real-time shifts in voter sentiment not reflected in traditional polling. For instance, social media activity following major events like debates or policy announcements could serve as an indicator of changes in support, supplementing polling data to create a more responsive forecasting model. Economic indicators, such as unemployment rates or inflation, could also offer insights into voter priorities and potential support patterns, enhancing the model’s predictive capacity in economically sensitive regions.</p>
+<p>Implementing these advancements would address current data and model limitations, creating a more adaptive and robust forecasting tool capable of accurately capturing the complexities of voter behavior in a dynamic election landscape.</p>
+</section>
+<section id="conclusion" class="level2" data-number="5.6">
+<h2 data-number="5.6" class="anchored" data-anchor-id="conclusion"><span class="header-section-number">5.6</span> Conclusion</h2>
+<p>The analysis demonstrates that both pollster reliability and sample size are critical factors in accurately predicting support percentages, while state-specific effects capture essential regional variations. However, the model’s assumptions and limitations suggest avenues for further refinement. Incorporating dynamic, turnout-adjusted, and multi-source data into future models could yield more precise election forecasts. In sum, while this model provides a solid foundation for understanding potential outcomes in the 2024 election, continuous refinement and adaptation to new data sources and methods will enhance the reliability of election prediction models.</p>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="appendix" class="level1 unnumbered">
+<h1 class="unnumbered">Appendix</h1>
+</section>
+<section id="pollster-methodology-overview-and-evaluation" class="level1" data-number="6">
+<h1 data-number="6"><span class="header-section-number">6</span> Pollster Methodology Overview and Evaluation</h1>
+<p>The Emerson College Polling method utilizes a hybrid approach, combining Interactive Voice Response (IVR) with an online panel to gather data from likely voters in Michigan. This methodology is crucial in translating individual opinions into quantifiable data that can inform electoral forecasts and insights.</p>
+<p><strong>Population, Frame, and Sample</strong><br>
+The target population is defined as the collection of all items about which we would like to speak, in this case it would be all voters in the state of Michigan.</p>
+<p>The sampling frame defined as a list of all the items from the target population that we could get data about, in this case it would be all voters who are able to respond to the IVR or online panel survey</p>
+<p>A sample is defined as the items from the sampling frame that we get data about, in this case that would be the 1000 people that responded to the ICR or online panel.</p>
+<p><strong>Sample Recruitment and Sampling Approach</strong><br>
+Emerson employs both IVR and online panel methodologies to recruit participants. The IVR method facilitates automated phone interviews, reaching demographics that may be less likely to participate in online surveys, such as older individuals or those with limited internet access. In contrast, the online panel is sourced from CINT, engaging participants who are more willing to complete surveys digitally. This dual approach captures a broader spectrum of voter sentiments and demographics, balancing the advantages of both methods. However, while IVR can access hard-to-reach populations, it may also yield lower response rates compared to the more engaged online panel.</p>
+<p><strong>Non-response Handling</strong><br>
+While the IVR method can reach various demographics, it is essential to consider potential non-response bias. Respondents who opt not to participate may share similar characteristics, leading to skewed results. Emerson may implement follow-up strategies or incentives to encourage participation, but these measures are not explicitly detailed in the methodology.</p>
+<p><strong>Questionnaire Evaluation</strong><br>
+Emerson crafted a comprehensive questionnaire that included a range of questions, such as “Do you approve or disapprove of the job Joe Biden is doing as President?” and “What is your party registration?” Respondents provided their answers using multiple-choice formats, offering options like “Approve,” “Disapprove,” “Neutral or no opinion,” as well as party affiliations such as “Democrat,” “Republican,” and “Independent/other.” The full questionnaire and its results can be accessed at this <a href="https://docs.google.com/spreadsheets/d/1QxGDC4nSP1dS6N7N1aXBxnXkRPyfw2As/edit?gid=1716322793#gid=1716322793">link</a>. After collecting the responses, the results were tallied to calculate the percentage for each option, enabling pollsters to convert individual opinions into broader trends. While the questions are generally clear and allow for straightforward responses, careful consideration should be given to the wording to avoid any potential bias. Questions that lead respondents toward a particular answer could impact the validity of the data collected.</p>
+<p><strong>Overview of Methodology</strong></p>
+<ul>
+<li><p><strong>Data Collection Techniques:</strong> Emerson employs both IVR and online panel methodologies. IVR allows for automated phone interviews, which can reach a diverse demographic, including those less likely to participate in online surveys. The online panel, sourced from CINT, complements this by engaging participants who are more accessible and willing to complete surveys digitally. This dual approach is intended to capture a broad spectrum of voter sentiments and demographics.</p></li>
+<li><p><strong>Sample Size and Credibility:</strong> The survey includes a sample of 1,000 likely voters, providing a reasonable basis for statistical inference. Emerson states a credibility interval of ±3 percentage points, which indicates a moderate level of precision in their estimates. This credibility interval should be considered when interpreting results, as it reflects the potential variability in public opinion.</p></li>
+<li><p><strong>Weighting Adjustments:</strong> To ensure that the sample accurately reflects the population of likely voters, the data is weighted by gender, education, race, age, party registration, and region. This weighting is critical, as it aligns the sample with demographic characteristics of the actual voter population, enhancing the reliability of the findings.</p></li>
+</ul>
+<p><strong>Strengths of the Methodology</strong></p>
+<ul>
+<li><p><strong>Diverse Reach:</strong> The combination of IVR and online panel methods allows Emerson to capture data from a wide range of demographics, minimizing the risk of bias that may arise from using a single method. This is particularly important in a politically diverse state like Michigan.</p></li>
+<li><p><strong>Rigorous Weighting:</strong> The meticulous approach to weighting the data helps to correct any imbalances in the sample, ensuring a more accurate reflection of voter sentiments across different demographic groups.</p></li>
+<li><p><strong>Clarity in Reporting:</strong> Emerson provides detailed demographic breakdowns and cross-tabulations, allowing for a nuanced understanding of how different groups perceive key issues and candidates.</p></li>
+</ul>
+<p><strong>Limitations of the Methodology</strong></p>
+<ul>
+<li><p><strong>Potential Non-response Bias:</strong> While the IVR method can reach various demographics, those who opt not to participate may share similar characteristics, potentially leading to non-response bias. Additionally, the online panel may attract a skewed sample if certain demographics are overrepresented or underrepresented in the panel.</p></li>
+<li><p><strong>Higher Credibility Intervals for Subgroups:</strong> Subsets based on demographics (e.g., age or party registration) often come with larger credibility intervals due to smaller sample sizes. This can diminish the reliability of conclusions drawn from those specific groups.</p></li>
+<li><p><strong>Temporal Limitations:</strong> The survey results reflect a snapshot of opinions at a specific time (October 25-27, 2024), which may not account for rapidly changing political landscapes, particularly as Election Day approaches.</p></li>
+</ul>
+<p>In summary, Emerson College Polling employs a robust methodology that effectively combines IVR and online panel methodologies to gauge voter sentiment. While there are inherent limitations, such as potential biases and the credibility of subgroup analysis, the strengths of this approach lie in its comprehensive reach and careful weighting adjustments. Overall, this methodology offers a valuable tool for understanding the current political climate in Michigan.</p>
+</section>
+<section id="idealized-survey" class="level1" data-number="7">
+<h1 data-number="7"><span class="header-section-number">7</span> Idealized Survey</h1>
+<p>In this appendix, I outline an idealized methodology and survey for forecasting the U.S. presidential election, utilizing a budget of $100,000. This approach combines robust sampling techniques, diverse recruitment strategies, and thorough data validation to ensure accurate and reliable insights into voter sentiment.</p>
+<p><strong>Sampling Approach</strong></p>
+<ol type="1">
+<li><p><strong>Target Population</strong>: The target population consists of registered voters in the United States. The survey will focus on likely voters, including individuals aged 18 and older across various demographic groups, including age, gender, race, and political affiliation.</p></li>
+<li><p><strong>Sample Size</strong>: A sample size of approximately 5,000 likely voters will be utilized. This sample size is designed to provide a high level of statistical confidence, with a credibility interval of ±2 percentage points.</p></li>
+<li><p><strong>Sampling Technique</strong>:</p>
+<ul>
+<li><p>A <strong>stratified random sampling</strong> method will be employed to ensure representation across key demographic groups. The population will be divided into strata based on demographic variables, such as age, gender, race, and region.</p></li>
+<li><p>A systematic selection will then be conducted within each stratum to achieve a balanced representation, reducing sampling bias.</p></li>
+</ul></li>
+</ol>
+<p><strong>Recruitment of Respondents</strong></p>
+<ol type="1">
+<li><p><strong>Data Sources</strong>:</p>
+<ul>
+<li><p>Voter registration databases will be utilized to identify potential respondents. These databases will provide contact information for registered voters across the United States.</p></li>
+<li><p>Partnerships with organizations that specialize in voter engagement will also be established to enhance the recruitment process.</p></li>
+</ul></li>
+<li><p><strong>Recruitment Methods</strong>:</p>
+<ul>
+<li><p><strong>Online Panel</strong>: An online panel sourced from reputable survey platforms (e.g., SurveyMonkey, Qualtrics) will be used to recruit respondents who opt-in to participate in surveys.</p></li>
+<li><p><strong>IVR and SMS Outreach</strong>: Interactive Voice Response (IVR) and SMS outreach will be implemented to reach demographics that may be less likely to engage in online surveys. This will ensure inclusivity and broaden the reach of the survey.</p></li>
+</ul></li>
+<li><p><strong>Incentives</strong>: Participants will be incentivized to complete the survey with small monetary rewards (e.g., $5) or entry into a raffle for a larger prize, thereby increasing response rates and engagement.</p></li>
+</ol>
+<p><strong>Data Validation and Quality Assurance</strong></p>
+<ol type="1">
+<li><p><strong>Pre-Survey Testing</strong>: A pilot test of the survey will be conducted with a smaller group of respondents (approximately 200) to identify any ambiguities or biases in the questions. Feedback will be incorporated to refine the survey instrument.</p></li>
+<li><p><strong>Quality Checks</strong>:</p>
+<ul>
+<li><p>During data collection, real-time monitoring will be implemented to identify and address any inconsistencies in responses.</p></li>
+<li><p>Automated checks will flag any duplicate responses, incomplete surveys, or inconsistent answer patterns.</p></li>
+</ul></li>
+<li><p><strong>Post-Survey Validation</strong>: After data collection, a validation process will be employed to cross-reference responses with demographic data to ensure the sample reflects the broader population accurately.</p></li>
+</ol>
+<p><strong>Poll Aggregation and Analysis</strong></p>
+<ol type="1">
+<li><p><strong>Data Aggregation</strong>: The data will be aggregated and analyzed using statistical software (e.g., R or Python) to compute margins of error and establish confidence intervals for key questions, such as candidate approval ratings and voting intentions.</p></li>
+<li><p><strong>Cross-Tabulation</strong>: The survey results will be cross-tabulated by demographic variables to provide insights into how different groups perceive candidates and issues. This will enable nuanced analysis of voter sentiment across demographics.</p></li>
+<li><p><strong>Reporting</strong>: Findings will be compiled into a comprehensive report summarizing key insights, trends, and forecasts for the upcoming presidential election. The report will be shared with stakeholders, including political analysts and campaign teams.</p></li>
+</ol>
+<p><strong>Survey Implementation</strong></p>
+<p>The survey will be implemented using Google Forms. Below is a link to the actual survey, which includes an introductory section, well-constructed questions, and a closing section thanking respondents for their participation:</p>
+<p><a href="https://docs.google.com/forms/d/e/1FAIpQLSdlSVq77BK3tKqsrsdLZicLx8ie0Jei1PFX3HzOGmpKxolD8w/viewform?usp=sf_link"><strong>U.S. Presidential Election Forecasting Survey</strong></a></p>
+<p><strong>Survey Copy</strong></p>
+<p><strong>U.S. Presidential Election Forecasting Survey</strong></p>
+<p><strong>Introduction</strong></p>
+<p>Thank you for participating in our survey! Your insights are invaluable for understanding voter sentiment leading up to the upcoming US presidential election. This survey will take approximately 5-10 minutes to complete. Your responses are anonymous and will be used solely for research purposes.</p>
+<p>If you have any questions or concerns, please contact Elizabeth Luong at elizabethh.luong@mail.utoronto.ca.</p>
+<p><strong>Section 1: Demographic Information</strong></p>
+<ol type="1">
+<li><p><strong>What is your age?</strong></p>
+<ul>
+<li><p>Under 18</p></li>
+<li><p>18-24</p></li>
+<li><p>25-34</p></li>
+<li><p>35-44</p></li>
+<li><p>45-54</p></li>
+<li><p>55-64</p></li>
+<li><p>65 or older</p></li>
+</ul></li>
+<li><p><strong>What is your gender?</strong></p>
+<ul>
+<li><p>Male</p></li>
+<li><p>Female</p></li>
+<li><p>Non-binary/Third gender</p></li>
+<li><p>Prefer not to say</p></li>
+</ul></li>
+<li><p><strong>What is your race or ethnicity:</strong></p>
+<ul>
+<li><p>White</p></li>
+<li><p>Black or African American</p></li>
+<li><p>Asian</p></li>
+<li><p>Hispanic or Latino</p></li>
+<li><p>Other (please specify): [Open text field]</p></li>
+</ul></li>
+<li><p><strong>In which state do you reside?</strong></p>
+<ul>
+<li>[Open text field]</li>
+</ul></li>
+<li><p><strong>What is your highest level of education completed?</strong></p>
+<ul>
+<li><p>Some high school</p></li>
+<li><p>High school diploma or equivalent</p></li>
+<li><p>Some college</p></li>
+<li><p>Bachelor’s degree</p></li>
+<li><p>Graduate degree</p></li>
+</ul></li>
+<li><p><strong>What is your party affiliation?</strong></p>
+<ul>
+<li><p>Democrat</p></li>
+<li><p>Republican</p></li>
+<li><p>Independent</p></li>
+<li><p>Other (please specify): [Open text field]</p></li>
+</ul></li>
+</ol>
+<p><strong>Section 2: Political Opinions</strong></p>
+<ol start="6" type="1">
+<li><p><strong>How likely are you to vote in the upcoming presidential election?</strong></p>
+<ul>
+<li><p>Very likely</p></li>
+<li><p>Somewhat likely</p></li>
+<li><p>Unsure</p></li>
+<li><p>Somewhat unlikely</p></li>
+<li><p>Very unlikely</p></li>
+</ul></li>
+<li><p><strong>Which candidate do you plan to vote for in the upcoming presidential election?</strong></p>
+<ul>
+<li><p>Donald Trump (Republican)</p></li>
+<li><p>Kamala Harris (Democrat)</p></li>
+<li><p>Robert F. Kennedy Jr.&nbsp;(Independent)</p></li>
+<li><p>Undecided</p></li>
+<li><p>Other (please specify): [Open text field]</p></li>
+</ul></li>
+<li><p><strong>What are the most important issues influencing your vote?</strong> (Select up to three)</p>
+<ul>
+<li><p>Economy</p></li>
+<li><p>Healthcare</p></li>
+<li><p>Education</p></li>
+<li><p>Climate Change</p></li>
+<li><p>Social Justice</p></li>
+<li><p>National Security</p></li>
+<li><p>Immigration</p></li>
+<li><p>Other (please specify): [Open text field]</p></li>
+</ul></li>
+<li><p><strong>How do you feel about the job performance of the current President?</strong></p>
+<ul>
+<li><p>Strongly approve</p></li>
+<li><p>Approve</p></li>
+<li><p>Neutral</p></li>
+<li><p>Disapprove</p></li>
+<li><p>Strongly disapprove</p></li>
+</ul></li>
+</ol>
+<p><strong>Section 3: Media Consumption</strong></p>
+<ol start="10" type="1">
+<li><p><strong>Which sources do you primarily use to get news about the election?</strong> (Select all that apply)</p>
+<ul>
+<li><p>Television</p></li>
+<li><p>Online news websites</p></li>
+<li><p>Social media</p></li>
+<li><p>Radio</p></li>
+<li><p>Newspapers</p></li>
+<li><p>Podcasts</p></li>
+<li><p>Other (please specify): [Open text field]</p></li>
+</ul></li>
+<li><p><strong>How often do you discuss politics with friends and family?</strong></p>
+<ul>
+<li><p>Daily</p></li>
+<li><p>Weekly</p></li>
+<li><p>Monthly</p></li>
+<li><p>Rarely</p></li>
+<li><p>Never</p></li>
+</ul></li>
+</ol>
+<p><strong>Conclusion</strong></p>
+<p>Thank you for taking the time to complete this survey! Your feedback is crucial for understanding voter sentiment as we approach the election. If you have any additional comments or thoughts you’d like to share, please reach out to&nbsp;Elizabeth Luong at elizabethh.luong@mail.utoronto.ca.</p>
+<p><strong>Thank you again for your participation!</strong></p>
+</section>
+<section id="additional-data-details" class="level1" data-number="8">
+<h1 data-number="8"><span class="header-section-number">8</span> Additional data details</h1>
+</section>
+<section id="sec-model-details" class="level1" data-number="9">
+<h1 data-number="9"><span class="header-section-number">9</span> Model details</h1>
+<section id="posterior-predictive-check" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="posterior-predictive-check"><span class="header-section-number">9.1</span> Posterior predictive check</h2>
+<p>In <strong>?@fig-ppcheckandposteriorvsprior-1</strong> we implement a posterior predictive check. This shows…</p>
+<p>In <strong>?@fig-ppcheckandposteriorvsprior-2</strong> we compare the posterior with the prior. This shows…</p>
+<div id="fig-ppcheckandposteriorvsprior" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-ppcheckandposteriorvsprior-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>Examining how the model fits, and is affected by, the data</p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-ppcheckandposteriorvsprior-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;1
+</figcaption>
+</figure>
+</div>
+</section>
+<section id="diagnostics" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="diagnostics"><span class="header-section-number">9.2</span> Diagnostics</h2>
+<p><strong>?@fig-stanareyouokay-1</strong> is a trace plot. It shows… This suggests…</p>
+<p><strong>?@fig-stanareyouokay-2</strong> is a Rhat plot. It shows… This suggests…</p>
+<div id="fig-stanareyouokay" class="quarto-layout-panel">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-stanareyouokay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div class="quarto-layout-row">
+<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
+<p>Checking the convergence of the MCMC algorithm</p>
+</div>
+</div>
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-stanareyouokay-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figure&nbsp;2
+</figcaption>
+</figure>
+</div>
+<div style="page-break-after: always;"></div>
+</section>
+</section>
+<section id="references" class="level1 unnumbered" data-number="10">
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">10 References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-rstanarm" class="csl-entry" role="listitem">
+Goodrich, Ben, Jonah Gabry, Imad Ali, and Sam Brilleman. 2022. <span>“<span class="nocase">rstanarm: <span>Bayesian</span> applied regression modeling via <span>Stan</span></span>.”</span> <a href="https://mc-stan.org/rstanarm/">https://mc-stan.org/rstanarm/</a>.
+</div>
+<div id="ref-palmerpenguins" class="csl-entry" role="listitem">
+Horst, Allison Marie, Alison Presmanes Hill, and Kristen B Gorman. 2020. <em><span class="nocase">palmerpenguins: Palmer Archipelago (Antarctica) penguin data</span></em>. <a href="https://doi.org/10.5281/zenodo.3960218">https://doi.org/10.5281/zenodo.3960218</a>.
+</div>
+<div id="ref-citeR" class="csl-entry" role="listitem">
+R Core Team. 2023. <em><span class="nocase">R: A Language and Environment for Statistical Computing</span></em>. Vienna, Austria: R Foundation for Statistical Computing. <a href="https://www.R-project.org/">https://www.R-project.org/</a>.
+</div>
+</div></section></div></main>
+<!-- /main column -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
