@@ -1,13 +1,13 @@
 ---
-title: "My title"
-subtitle: "My subtitle if needed"
+title: "Forecasting the 2024 U.S. Presidential Election: A Bayesian Approach Using Poll Aggregation and Monte Carlo Simulation"
+subtitle: "Predicting Voter Support for Kamala Harris and Donald Trump Across Key U.S. States"
 author: 
   - Abdullah Motasim
   - Elizabeth Luong
 thanks: "Code and data are available at: [https://github.com/abdullah-motasim/Forecasting-2024-US-Presidential-Election](https://github.com/abdullah-motasim/Forecasting-2024-US-Presidential-Election)."
 date: today
 date-format: long
-abstract: "First sentence. Second sentence. Third sentence. Fourth sentence."
+abstract: "This paper presents a predictive analysis of the 2024 U.S. Presidential Election, focusing on estimating support for Kamala Harris and Donald Trump through aggregated polling data. Using Bayesian Generalized Linear Models (GLMs) and Monte Carlo simulations, we analyze polling trends across various states to assess each candidate's projected support and overall probability of winning. Results indicate a 63.2% probability of victory for Harris and a 36.8% probability for Trump, with notable regional variations. Harris shows strong support in traditional Democratic strongholds, while Trump leads in Republican-leaning areas, underscoring the importance of state-specific dynamics in shaping election outcomes. This study highlights the influence of pollster reliability, sample sizes, and regional factors, offering insights into the potential direction of the 2024 election."
 format: pdf
 number-sections: true
 table-of-contents: true
