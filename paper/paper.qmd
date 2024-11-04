@@ -1,6 +1,6 @@
 ---
-title: "Forecasting the 2024 U.S. Presidential Election: A Bayesian Approach Using Poll Aggregation and Monte Carlo Simulation"
-subtitle: "Predicting Voter Support for Kamala Harris and Donald Trump Across Key U.S. States"
+title: "Forecasting the 2024 U.S. Presidential Election"
+subtitle: "Bayesian Models Predict Kamala Harris's Path to Victory"
 author: 
   - Abdullah Motasim
   - Elizabeth Luong
@@ -38,8 +38,7 @@ analysis_data <- read_parquet(here("data/02-analysis_data/analysis_data.parquet"
 
 # Introduction
 
-Overview paragraph: On November 5 2024 the U.S.
-Presidential Elections will be held to determine the 47th President of the United States.
+On November 5 2024 the U.S. Presidential Elections will be held to determine the 47th President of the United States.
 Since the U.S. is a powerhouse within the world, often affecting many international affairs, the result of this election will have a global impact on all countries and as such there is much interest in which of the top two candidates Donald Trump or Kamala Harris will end up winning the election.
 As such, leading up to the election time there are many polls conducted by different pollsters to determine the winner of the election, but these polls often vary significantly between each other due to biases and sampling limitations.
 Poll aggregation is a method which aims to mitigate these differences by combining or aggregating the results of multiple polls to provide a more robust estimate of the election outcome.
@@ -62,7 +61,7 @@ The remainder of this paper is structured as follows.
 
 ## Overview
 
-The aggregated dataset containing the polling data for the 2024 U.S. election was sourced from FiveThrityEight () and all analysis was performed using R @citeR and the following packages: [@citeR] and the following packages: tidyverse [@tidyverse], dplyr [@dplyr], janitor [@janitor], testthat [@testthat], arrow [@arrow], here [@here], rstanarm [@rstanarm], bayesplot [@bayesplot], gt [@gt], kableExtra [@kableExtra], knitr [@knitr], and webshot2 [@webshot2].
+The aggregated dataset containing the polling data for the 2024 U.S. election was sourced from FiveThrityEight [@fivethirtyeight] and all analysis was performed using R @citeR and the following packages: [@citeR] and the following packages: tidyverse [@tidyverse], dplyr [@dplyr], janitor [@janitor], testthat [@testthat], arrow [@arrow], here [@here], rstanarm [@rstanarm], bayesplot [@bayesplot], gt [@gt], kableExtra [@kableExtra], knitr [@knitr], and webshot2 [@webshot2].
 
 The initial raw data contained about 17000 observations of 52 variables from multiple pollsters and after cleaning the data we were left with about 9000 observations of 7 variables.
 The data cleaning involved removing missing values and only selecting variables which were of importance to us, these variables were:
@@ -407,13 +406,20 @@ The findings, represented through probability estimates, predicted support distr
 
 ## Predicted Support Percentages
 
+### Kamala Harris
+
+The distribution of predicted support for Kamala Harris is displayed in @fig-harris-support. The model estimates her average support at approximately 47.32%, with the majority of values clustering around this mean.
+This relatively tight distribution indicates consistent support for Harris across polls, with limited variability.
+The standard deviation of her predicted support suggests that her polling results remain stable, even in states with more diverse polling outcomes.
+
 ```{r}
 #| echo: false
 #| warning: false
 #| message: false
 #| label: fig-harris-support
-#| tbl-cap: This histogram shows the distribution of predicted support percentages for Kamala Harris based on model simulations.
+#| fig-cap: This histogram shows the distribution of predicted support percentages for Kamala Harris based on model simulations.
 
+harris_model <- readRDS(here("models/harris_model.rds"))
 
 # Plot distribution of predicted support for Harris
 ggplot(data.frame(harris_pred_means), aes(x = harris_pred_means)) +
@@ -427,16 +433,34 @@ ggplot(data.frame(harris_pred_means), aes(x = harris_pred_means)) +
   theme(
     plot.caption = element_text(size = 10, hjust = 0.5, margin = margin(t = 10))
   )
-
-
 ```
 
-### Kamala Harris
+### Donald Trump
 
-The distribution of predicted support for Kamala Harris is displayed in @fig-harris-support.
-The model estimates her average support at approximately 47.32%, with the majority of values clustering around this mean.
-This relatively tight distribution indicates consistent support for Harris across polls, with limited variability.
-The standard deviation of her predicted support suggests that her polling results remain stable, even in states with more diverse polling outcomes.
+@fig-trump-support illustrates the predicted support for Donald Trump, centered around a mean of 45.56%. Compared to Harris, Trump’s predicted support distribution shows slightly greater variability, indicating a broader spread in his support across polls. The higher standard deviation in Trump’s support highlights increased variability in polling outcomes, suggesting a wider range of voter responses depending on the region and poll characteristics.
+
+```{r}
+#| echo: false
+#| warning: false
+#| message: false
+#| label: fig-trump-support
+#| fig-cap: This histogram shows the distribution of predicted support percentages for Donald Trump based on model simulations.
+
+trump_model <- readRDS(here("models/trump_model.rds"))
+
+# Plot distribution of predicted support for Trump
+ggplot(data.frame(trump_pred_means), aes(x = trump_pred_means)) +
+  geom_histogram(bins = 30, fill = "red", color = "black", alpha = 0.7) +
+  labs(
+    title = "Distribution of Predicted Support for Donald Trump",
+    x = "Predicted Support Percentage",
+    y = "Frequency", 
+  ) +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.caption = element_text(size = 10, hjust = 0.5, margin = margin(t = 10))
+  )
+```
 
 ### Comparison of Predicted Support
 
@@ -477,10 +501,10 @@ This analysis provides a foundation for understanding competitive dynamics and r
 
 ## Key Findings
 
-The analysis utilizes Bayesian Generalized Linear Models (GLMs) and Monte Carlo simulations to estimate predicted support percentages for Kamala Harris and Donald Trump. With a win probability of 63.2% for Harris and 36.8% for Trump, the model suggests a modest advantage for Harris, albeit within a competitive margin. The density plot (Fig. 6) highlights the distributions of predicted support for both candidates, showing a slight overlap, which indicates close competition and shows the uncertainty inherent in forecasting elections based on polling data.
+The analysis utilizes Bayesian Generalized Linear Models (GLMs) and Monte Carlo simulations to estimate predicted support percentages for Kamala Harris and Donald Trump. With a win probability of 63.2% for Harris and 36.8% for Trump, the model suggests a modest advantage for Harris, albeit within a competitive margin. The density plot @fig-avg-support previously introduce in @sec-outcome-variable, highlights the distributions of predicted support for both candidates, showing a slight overlap, which indicates close competition and shows the uncertainty inherent in forecasting elections based on polling data.
 
 Our findings emphasize the roles of pollster reliability, sample size, and state-level effects in influencing predicted support.
-Specifically, the distributions of predicted support (Figs. 4 and 5) reveal that both Harris and Trump have a strong central tendency around similar support percentages, with Harris showing a slightly higher mean.
+Specifically, the distributions of predicted support @fig-trump-support and @fig-harris-support reveal that both Harris and Trump have a strong central tendency around similar support percentages, with Harris showing a slightly higher mean.
 This slight advantage for Harris in the distribution of predicted support aligns with her higher win probability.
 However, the narrowness of this advantage indicates that slight variations in support could easily alter the projected outcome.
 
@@ -502,8 +526,7 @@ This inclusion reduces the likelihood that any single pollster's methodology dis
 The model highlights the importance of state-level effects, revealing that support for each candidate varies significantly by region.
 For example, Harris is shown to have strong support in traditionally Democratic states, whereas Trump maintains a lead in Republican-leaning regions.
 In battleground states such as Florida and Pennsylvania, the predicted support percentages are closer, reflecting the competitive nature of these regions.
-The density plot in Fig.
-6 illustrates that while Harris has a slight overall advantage, support for both candidates closely overlaps in key states, indicating that regional factors are pivotal in determining final outcomes.
+The density plot in @fig-avg-support introduced in section @sec-outcome-variable illustrates that while Harris has a slight overall advantage, support for both candidates closely overlaps in key states, indicating that regional factors are pivotal in determining final outcomes.
 
 Our results underscore the necessity of including state-level predictors to capture these regional variations.
 Ignoring state-level effects could oversimplify the model, potentially misrepresenting the strength of support for each candidate in different parts of the country.
