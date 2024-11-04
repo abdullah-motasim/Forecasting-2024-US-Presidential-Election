@@ -21,6 +21,8 @@ bibliography: references.bib
 #| message: false
 
 library(tidyverse)
+library(dplyr)
+library(janitor)
 library(testthat)
 library(arrow)
 library(here)
@@ -60,9 +62,7 @@ The remainder of this paper is structured as follows.
 
 ## Overview
 
-The aggregated dataset containing the polling data for the 2024 U.S. election was sourced from FiveThrityEight ().
-We use the statistical programming language R [@citeR] and packages the ...
-to download, analyze, and model the data.
+The aggregated dataset containing the polling data for the 2024 U.S. election was sourced from FiveThrityEight () and all analysis was performed using R @citeR and the following packages: [@citeR] and the following packages: tidyverse [@tidyverse], dplyr [@dplyr], janitor [@janitor], testthat [@testthat], arrow [@arrow], here [@here], rstanarm [@rstanarm], bayesplot [@bayesplot], gt [@gt], kableExtra [@kableExtra], knitr [@knitr], and webshot2 [@webshot2].
 
 The initial raw data contained about 17000 observations of 52 variables from multiple pollsters and after cleaning the data we were left with about 9000 observations of 7 variables.
 The data cleaning involved removing missing values and only selecting variables which were of importance to us, these variables were:
@@ -235,6 +235,9 @@ Incorporating sample size as a predictor allows the model to adjust the weight o
 #| echo: false
 #| warning: false
 #| message: false
+#| fig-height: 6
+#| fig-width: 8
+#| fig-pos: 'H'
 
 # Prepare the data by grouping and summarizing sample size per state
 state_sample_data <- analysis_data %>%
