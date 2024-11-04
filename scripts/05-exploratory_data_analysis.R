@@ -30,7 +30,7 @@ analysis_data <- analysis_data %>%
 
 # Fit a Generalize Linear Model for poll percentage
 glm_model <- stan_glm(
-  formula =  poll_percentage ~ sample_size + state +candidate,
+  formula =  poll_percentage ~ sample_size + state + candidate,
   data = analysis_data,
   family = gaussian(),  # GLM for continuous outcome
   prior = normal(location = 0, scale = 2.5, autoscale = TRUE),

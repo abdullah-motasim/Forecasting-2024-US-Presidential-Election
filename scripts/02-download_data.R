@@ -1,7 +1,7 @@
 #### Preamble ####
 # Purpose: Downloads and saves the data from Presidential general election polls (current cycle)
 # Website: https://projects.fivethirtyeight.com/polls/president-general/2024/national/
-# Author: Elizabeth Luong, Abdullah Motasim, and Yuanting Han
+# Author: Elizabeth Luong and Abdullah Motasim
 # Date: 4 November 2024
 # Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT

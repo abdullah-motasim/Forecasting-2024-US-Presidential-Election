@@ -1,6 +1,6 @@
 #### Preamble ####
 # Purpose: Tests the cleaned U.S. presidential polls dataset for correctness and consistency
-# Author: Elizabeth Luong, Abdullah Motasim, and Yuanting Han
+# Author: Elizabeth Luong and Abdullah Motasim
 # Date: 4 November 2024
 # Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT
