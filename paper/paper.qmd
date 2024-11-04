@@ -63,7 +63,7 @@ The remainder of this paper is structured as follows.
 
 The aggregated dataset containing the polling data for the 2024 U.S. election was sourced from FiveThrityEight [@fivethirtyeight] and all analysis was performed using R @citeR and the following packages: [@citeR] and the following packages: tidyverse [@tidyverse], dplyr [@dplyr], janitor [@janitor], testthat [@testthat], arrow [@arrow], here [@here], rstanarm [@rstanarm], bayesplot [@bayesplot], gt [@gt], kableExtra [@kableExtra], knitr [@knitr], and webshot2 [@webshot2].
 
-The initial raw data contained about 17000 observations of 52 variables from multiple pollsters and after cleaning the data we were left with about 9000 observations of 7 variables.
+The FiveThirtyEight dataset was chosen over others as it is valued for its commitment to transparency, advanced modeling techniques, rigorous poll aggregation, and inclusion of broader socio-economic factors. The initial raw data contained about 17000 observations of 52 variables from multiple pollsters and after cleaning the data we were left with about 9000 observations of 7 variables.
 The data cleaning involved removing missing values and only selecting variables which were of importance to us, these variables were:
 
 -   **pollster_name** - The name of the polling organization that conducted the poll (e.g., YouGov, RMG Research).
@@ -683,18 +683,13 @@ This approach combines robust sampling techniques, diverse recruitment strategie
 
 **Sampling Approach**
 
-1.  **Target Population**: The target population consists of registered voters in the United States.
-    The survey will focus on likely voters, including individuals aged 18 and older across various demographic groups, including age, gender, race, and political affiliation.
+1.  **Target Population**: The target population is defined as the collection of all items about which we would like to speak, in this case it would consists of all registered voters in the United States. The survey will focus on likely voters, including individuals aged 18 and older across various demographic groups, including age, gender, race, and political affiliation.
 
-2.  **Sample Size**: A sample size of approximately 5,000 likely voters will be utilized.
-    This sample size is designed to provide a high level of statistical confidence, with a credibility interval of ±2 percentage points.
+2.  **Sample Size**: A sample size of approximately 5,000 likely voters will be utilized. This sample size is designed to provide a high level of statistical confidence, with a credibility interval of ±2 percentage points.
 
 3.  **Sampling Technique**:
 
-    -   A **stratified random sampling** method will be employed to ensure representation across key demographic groups.
-        The population will be divided into strata based on demographic variables, such as age, gender, race, and region.
-
-    -   A systematic selection will then be conducted within each stratum to achieve a balanced representation, reducing sampling bias.
+A **stratified random sampling** method which involves dividing subjects into subgroups on characteristics that they share and than these subgroups are randomly sampled. In this case we will choose the subgroups based on demographic variables, such as age, gender, race, and region, we will than randomly sample participants from these subgroups.
 
 **Recruitment of Respondents**
 
@@ -726,6 +721,8 @@ This approach combines robust sampling techniques, diverse recruitment strategie
     -   Automated checks will flag any duplicate responses, incomplete surveys, or inconsistent answer patterns.
 
 3.  **Post-Survey Validation**: After data collection, a validation process will be employed to cross-reference responses with demographic data to ensure the sample reflects the broader population accurately.
+
+4. **Importance of Non-Response**: Non-response refers to missing data in a dataset when respondents either skip specific questions, groups of questions, or even refuse to participate entirely. Non-response from individuals introduces sampling error, as it may lead to biases in the results if certain population segments are underrepresented. To address this issue we will aim to follow up with non-respondents, using reminders or incentives to encourage participation. Additionally, we will utilize simulations to determine if there are any groups which are underrepresented within out data and than use weighted adjustments to compensate for these underrepresented groups.
 
 **Poll Aggregation and Analysis**
 
