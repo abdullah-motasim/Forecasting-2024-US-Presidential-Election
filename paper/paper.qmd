@@ -593,8 +593,7 @@ The sampling frame defined as a list of all the items from the target population
 
 A sample is defined as the items from the sampling frame that we get data about, in this case that would be the 1000 people that responded to the ICR or online panel.
 
-Non-response refers to missing data in a dataset when respondents either skip specific questions, groups of questions, or even refuse to participate entirely. Non-response from individuals introduces sampling error, as it may lead to biases in the results if certain population segments are underrepresented. 
-Government statistics are generally reliable but must be viewed critically, especially considering the potential for political influences, methodological limitations, or errors. Despite this, when methodologies are transparent and data is subjected to independent audits, government statistics can still serve as valuable sources of information for policy research, but users should always be aware of potential biases and limitations.
+Non-response refers to missing data in a dataset when respondents either skip specific questions, groups of questions, or even refuse to participate entirely. Non-response from individuals introduces sampling error, as it may lead to biases in the results if certain population segments are underrepresented. Government statistics are generally reliable but must be viewed critically, especially considering the potential for political influences, methodological limitations, or errors. Despite this, when methodologies are transparent and data is subjected to independent audits, government statistics can still serve as valuable sources of information for policy research, but users should always be aware of potential biases and limitations.
 
 
 **Sample Recruitment and Sampling Approach**\
