@@ -7,7 +7,7 @@ author:
 thanks: "Code and data are available at: [https://github.com/abdullah-motasim/Forecasting-2024-US-Presidential-Election](https://github.com/abdullah-motasim/Forecasting-2024-US-Presidential-Election)."
 date: today
 date-format: long
-abstract: "This paper presents a predictive analysis of the 2024 U.S. Presidential Election, focusing on estimating support for Kamala Harris and Donald Trump through aggregated polling data. Using Bayesian Generalized Linear Models (GLMs) and Monte Carlo simulations, we analyze polling trends across various states to assess each candidate's projected support and overall probability of winning. Results indicate a 63.2% probability of victory for Harris and a 36.8% probability for Trump, with notable regional variations. Harris shows strong support in traditional Democratic strongholds, while Trump leads in Republican-leaning areas, underscoring the importance of state-specific dynamics in shaping election outcomes. This study highlights the influence of pollster reliability, sample sizes, and regional factors, offering insights into the potential direction of the 2024 election."
+abstract: "This paper presents a predictive analysis of the 2024 U.S. Presidential Election, focusing on estimating support for Kamala Harris and Donald Trump through aggregated polling data. Using Bayesian Generalized Linear Models (GLMs) and Monte Carlo simulations, we analyze polling trends across various states to assess each candidate's projected support and overall probability of winning. Results indicate a 63.2% probability of victory for Harris and a 36.8% probability for Trump, with notable regional variations. Harris shows strong support in traditional Democratic strongholds, while Trump leads in Republican-leaning areas, underscoring the importance of state-specific dynamics in shaping election outcomes. This study highlights the influence of pollster reliability, sample sizes, and regional factors, offering knowledge into the potential direction of the 2024 election."
 format: pdf
 number-sections: true
 table-of-contents: true
@@ -40,7 +40,7 @@ analysis_data <- read_parquet(here("data/02-analysis_data/analysis_data.parquet"
 
 Overview paragraph: On November 5 2024 the U.S.
 Presidential Elections will be held to determine the 47th President of the United States.
-Since the U.S. is a powerhouse within the world, often affecting crucial international affairs, the result of this election will have a global impact on all countries and as such there is much interest in which of the top two candidates Donald Trump or Kamala Harris will end up winning the election.
+Since the U.S. is a powerhouse within the world, often affecting many international affairs, the result of this election will have a global impact on all countries and as such there is much interest in which of the top two candidates Donald Trump or Kamala Harris will end up winning the election.
 As such, leading up to the election time there are many polls conducted by different pollsters to determine the winner of the election, but these polls often vary significantly between each other due to biases and sampling limitations.
 Poll aggregation is a method which aims to mitigate these differences by combining or aggregating the results of multiple polls to provide a more robust estimate of the election outcome.
 
@@ -82,17 +82,17 @@ The data cleaning involved removing missing values and only selecting variables 
 -   **numeric_grade** - A numeric rating given to the pollster to indicate their quality or reliability (e.g., 3.0).
 
 These variables were selected due to their direct relevance to assessing candidate support, polling reliability, and geographic voting trends.
-Specifically, pollster_name and numeric_grade are crucial for tracking potential biases and variations across polling organizations, as different methodologies can impact results.
+Specifically, pollster_name and numeric_grade are used to track potential biases and variations across polling organizations, as different methodologies can impact results.
 Candidate/Party and percentage provide direct indicators of support levels for each contender, which is essential for making accurate projections of election outcomes.
 Also, it is worth noting that there were more Sample_size is key to assessing the reliability of each poll, as larger samples tend to yield more accurate representations of public opinion.
-Lastly, state enables us to account for regional variations, crucial in a system like the U.S.
-Electoral College, where state-level results play a determining role in the election.
-Collectively, these variables offer a focused and comprehensive view of the polling landscape, supporting a more reliable aggregation and interpretation of the data.
+Lastly, state enables us to account for regional variations, key in a system like the U.S. where state-level results play a determining role in the election.
+
+Collectively, these variables offer a focused view of the polling landscape, supporting a more reliable aggregation and interpretation of the data.
 
 ## Measurement
 
 Since different pollsters utilize various methods to collect their data and convert real-world phenomena into entries in their datasets, we have chosen to focus on the method utilized by Emerson, as it is the most frequent pollster within our cleaned data, accounting for 823 of the observations.
-Analyzing Emerson's methodology provides valuable insights into how polling results are generated, thereby enhancing our understanding of the dataset.
+Analyzing Emerson's methodology provides valuable knowledge on how polling results are generated, thereby enhancing our understanding of the dataset.
 
 Emerson College Polling employs a combination of Interactive Voice Response (IVR) and online panel methodologies for data collection.
 The recent survey of Michigan sampled 1,000 likely voters.
@@ -107,7 +107,7 @@ Note this is a general overview of the measurement method utilized by Emerson, a
 
 The primary outcome variable in our analysis is the percentage of support each candidate receives in various polls, as reported by different polling organizations.
 This variable captures the proportion of respondents who indicate support for a specific candidate (e.g., Kamala Harris, Donald Trump) in a given poll.
-By aggregating the reported percentages across pollsters and accounting for factors such as sample size and pollster reliability, we can obtain a comprehensive view of each candidate's current standing in the 2024 U.S. election.
+By aggregating the reported percentages across pollsters and accounting for factors such as sample size and pollster reliability, we can obtain a view of each candidate's current standing in the 2024 U.S. election.
 This outcome variable directly reflects voter preference trends and provides a baseline for modeling anticipated election results.
 The robustness of this measure is influenced by the accuracy of individual poll data and the methodological rigor of each pollster, such as Emerson’s use of IVR and online panels, ensuring it represents a reliable indicator of the broader electorate's sentiments.
 
@@ -169,7 +169,7 @@ ggplot(comparison_data, aes(x = support, fill = candidate)) +
 To model the outcome variable effectively, we selected 3 predictor variables based on their relevance to candidate support and regional trends:
 
 Pollster Name: Identifying the organization conducting each poll (e.g., YouGov, Emerson) allows us to assess potential biases and variation in methodologies that could impact polling accuracy.
-Given that certain pollsters (like Emerson) have more frequent entries in our cleaned dataset, this predictor provides valuable insight into consistency and reliability across poll sources.
+Given that certain pollsters (like Emerson) have more frequent entries in our cleaned dataset, this predictor provides valuable findingsinto consistency and reliability across poll sources.
 
 Sample Size: Poll sample size directly influences the reliability of the reported percentages.
 Polls with larger sample sizes tend to yield more accurate estimates, reducing margin of error and providing a more representative snapshot of voter opinion.
@@ -182,7 +182,7 @@ These variables offer a structured approach to analyzing the 2024 U.S. election,
 
 @fig-pollster-vs-reliability illustrates the distribution of numeric reliability grades for the five most frequent pollsters in the dataset: Beacon/Shaw, Emerson, Morning Consult, Redfield & Wilton Strategies, and Siena/NYT. Each boxplot represents the variation in numeric reliability grades for individual polls from these pollsters, with jittered points indicating individual poll grades. This visualization helps highlight the consistency of reliability scores across these pollsters, with Emerson and Morning Consult exhibiting particularly stable distributions around higher reliability grades compared to others.
 
-This reliability assessment is crucial in weighting pollster data appropriately in our analysis. For example, Emerson, one of the most frequent pollsters in the dataset, shows a narrow spread in its reliability score, suggesting consistent methodology and accuracy. By understanding the reliability of each pollster, we can adjust our model to account for potential biases or methodological weaknesses that might otherwise skew the results. This reliability variable acts as a quality measure, allowing us to place greater confidence in polls from consistently high-rated pollsters.
+This reliability assessment is needed in weighting pollster data appropriately in our analysis. For example, Emerson, one of the most frequent pollsters in the dataset, shows a narrow spread in its reliability score, suggesting consistent methodology and accuracy. By understanding the reliability of each pollster, we can adjust our model to account for potential biases or methodological weaknesses that might otherwise skew the results. This reliability variable acts as a quality measure, allowing us to place greater confidence in polls from consistently high-rated pollsters.
 
 ```{r}
 #| label: fig-pollster-vs-reliability
@@ -225,9 +225,9 @@ ggplot(top_pollsters_data, aes(x = pollster_name, y = numeric_grade)) +
     plot.margin = margin(t = 15, r = 15, b = 15, l = 15))
 ```
 
-@fig-state-vs-size provides a breakdown of sample sizes across different U.S. states, with Pennsylvania, Michigan, and Wisconsin leading in terms of sample volume. These sample sizes are a critical predictor, as polls with larger sample sizes generally yield more reliable data. This visualization underscores the emphasis placed on certain swing states and battleground regions, reflecting where polling efforts are most concentrated and, by extension, where voter sentiment may be considered more closely in analyses.
+@fig-state-vs-size provides a breakdown of sample sizes across different U.S. states, with Pennsylvania, Michigan, and Wisconsin leading in terms of sample volume. These sample sizes are ket predictors, as polls with larger sample sizes generally yield more reliable data. This visualization underscores the emphasis placed on certain swing states and battleground regions, reflecting where polling efforts are most concentrated and, by extension, where voter sentiment may be considered more closely in analyses.
 
-Incorporating sample size as a predictor allows the model to adjust the weight of each poll based on its reliability. For instance, a poll with a large sample size from a critical state such as Pennsylvania is likely to be more indicative of statewide voter sentiment than a poll with a smaller sample size. This adjustment based on sample size helps to create a more nuanced and representative model, giving us a stronger basis for forecasting outcomes in the election.
+Incorporating sample size as a predictor allows the model to adjust the weight of each poll based on its reliability. For instance, a poll with a large sample size from a key state such as Pennsylvania is likely to be more indicative of statewide voter sentiment than a poll with a smaller sample size. This adjustment based on sample size helps to create a more representative model, giving us a stronger basis for forecasting outcomes in the election.
 
 ```{r}
 #| label: fig-state-vs-size
@@ -392,7 +392,7 @@ First, the assumption of a Gaussian distribution for support percentages may not
 While a Gaussian distribution efficiently models continuous support, it may lead to biased estimates in smaller states or in polls with high variance if non-normal patterns are present.
 
 Second, the model assumes that each pollster’s effect on support estimates is consistent across all states, disregarding potential variations in polling methodologies and accuracy by region.
-This simplification may overlook regional nuances, especially if certain pollsters perform differently in specific states, potentially reducing accuracy in cases of state-specific polling practices.
+This simplification may overlook regional variations, especially if certain pollsters perform differently in specific states, potentially reducing accuracy in cases of state-specific polling practices.
 
 Finally, the model treats state-level effects as static, assuming that state-specific support remains stable over time.
 This limits the model’s ability to adapt to changing voter sentiment within states as the election nears.
@@ -403,7 +403,7 @@ While these assumptions balance interpretability and reliability, they also indi
 # Results {#sec-results}
 
 The results of the Bayesian Generalized Linear Model (GLM) analysis, which aimed to predict support percentages for Kamala Harris and Donald Trump across various polls.
-The findings, represented through probability estimates, predicted support distributions, and comparative density plots, provide insights into each candidate's likely performance in hypothetical head-to-head polling scenarios.
+The findings, represented through probability estimates, predicted support distributions, and comparative density plots, provide information about each candidate's likely performance in hypothetical head-to-head polling scenarios.
 
 ## Predicted Support Percentages
 
@@ -456,13 +456,13 @@ This probabilistic approach captures the uncertainty inherent in election predic
 
 ### Regional Variation in Support
 
-The model reveals notable differences in support by state, aligning with known regional preferences.
+The model showcases notable differences in support by state, aligning with known regional preferences.
 For instance, Harris’ support is consistently higher in traditionally Democratic states like California and New York, where her predicted vote share surpasses 60%.
 Conversely, Trump shows strong predicted support in states like Texas and Florida, with anticipated leads of 5-10 percentage points, reflecting historical Republican preferences.
 
 ### Battleground States
 
-In critical battleground states like Pennsylvania and Ohio, the predicted support for both candidates is nearly evenly split, signifying highly competitive races.
+In key states like Pennsylvania and Ohio, the predicted support for both candidates is nearly evenly split, signifying highly competitive races.
 The model suggests that Trump may hold a slight edge in Ohio, while Harris appears to lead narrowly in Pennsylvania.
 These projections highlight the importance of minor polling shifts in these states, where even small changes in support could significantly influence the final outcome.
 
@@ -505,17 +505,17 @@ In battleground states such as Florida and Pennsylvania, the predicted support p
 The density plot in Fig.
 6 illustrates that while Harris has a slight overall advantage, support for both candidates closely overlaps in key states, indicating that regional factors are pivotal in determining final outcomes.
 
-Our results underscore the necessity of including state-level predictors to capture these regional nuances.
+Our results underscore the necessity of including state-level predictors to capture these regional variations.
 Ignoring state-level effects could oversimplify the model, potentially misrepresenting the strength of support for each candidate in different parts of the country.
-By accounting for these variations, our model can provide a more nuanced prediction that aligns with observed state-specific voting patterns.
+By accounting for these variations, our model can provide a more detailed prediction that aligns with observed state-specific voting patterns.
 
 ## Weaknesses
 
-While the models presented provide a comprehensive approach to forecasting the 2024 election, both the data and models have inherent weaknesses that may impact the accuracy of the predictions.
+While the models presented provide a thorough approach to forecasting the 2024 election, both the data and models have inherent weaknesses that may impact the accuracy of the predictions.
 
 ### Data-Related Weaknesses
 
-The polling data used in this analysis, while comprehensive, presents challenges in terms of representativeness and variability.
+The polling data used in this analysis, while thorough, presents challenges in terms of representativeness and variability.
 Polls differ widely in sample size, methodology, and quality, which can introduce biases that are difficult to adjust for consistently across states.
 For instance, smaller sample sizes, particularly in less-populated or battleground states, may lead to exaggerated or unstable estimates of support.
 Additionally, polling firms often adopt different weighting schemes or sampling frames, which may not fully capture the demographic and geographic diversity within each state.
@@ -523,21 +523,21 @@ This variability can result in inconsistencies when aggregating polls across dif
 
 Another challenge is the limited frequency of polling in certain regions.
 Many states receive minimal polling attention, leading to sparse data that may not accurately reflect shifts in voter sentiment over time.
-This lack of consistent polling can cause the model to rely on outdated or unrepresentative data points, especially in states where political dynamics are changing rapidly.
+This lack of consistent polling can cause the model to rely on outdated or unrepresentative data points, especially in states where political dynamics are changing swiftly.
 Consequently, the model may overestimate or underestimate support in these areas, reducing the accuracy of the overall predictions.
 
 ### Model-Related Weaknesses
 
 The model’s reliance on a Gaussian distribution to predict support percentages may not fully account for the non-normality often observed in polling data.
 Polling data can exhibit skewed distributions or heavy tails, particularly in states where support for a candidate is highly polarized.
-By assuming a Gaussian distribution, the model may miss these nuances, potentially leading to biased estimates in states where the distribution of support is not symmetric.
+By assuming a Gaussian distribution, the model may miss these variations, potentially leading to biased estimates in states where the distribution of support is not symmetric.
 
 Additionally, the model assumes that the effect of each pollster on support estimates is consistent across all states, an assumption that may oversimplify regional differences in polling accuracy.
 Different pollsters have varying levels of reliability in specific regions, influenced by factors like local sampling techniques, demographic targeting, and survey timing.
 By treating pollster effects as uniform, the model may fail to capture these subtleties, potentially resulting in inaccurate support estimates for states where polling practices differ significantly.
 
 The static nature of the state-level effects in the model also presents a limitation.
-Political dynamics within states are fluid, particularly in the lead-up to an election, when voter sentiment may shift rapidly in response to events, campaigns, or emerging issues.
+Political dynamics within states are fluid, particularly in the lead-up to an election, when voter sentiment may shift swiftly in response to events, campaigns, or emerging issues.
 By treating state-level effects as constant, the model lacks the flexibility to account for these temporal changes.
 Consequently, predictions based on older polls may not accurately reflect current support levels, especially in states with fast-changing political landscapes.
 
@@ -556,7 +556,7 @@ This would result in a more dynamic model that adapts to real-time changes in vo
 
 Incorporating voter turnout predictions based on historical data and demographic trends could further improve the model’s reliability.
 Turnout often varies by demographic group, driven by factors such as candidate appeal, mobilization efforts, and election-specific conditions like weather.
-Adjusting predictions based on turnout likelihoods by group would create a more nuanced view of potential election outcomes, especially in swing states where voter turnout can significantly impact results.
+Adjusting predictions based on turnout likelihoods by group would create a more detailed view of potential election outcomes, especially in swing states where voter turnout can significantly impact results.
 
 Expanding the Bayesian framework to incorporate historical voting patterns as informative priors would be particularly valuable in states with sparse or inconsistent polling.
 Bayesian methods can update predictions as new polling data becomes available, grounding predictions in past election trends while allowing flexibility for current shifts.
@@ -564,13 +564,13 @@ This approach would mitigate the volatility often seen in states with limited da
 
 Finally, integrating alternative data sources, such as social media sentiment analysis or economic indicators, could enrich the model by capturing real-time shifts in voter sentiment not reflected in traditional polling.
 For instance, social media activity following major events like debates or policy announcements could serve as an indicator of changes in support, supplementing polling data to create a more responsive forecasting model.
-Economic indicators, such as unemployment rates or inflation, could also offer insights into voter priorities and potential support patterns, enhancing the model’s predictive capacity in economically sensitive regions.
+Economic indicators, such as unemployment rates or inflation, could also help determine voter priorities and potential support patterns, enhancing the model’s predictive capacity in economically sensitive regions.
 
 Implementing these advancements would address current data and model limitations, creating a more adaptive and robust forecasting tool capable of accurately capturing the complexities of voter behavior in a dynamic election landscape.
 
 ## Conclusion
 
-The analysis demonstrates that both pollster reliability and sample size are critical factors in accurately predicting support percentages, while state-specific effects capture essential regional variations.
+The analysis demonstrates that both pollster reliability and sample size are key factors in accurately predicting support percentages, while state-specific effects capture essential regional variations.
 However, the model’s assumptions and limitations suggest avenues for further refinement.
 Incorporating dynamic, turnout-adjusted, and multi-source data into future models could yield more precise election forecasts.
 In sum, while this model provides a solid foundation for understanding potential outcomes in the 2024 election, continuous refinement and adaptation to new data sources and methods will enhance the reliability of election prediction models.
@@ -584,7 +584,7 @@ In sum, while this model provides a solid foundation for understanding potential
 # Pollster Methodology Overview and Evaluation {#sec-pollster-methdology}
 
 The Emerson College Polling method utilizes a hybrid approach, combining Interactive Voice Response (IVR) with an online panel to gather data from likely voters in Michigan.
-This methodology is crucial in translating individual opinions into quantifiable data that can inform electoral forecasts and insights.
+This methodology is used in translating individual opinions into quantifiable data that can inform electoral forecasts.
 
 **Population, Frame, and Sample**\
 The target population is defined as the collection of all items about which we would like to speak, in this case it would be all voters in the state of Michigan.
@@ -610,7 +610,7 @@ Respondents who opt not to participate may share similar characteristics, leadin
 Emerson may implement follow-up strategies or incentives to encourage participation, but these measures are not explicitly detailed in the methodology.
 
 **Questionnaire Evaluation**\
-Emerson crafted a comprehensive questionnaire that included a range of questions, such as “Do you approve or disapprove of the job Joe Biden is doing as President?”
+Emerson crafted a thorough questionnaire that included a range of questions, such as “Do you approve or disapprove of the job Joe Biden is doing as President?”
 and “What is your party registration?”
 Respondents provided their answers using multiple-choice formats, offering options like “Approve,” “Disapprove,” “Neutral or no opinion,” as well as party affiliations such as “Democrat,” “Republican,” and “Independent/other.” The full questionnaire and its results can be accessed at this [link](https://docs.google.com/spreadsheets/d/1QxGDC4nSP1dS6N7N1aXBxnXkRPyfw2As/edit?gid=1716322793#gid=1716322793).
 After collecting the responses, the results were tallied to calculate the percentage for each option, enabling pollsters to convert individual opinions into broader trends.
@@ -629,16 +629,16 @@ Questions that lead respondents toward a particular answer could impact the vali
     This credibility interval should be considered when interpreting results, as it reflects the potential variability in public opinion.
 
 -   **Weighting Adjustments:** To ensure that the sample accurately reflects the population of likely voters, the data is weighted by gender, education, race, age, party registration, and region.
-    This weighting is critical, as it aligns the sample with demographic characteristics of the actual voter population, enhancing the reliability of the findings.
+    This weighting is key, as it aligns the sample with demographic characteristics of the actual voter population, enhancing the reliability of the findings.
 
 **Strengths of the Methodology**
 
 -   **Diverse Reach:** The combination of IVR and online panel methods allows Emerson to capture data from a wide range of demographics, minimizing the risk of bias that may arise from using a single method.
     This is particularly important in a politically diverse state like Michigan.
 
--   **Rigorous Weighting:** The meticulous approach to weighting the data helps to correct any imbalances in the sample, ensuring a more accurate reflection of voter sentiments across different demographic groups.
+-   **Rigorous Weighting:** The approach to weighting the data helps to correct any imbalances in the sample, ensuring a more accurate reflection of voter sentiments across different demographic groups.
 
--   **Clarity in Reporting:** Emerson provides detailed demographic breakdowns and cross-tabulations, allowing for a nuanced understanding of how different groups perceive key issues and candidates.
+-   **Clarity in Reporting:** Emerson provides detailed demographic breakdowns and cross-tabulations, allowing for a accurate understanding of how different groups perceive key issues and candidates.
 
 **Limitations of the Methodology**
 
@@ -648,16 +648,16 @@ Questions that lead respondents toward a particular answer could impact the vali
 -   **Higher Credibility Intervals for Subgroups:** Subsets based on demographics (e.g., age or party registration) often come with larger credibility intervals due to smaller sample sizes.
     This can diminish the reliability of conclusions drawn from those specific groups.
 
--   **Temporal Limitations:** The survey results reflect a snapshot of opinions at a specific time (October 25-27, 2024), which may not account for rapidly changing political landscapes, particularly as Election Day approaches.
+-   **Temporal Limitations:** The survey results reflect a snapshot of opinions at a specific time (October 25-27, 2024), which may not account for swiftly changing political landscapes, particularly as Election Day approaches.
 
 In summary, Emerson College Polling employs a robust methodology that effectively combines IVR and online panel methodologies to gauge voter sentiment.
-While there are inherent limitations, such as potential biases and the credibility of subgroup analysis, the strengths of this approach lie in its comprehensive reach and careful weighting adjustments.
+While there are inherent limitations, such as potential biases and the credibility of subgroup analysis, the strengths of this approach lie in its thorough reach and careful weighting adjustments.
 Overall, this methodology offers a valuable tool for understanding the current political climate in Michigan.
 
 # Idealized Survey
 
 In this appendix, I outline an idealized methodology and survey for forecasting the U.S. presidential election, utilizing a budget of \$100,000.
-This approach combines robust sampling techniques, diverse recruitment strategies, and thorough data validation to ensure accurate and reliable insights into voter sentiment.
+This approach combines robust sampling techniques, diverse recruitment strategies, and thorough data validation to ensure accurate and reliable information on voter sentiment.
 
 **Sampling Approach**
 
@@ -709,10 +709,10 @@ This approach combines robust sampling techniques, diverse recruitment strategie
 
 1.  **Data Aggregation**: The data will be aggregated and analyzed using statistical software (e.g., R or Python) to compute margins of error and establish confidence intervals for key questions, such as candidate approval ratings and voting intentions.
 
-2.  **Cross-Tabulation**: The survey results will be cross-tabulated by demographic variables to provide insights into how different groups perceive candidates and issues.
-    This will enable nuanced analysis of voter sentiment across demographics.
+2.  **Cross-Tabulation**: The survey results will be cross-tabulated by demographic variables to provide information on how different groups perceive candidates and issues.
+    This will enable analysis of voter sentiment across demographics.
 
-3.  **Reporting**: Findings will be compiled into a comprehensive report summarizing key insights, trends, and forecasts for the upcoming presidential election.
+3.  **Reporting**: Findings will be compiled into a thorough report summarizing key observations, trends, and forecasts for the upcoming presidential election.
     The report will be shared with stakeholders, including political analysts and campaign teams.
 
 **Survey Implementation**
@@ -728,7 +728,7 @@ Below is a link to the actual survey, which includes an introductory section, we
 **Introduction**
 
 Thank you for participating in our survey!
-Your insights are invaluable for understanding voter sentiment leading up to the upcoming US presidential election.
+Your input is invaluable for understanding voter sentiment leading up to the upcoming US presidential election.
 This survey will take approximately 5-10 minutes to complete.
 Your responses are anonymous and will be used solely for research purposes.
 
@@ -889,7 +889,7 @@ If you have any questions or concerns, please contact Elizabeth Luong at elizabe
 **Conclusion**
 
 Thank you for taking the time to complete this survey!
-Your feedback is crucial for understanding voter sentiment as we approach the election.
+Your feedback is important for understanding voter sentiment as we approach the election.
 If you have any additional comments or thoughts you'd like to share, please reach out to Elizabeth Luong at elizabethh.luong\@mail.utoronto.ca.
 
 **Thank you again for your participation!**
