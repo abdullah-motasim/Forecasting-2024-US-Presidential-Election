@@ -1,6 +1,6 @@
 #### Preamble ####
 # Purpose: Models the forecast for the 2024 U.S. presidential election using "poll-of-polls"
-# Author: Elizabeth Luong, Abdullah Motasim, and Yuanting Han
+# Author: Elizabeth Luong and Abdullah Motasim
 # Date: 4 November 2024
 # Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT

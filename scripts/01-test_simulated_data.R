@@ -1,6 +1,6 @@
 #### Preamble ####
 # Purpose: Tests the structure and validity of the simulated American electoral divisions dataset.
-#  Author: Elizabeth Luong, Abdullah Motasim, and Yuanting Han
+#  Author: Elizabeth Luong and Abdullah Motasim
 # Date: 4 November 2024
 # Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT

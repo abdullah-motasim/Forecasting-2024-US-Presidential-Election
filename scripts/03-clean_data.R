@@ -2,7 +2,7 @@
 # Purpose: Cleans the raw U.S. presidential poll data for analysis.
 #          This script standardizes column names, selects relevant columns,
 #          converts data types, and handles missing values.
-# Author: Elizabeth Luong, Abdullah Motasim, and Yuanting Han
+# Author:Elizabeth Luong and Abdullah Motasim
 # Date: 4 November 2024
 # Contact: elizabethh.luong@mail.utoronto.ca
 # License: MIT
