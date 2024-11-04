@@ -234,16 +234,19 @@ Weaknesses and next steps should also be included.
 
 \appendix
 
-# Appendix {.unnumbered}
+# Appendix {-}
 
-## Appendix A: Pollster Methodology Overview and Evaluation
+# Pollster Methodology Overview and Evaluation
 
 The Emerson College Polling method utilizes a hybrid approach, combining Interactive Voice Response (IVR) with an online panel to gather data from likely voters in Michigan.
 This methodology is crucial in translating individual opinions into quantifiable data that can inform electoral forecasts and insights.
 
 **Population, Frame, and Sample**\
-The target population for this survey consists of likely voters in Michigan.
-The sampling frame is constructed to include diverse demographic groups within this population, ensuring a representative sample of voter sentiments.
+The target population is defined as the collection of all items about which we would like to speak, in this case it would be all voters in the state of Michigan.
+
+The sampling frame defined as a list of all the items from the target population that we could get data about, in this case it would be all voters who are able to respond to the IVR or online panel survey
+
+A sample is defined as the items from the sampling frame that we get data about, in this case that would be the 1000 people that responded to the ICR or online panel.
 
 **Sample Recruitment and Sampling Approach**\
 Emerson employs both IVR and online panel methodologies to recruit participants.
@@ -302,7 +305,7 @@ In summary, Emerson College Polling employs a robust methodology that effectivel
 While there are inherent limitations, such as potential biases and the credibility of subgroup analysis, the strengths of this approach lie in its comprehensive reach and careful weighting adjustments.
 Overall, this methodology offers a valuable tool for understanding the current political climate in Michigan.
 
-## Appendix B: Idealized Survey
+# Idealized Survey
 
 In this appendix, I outline an idealized methodology and survey for forecasting the U.S. presidential election, utilizing a budget of \$100,000.
 This approach combines robust sampling techniques, diverse recruitment strategies, and thorough data validation to ensure accurate and reliable insights into voter sentiment.
