@@ -206,8 +206,4 @@ ggplot(state_sample_data, aes(x = reorder(state, total_sample_size), y = total_s
     axis.text.x = element_text(size = 12),
     plot.caption = element_text(size = 8, hjust = 0, margin = margin(t = 10))
   )
-<<<<<<< HEAD
 
-
-=======
->>>>>>> 53ac3dd6942af9195d75e4471ada865f6a179750
